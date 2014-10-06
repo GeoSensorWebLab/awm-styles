@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE Map[]>
-<Map xmlns:xi="http://www.w3.org/2001/XInclude" srs="+proj=laea +lat_0=90 +lon_0=-40 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs" background-color="#b5d0d0" maximum-extent="-9036842.762,-9036842.762,9036842.762,9036842.762">
-
-<Parameters>
-  <Parameter name="bounds">-180,-85.05112877980659,180,85.05112877980659</Parameter>
-  <Parameter name="center">0,0,4</Parameter>
-  <Parameter name="format">png</Parameter>
-  <Parameter name="minzoom">0</Parameter>
-  <Parameter name="maxzoom">22</Parameter>
-  <Parameter name="scale">1</Parameter>
-  <Parameter name="metatile">2</Parameter>
-  <Parameter name="name"><![CDATA[OpenStreetMap Carto]]></Parameter>
-  <Parameter name="description"><![CDATA[A faithful reimplementation of the standard OpenStreetMap style]]></Parameter>
-</Parameters>
-
-<xi:include href="fonts.inc.xml" />
-
-<xi:include href="base-layers.inc.xml" />
-
-<xi:include href="osm-layers.inc.xml" />
+<!DOCTYPE Map []>
+<Map background-color="#b5d0d0" maximum-extent="-9036842.762,-9036842.762,9036842.762,9036842.762" srs="+proj=laea +lat_0=90 +lon_0=-40 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <Parameters>
+    <Parameter name="bounds">-180,-85.05112877980659,180,85.05112877980659</Parameter>
+    <Parameter name="center">0,0,4</Parameter>
+    <Parameter name="format">png</Parameter>
+    <Parameter name="minzoom">0</Parameter>
+    <Parameter name="maxzoom">22</Parameter>
+    <Parameter name="scale">1</Parameter>
+    <Parameter name="metatile">2</Parameter>
+    <Parameter name="name"><![CDATA[OpenStreetMap Carto]]></Parameter>
+    <Parameter name="description"><![CDATA[A faithful reimplementation of the standard OpenStreetMap style]]></Parameter>
+  </Parameters>
+  <xi:include href="fonts.inc.xml"/>
+  <xi:include href="base-layers.inc.xml"/>
+  <xi:include href="geographic-lines.inc.xml"/>
+  <xi:include href="osm-layers.inc.xml"/>
 </Map>
