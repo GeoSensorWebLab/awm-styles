@@ -5,7 +5,7 @@
     <Rule>
       <Filter>([name] = 'Arctic Circle')</Filter>
       <LineSymbolizer clip="false" stroke="#116688" stroke-opacity="0.5" stroke-width="1"/>
-      <TextSymbolizer clip="false" face-name="Futura Medium" halo-radius="2" placement="line" spacing="800"><![CDATA[[name]]]></TextSymbolizer>
+      <TextSymbolizer clip="false" fontset-name="fontset-0" halo-radius="2" placement="line" spacing="800"><![CDATA[[name]]]></TextSymbolizer>
     </Rule>
   </Style>
   <Layer name="ne10mgeographiclines" srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
@@ -20,7 +20,7 @@
     <Rule>
       <Filter>([display] = '45 N')</Filter>
       <LineSymbolizer clip="false" stroke="#116688" stroke-opacity="0.5" stroke-width="1"/>
-      <TextSymbolizer clip="false" face-name="Futura Medium" halo-radius="2" placement="line" spacing="800"><![CDATA[[display]]]></TextSymbolizer>
+      <TextSymbolizer clip="false" fontset-name="fontset-0" halo-radius="2" placement="line" spacing="800"><![CDATA[[display]]]></TextSymbolizer>
     </Rule>
   </Style>
   <Layer name="10mgraticules15" srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
