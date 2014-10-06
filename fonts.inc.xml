@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include xmlns:xi="http://www.w3.org/2001/XInclude">
+  <FontSet name="fontset-0">
+    <Font face-name="DejaVu Sans Book"/>
+    <Font face-name="Arundina Sans Regular"/>
+    <Font face-name="Padauk Regular"/>
+    <Font face-name="Khmer OS Metal Chrieng Regular"/>
+    <Font face-name="Mukti Narrow Regular"/>
+    <Font face-name="gargi Medium"/>
+    <Font face-name="TSCu_Paranar Regular"/>
+    <Font face-name="Tibetan Machine Uni Regular"/>
+    <Font face-name="Mallige Normal"/>
+    <Font face-name="Droid Sans Fallback Regular"/>
+    <Font face-name="Unifont Medium"/>
+    <Font face-name="unifont Medium"/>
+  </FontSet>
+  <FontSet name="fontset-1">
+    <Font face-name="DejaVu Sans Oblique"/>
+    <Font face-name="Arundina Sans Italic"/>
+    <Font face-name="TSCu_Paranar Italic"/>
+    <Font face-name="Mallige NormalItalic"/>
+    <Font face-name="DejaVu Sans Book"/>
+    <Font face-name="Arundina Sans Regular"/>
+    <Font face-name="Padauk Regular"/>
+    <Font face-name="Khmer OS Metal Chrieng Regular"/>
+    <Font face-name="Mukti Narrow Regular"/>
+    <Font face-name="gargi Medium"/>
+    <Font face-name="TSCu_Paranar Regular"/>
+    <Font face-name="Tibetan Machine Uni Regular"/>
+    <Font face-name="Mallige Normal"/>
+    <Font face-name="Droid Sans Fallback Regular"/>
+    <Font face-name="Unifont Medium"/>
+    <Font face-name="unifont Medium"/>
+  </FontSet>
+  <FontSet name="fontset-2">
+    <Font face-name="DejaVu Sans Bold"/>
+    <Font face-name="Arundina Sans Bold"/>
+    <Font face-name="Padauk Bold"/>
+    <Font face-name="Mukti Narrow Bold"/>
+    <Font face-name="TSCu_Paranar Bold"/>
+    <Font face-name="Mallige Bold"/>
+    <Font face-name="DejaVu Sans Book"/>
+    <Font face-name="Arundina Sans Regular"/>
+    <Font face-name="Padauk Regular"/>
+    <Font face-name="Khmer OS Metal Chrieng Regular"/>
+    <Font face-name="Mukti Narrow Regular"/>
+    <Font face-name="gargi Medium"/>
+    <Font face-name="TSCu_Paranar Regular"/>
+    <Font face-name="Tibetan Machine Uni Regular"/>
+    <Font face-name="Mallige Normal"/>
+    <Font face-name="Droid Sans Fallback Regular"/>
+    <Font face-name="Unifont Medium"/>
+    <Font face-name="unifont Medium"/>
+  </FontSet>
+</Include>
