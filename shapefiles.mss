@@ -35,3 +35,19 @@
     polygon-fill: #ddd;
   }
 }
+
+#geographic-lines {
+  [name = 'Arctic Circle'] {
+    line-width: 1;
+    line-opacity: 0.5;
+    line-color: #116688;
+    line-clip: false;
+    
+    text-name: "[name]";
+    text-face-name: @book-fonts;
+    text-placement: line;
+    text-halo-radius: 2;
+    text-spacing: 800;
+    text-clip: false;
+  }
+}

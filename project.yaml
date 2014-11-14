@@ -229,6 +229,15 @@ Layer:
           ORDER BY z_order
         ) AS water_lines
     advanced: {}
+  - id: "geographic-lines"
+    name: "geographic-lines"
+    class: ""
+    geometry: "linestring"
+    <<: *extents84
+    Datasource:
+      file: "data/ne_10m_geographic_lines/ne_10m_geographic_lines.shp"
+      type: "shape"
+    advanced: {}
   - id: "dam"
     name: "dam"
     class: ""

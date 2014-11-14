@@ -260,6 +260,25 @@
       "advanced": {}
     }, 
     {
+      "name": "geographic-lines", 
+      "srs-name": "WGS84", 
+      "geometry": "linestring", 
+      "class": "", 
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs", 
+      "Datasource": {
+        "type": "shape", 
+        "file": "data/ne_10m_geographic_lines/ne_10m_geographic_lines.shp"
+      }, 
+      "extent": [
+        -180, 
+        -85.05112877980659, 
+        180, 
+        85.05112877980659
+      ], 
+      "id": "geographic-lines", 
+      "advanced": {}
+    }, 
+    {
       "name": "dam", 
       "srs-name": "900913", 
       "geometry": "linestring", 
