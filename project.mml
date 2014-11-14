@@ -279,6 +279,25 @@
       "advanced": {}
     }, 
     {
+      "name": "graticule-lines", 
+      "srs-name": "WGS84", 
+      "geometry": "linestring", 
+      "class": "", 
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs", 
+      "Datasource": {
+        "type": "shape", 
+        "file": "data/ne_10m_graticules_15/ne_10m_graticules_15.shp"
+      }, 
+      "extent": [
+        -180, 
+        -85.05112877980659, 
+        180, 
+        85.05112877980659
+      ], 
+      "id": "graticule-lines", 
+      "advanced": {}
+    }, 
+    {
       "name": "dam", 
       "srs-name": "900913", 
       "geometry": "linestring", 

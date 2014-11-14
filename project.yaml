@@ -238,6 +238,15 @@ Layer:
       file: "data/ne_10m_geographic_lines/ne_10m_geographic_lines.shp"
       type: "shape"
     advanced: {}
+  - id: "graticule-lines"
+    name: "graticule-lines"
+    class: ""
+    geometry: "linestring"
+    <<: *extents84
+    Datasource:
+      file: "data/ne_10m_graticules_15/ne_10m_graticules_15.shp"
+      type: "shape"
+    advanced: {}
   - id: "dam"
     name: "dam"
     class: ""

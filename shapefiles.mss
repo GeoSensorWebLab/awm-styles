@@ -38,3 +38,19 @@
     text-clip: false;
   }
 }
+
+#graticule-lines {
+  [display = '45 N'] {
+    line-width: 1;
+    line-opacity: 0.5;
+    line-color: #116688;
+    line-clip: false;
+
+    text-name: "[display]";
+    text-face-name: @book-fonts;
+    text-placement: line;
+    text-halo-radius: 2;
+    text-spacing: 800;
+    text-clip: false;
+  }
+}
