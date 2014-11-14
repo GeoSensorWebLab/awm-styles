@@ -11,6 +11,7 @@ mkdir -p data/simplified-land-polygons-complete-3857
 mkdir -p data/ne_110m_admin_0_boundary_lines_land
 mkdir -p data/ne_10m_populated_places
 mkdir -p data/land-polygons-split-3857
+mkdir -p data/ne_10m_geographic_lines
 
 # world_boundaries
 echo "dowloading world_boundaries..."
@@ -65,6 +66,16 @@ unzip $UNZIP_OPTS data/land-polygons-split-3857.zip \
   land-polygons-split-3857/land_polygons.cpg \
   -d data/
 
+# ne_10m_geographic_lines
+echo "dowloading ne_10m_geographic_lines..."
+curl -z "data/ne_10m_geographic_lines.zip" -L -o "data/ne_10m_geographic_lines.zip" "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_geographic_lines.zip"
+echo "expanding ne_10m_geographic_lines..."
+unzip $UNZIP_OPTS data/ne_10m_geographic_lines.zip \
+  ne_10m_geographic_lines.shp \
+  ne_10m_geographic_lines.shx \
+  ne_10m_geographic_lines.prj \
+  ne_10m_geographic_lines.dbf \
+  -d data/ne_10m_geographic_lines/
 
 #process populated places
 echo "processing ne_10m_populated_places..."
@@ -78,7 +89,8 @@ shapeindex --shape_files \
 data/simplified-land-polygons-complete-3857/simplified_land_polygons.shp \
 data/land-polygons-split-3857/land_polygons.shp \
 data/ne_10m_populated_places/ne_10m_populated_places_fixed.shp \
-data/ne_110m_admin_0_boundary_lines_land/ne_110m_admin_0_boundary_lines_land.shp
+data/ne_110m_admin_0_boundary_lines_land/ne_110m_admin_0_boundary_lines_land.shp \
+data/ne_10m_geographic_lines/ne_10m_geographic_lines.shp
 
 
 #clean up
