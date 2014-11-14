@@ -1,0 +1,35 @@
+# This file defines the ArcticWebMap styles used in production.
+# This file is used by scripts/generate to create six versions of project.yaml,
+# which are then used to create six MML files, which are then used to create
+# six XML files for installation.
+# See scripts/generate for more information.
+styles:
+  - name: "ArcticWebMap 3571"
+    description: "ArcticWebMap in EPSG:3571 projection"
+    srs: "+proj=laea +lat_0=90 +lon_0=180 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+    basename: "osm_3571"
+
+  - name: "ArcticWebMap 3572"
+    description: "ArcticWebMap in EPSG:3572 projection"
+    srs: "+proj=laea +lat_0=90 +lon_0=-150 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+    basename: "osm_3572"
+
+  - name: "ArcticWebMap 3573"
+    description: "ArcticWebMap in EPSG:3573 projection"
+    srs: "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+    basename: "osm_3573"
+
+  - name: "ArcticWebMap 3574"
+    description: "ArcticWebMap in EPSG:3574 projection"
+    srs: "+proj=laea +lat_0=90 +lon_0=-40 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+    basename: "osm_3574"
+
+  - name: "ArcticWebMap 3575"
+    description: "ArcticWebMap in EPSG:3575 projection"
+    srs: "+proj=laea +lat_0=90 +lon_0=10 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+    basename: "osm_3575"
+
+  - name: "ArcticWebMap 3576"
+    description: "ArcticWebMap in EPSG:3576 projection"
+    srs: "+proj=laea +lat_0=90 +lon_0=90 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+    basename: "osm_3576"

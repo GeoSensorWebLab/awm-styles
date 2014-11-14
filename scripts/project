@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require 'erb'
+require 'json'
+require 'yaml'
+
+project = YAML.load(ERB.new(IO.read('project.yaml.erb')).result)
+IO.write('project.mml', JSON.pretty_generate(project))
