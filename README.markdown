@@ -1,17 +1,24 @@
 # Arctic Web Map Mapnik Styles
 
-These XML files contain the default styles for our Mapnik server. We currently support the following projections:
+These are CartoCSS map stylesheets based on the openstreetmap-carto repository. They are used for Arctic Web Map styling.
 
-* EPSG:3571
-* EPSG:3572
-* EPSG:3573
-* EPSG:3574
-* EPSG:3575
-* EPSG:3576
+# Local Installation
 
-The style is based on the default OSM mapnik style.
+You need a PostGIS database populated with OpenStreetMap data in the standard osm2pgsql database layout, along with auxillary shapefiles. See [INSTALL.md](INSTALL.md).
 
-## License
+# Production Installation
+
+TODO: Write instructions for deploying on our Tile Server.
+
+# Contributing
+
+Contributions to this project are welcome, see [CONTRIBUTING.md](CONTRIBUTING.md) for full details.
+
+# Maintainers
+
+* James Badger (jpbadger@ucalgary.ca)
+
+# License
 
 Copyright GeoSensor Web Lab 2014, all rights reserved.
 
