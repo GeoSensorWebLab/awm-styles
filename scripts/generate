@@ -1,13 +1,13 @@
 #!/usr/bin/env ruby
 
-require 'yaml'
+require 'erb'
 require 'json'
+require 'yaml'
 
 AWM_STYLES = 'awm-styles.yaml'
-PROJECT_YAML = 'project.yaml'
 
 styles = YAML.load(IO.read(AWM_STYLES))["styles"]
-base_project = YAML.load(IO.read(PROJECT_YAML))
+base_project = YAML.load(ERB.new(IO.read('project.yaml.erb')).result)
 
 yaml_options = { line_width: -1 }
 
