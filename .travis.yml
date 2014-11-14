@@ -10,12 +10,10 @@ install:
   - mkdir -p data/world_boundaries
   - mkdir -p data/simplified-land-polygons-complete-3857
   - mkdir -p data/ne_110m_admin_0_boundary_lines_land
-  - mkdir -p data/ne_10m_populated_places
   - mkdir -p data/land-polygons-split-3857
   - touch data/world_boundaries/builtup_area.shp
   - touch data/simplified-land-polygons-complete-3857/simplified_land_polygons.shp
   - touch data/ne_110m_admin_0_boundary_lines_land/ne_110m_admin_0_boundary_lines_land.shp
-  - touch data/ne_10m_populated_places/ne_10m_populated_places_fixed.shp
   - touch data/land-polygons-split-3857/land_polygons.shp
 script:
   - jsonlint project.mml
