@@ -34,7 +34,7 @@
 }
 
 #placenames-capital {
-  [zoom >= 5][zoom < 15] {
+  [zoom >= 6][zoom < 15] {
     text-name: "[name]";
     text-size: 10;
     text-fill: @placenames;
