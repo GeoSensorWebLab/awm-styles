@@ -8,7 +8,29 @@ You need a PostGIS database populated with OpenStreetMap data in the standard os
 
 # Production Installation
 
-TODO: Write instructions for deploying on our Tile Server.
+For our production system, we have Mapnik using the XML configuration in `/etc/mapnik-osm-carto-data`. In order to install the latest version of our styles you will have to clone this repository to the tile server.
+
+    $ git clone https://bitbucket.org/geosensorweblab/mapnik-styles
+    $ cd mapnik-styles
+
+Then install Node and carto to build the XML files.
+
+    $ sudo apt-get install nodejs
+    $ sudo npm install -g carto
+
+Then use the generation script to prepare the XML files:
+
+    $ scripts/generate
+
+This will generate a set of XML files in the current directory, one for each AWM style. Use the install script to copy these to the Mapnik style directory:
+
+    $ sudo scripts/install
+
+And reload renderd to pick up the changes:
+
+    $ sudo service renderd reload
+
+The new style should then start generating on new tiles. If you want to replace old tiles that still have old styles applied, look into the `render_old` command from `mod_tile`.
 
 # Contributing
 
