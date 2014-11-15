@@ -3,3 +3,5 @@
 for file in *.xml; do
 	/bin/cp $file /etc/mapnik-osm-carto-data/.
 done
+
+/bin/cp -r symbols /etc/mapnik-osm-carto-data/.
