@@ -165,7 +165,7 @@
       "srs-name": "WGS84",
       "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
       "Datasource": {
-        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_L_0.shp",
+        "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_L_0.shp",
         "type": "shape"
       },
       "advanced": {
@@ -185,7 +185,7 @@
       "srs-name": "WGS84",
       "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
       "Datasource": {
-        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_K_200.shp",
+        "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_K_200.shp",
         "type": "shape"
       },
       "advanced": {
@@ -205,7 +205,7 @@
       "srs-name": "WGS84",
       "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
       "Datasource": {
-        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_J_1000.shp",
+        "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_J_1000.shp",
         "type": "shape"
       },
       "advanced": {
@@ -225,7 +225,7 @@
       "srs-name": "WGS84",
       "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
       "Datasource": {
-        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_I_2000.shp",
+        "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_I_2000.shp",
         "type": "shape"
       },
       "advanced": {
@@ -245,7 +245,7 @@
       "srs-name": "WGS84",
       "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
       "Datasource": {
-        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_H_3000.shp",
+        "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_H_3000.shp",
         "type": "shape"
       },
       "advanced": {
@@ -265,7 +265,7 @@
       "srs-name": "WGS84",
       "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
       "Datasource": {
-        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_G_4000.shp",
+        "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_G_4000.shp",
         "type": "shape"
       },
       "advanced": {
@@ -285,7 +285,7 @@
       "srs-name": "WGS84",
       "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
       "Datasource": {
-        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_F_5000.shp",
+        "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_F_5000.shp",
         "type": "shape"
       },
       "advanced": {
@@ -305,7 +305,7 @@
       "srs-name": "WGS84",
       "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
       "Datasource": {
-        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_E_6000.shp",
+        "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_E_6000.shp",
         "type": "shape"
       },
       "advanced": {
@@ -325,7 +325,7 @@
       "srs-name": "WGS84",
       "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
       "Datasource": {
-        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_D_7000.shp",
+        "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_D_7000.shp",
         "type": "shape"
       },
       "advanced": {
@@ -345,7 +345,7 @@
       "srs-name": "WGS84",
       "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
       "Datasource": {
-        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_C_8000.shp",
+        "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_C_8000.shp",
         "type": "shape"
       },
       "advanced": {
@@ -365,7 +365,7 @@
       "srs-name": "WGS84",
       "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
       "Datasource": {
-        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_B_9000.shp",
+        "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_B_9000.shp",
         "type": "shape"
       },
       "advanced": {
@@ -385,7 +385,7 @@
       "srs-name": "WGS84",
       "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
       "Datasource": {
-        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_A_10000.shp",
+        "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_A_10000.shp",
         "type": "shape"
       },
       "advanced": {
