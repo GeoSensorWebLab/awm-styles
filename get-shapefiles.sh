@@ -12,6 +12,7 @@ mkdir -p data/ne_110m_admin_0_boundary_lines_land
 mkdir -p data/land-polygons-split-3857
 mkdir -p data/ne_10m_geographic_lines
 mkdir -p data/ne_10m_graticules_15
+mkdir -p data/ne_10m_bathymetry_all
 
 # world_boundaries
 PACK="world_boundaries"
@@ -82,6 +83,14 @@ unzip $UNZIP_OPTS data/$PACK.zip \
   $PACK.dbf \
   -d data/$PACK/
 
+# ne_10m_bathymetry_all
+PACK="ne_10m_bathymetry_all"
+echo "dowloading $PACK..."
+curl -z "data/$PACK.zip" -L -o "data/$PACK.zip" "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/$PACK.zip"
+echo "expanding $PACK..."
+unzip $UNZIP_OPTS data/$PACK.zip \
+  -d data/
+
 #index
 echo "indexing shapefiles"
 
@@ -90,6 +99,7 @@ data/simplified-land-polygons-complete-3857/simplified_land_polygons.shp \
 data/land-polygons-split-3857/land_polygons.shp \
 data/ne_110m_admin_0_boundary_lines_land/ne_110m_admin_0_boundary_lines_land.shp \
 data/ne_10m_geographic_lines/ne_10m_geographic_lines.shp \
-data/ne_10m_geographic_lines/ne_10m_graticules_15.shp
+data/ne_10m_geographic_lines/ne_10m_graticules_15.shp \
+data/ne_10m_bathymetry_all/*.shp
 
 echo "...done!"
