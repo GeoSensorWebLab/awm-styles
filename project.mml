@@ -42,7 +42,7 @@
     },
     "osm2pgsql": {
       "type": "postgis",
-      "host": "192.168.59.103",
+      "host": "192.168.1.50",
       "port": "49153",
       "user": "osm",
       "dbname": "gis",
@@ -152,6 +152,246 @@
       }
     },
     {
+      "id": "bathymetry-0m",
+      "name": "bathymetry-0m",
+      "class": "",
+      "geometry": "polygon",
+      "extent": [
+        -180,
+        -85.05112877980659,
+        180,
+        85.05112877980659
+      ],
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "Datasource": {
+        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_L_0.shp",
+        "type": "shape"
+      },
+      "advanced": {
+      }
+    },
+    {
+      "id": "bathymetry-200m",
+      "name": "bathymetry-200m",
+      "class": "",
+      "geometry": "polygon",
+      "extent": [
+        -180,
+        -85.05112877980659,
+        180,
+        85.05112877980659
+      ],
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "Datasource": {
+        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_K_200.shp",
+        "type": "shape"
+      },
+      "advanced": {
+      }
+    },
+    {
+      "id": "bathymetry-1km",
+      "name": "bathymetry-1km",
+      "class": "",
+      "geometry": "polygon",
+      "extent": [
+        -180,
+        -85.05112877980659,
+        180,
+        85.05112877980659
+      ],
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "Datasource": {
+        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_J_1000.shp",
+        "type": "shape"
+      },
+      "advanced": {
+      }
+    },
+    {
+      "id": "bathymetry-2km",
+      "name": "bathymetry-2km",
+      "class": "",
+      "geometry": "polygon",
+      "extent": [
+        -180,
+        -85.05112877980659,
+        180,
+        85.05112877980659
+      ],
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "Datasource": {
+        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_I_2000.shp",
+        "type": "shape"
+      },
+      "advanced": {
+      }
+    },
+    {
+      "id": "bathymetry-3km",
+      "name": "bathymetry-3km",
+      "class": "",
+      "geometry": "polygon",
+      "extent": [
+        -180,
+        -85.05112877980659,
+        180,
+        85.05112877980659
+      ],
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "Datasource": {
+        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_H_3000.shp",
+        "type": "shape"
+      },
+      "advanced": {
+      }
+    },
+    {
+      "id": "bathymetry-4km",
+      "name": "bathymetry-4km",
+      "class": "",
+      "geometry": "polygon",
+      "extent": [
+        -180,
+        -85.05112877980659,
+        180,
+        85.05112877980659
+      ],
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "Datasource": {
+        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_G_4000.shp",
+        "type": "shape"
+      },
+      "advanced": {
+      }
+    },
+    {
+      "id": "bathymetry-5km",
+      "name": "bathymetry-5km",
+      "class": "",
+      "geometry": "polygon",
+      "extent": [
+        -180,
+        -85.05112877980659,
+        180,
+        85.05112877980659
+      ],
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "Datasource": {
+        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_F_5000.shp",
+        "type": "shape"
+      },
+      "advanced": {
+      }
+    },
+    {
+      "id": "bathymetry-6km",
+      "name": "bathymetry-6km",
+      "class": "",
+      "geometry": "polygon",
+      "extent": [
+        -180,
+        -85.05112877980659,
+        180,
+        85.05112877980659
+      ],
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "Datasource": {
+        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_E_6000.shp",
+        "type": "shape"
+      },
+      "advanced": {
+      }
+    },
+    {
+      "id": "bathymetry-7km",
+      "name": "bathymetry-7km",
+      "class": "",
+      "geometry": "polygon",
+      "extent": [
+        -180,
+        -85.05112877980659,
+        180,
+        85.05112877980659
+      ],
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "Datasource": {
+        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_D_7000.shp",
+        "type": "shape"
+      },
+      "advanced": {
+      }
+    },
+    {
+      "id": "bathymetry-8km",
+      "name": "bathymetry-8km",
+      "class": "",
+      "geometry": "polygon",
+      "extent": [
+        -180,
+        -85.05112877980659,
+        180,
+        85.05112877980659
+      ],
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "Datasource": {
+        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_C_8000.shp",
+        "type": "shape"
+      },
+      "advanced": {
+      }
+    },
+    {
+      "id": "bathymetry-9km",
+      "name": "bathymetry-9km",
+      "class": "",
+      "geometry": "polygon",
+      "extent": [
+        -180,
+        -85.05112877980659,
+        180,
+        85.05112877980659
+      ],
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "Datasource": {
+        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_B_9000.shp",
+        "type": "shape"
+      },
+      "advanced": {
+      }
+    },
+    {
+      "id": "bathymetry-10km",
+      "name": "bathymetry-10km",
+      "class": "",
+      "geometry": "polygon",
+      "extent": [
+        -180,
+        -85.05112877980659,
+        180,
+        85.05112877980659
+      ],
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "Datasource": {
+        "file": "data/ne_10m_bathymetry_all/ne_10m_bathymetry_A_10000.shp",
+        "type": "shape"
+      },
+      "advanced": {
+      }
+    },
+    {
       "id": "landcover",
       "name": "landcover",
       "class": "",
@@ -166,7 +406,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -193,7 +433,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -220,7 +460,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -247,7 +487,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -274,7 +514,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -301,7 +541,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -328,7 +568,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -395,7 +635,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -422,7 +662,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -449,7 +689,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -476,7 +716,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -503,7 +743,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -530,7 +770,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -557,7 +797,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -584,7 +824,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -614,7 +854,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -641,7 +881,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -668,7 +908,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -695,7 +935,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -722,7 +962,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -749,7 +989,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -776,7 +1016,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -803,7 +1043,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -830,7 +1070,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -857,7 +1097,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -884,7 +1124,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -911,7 +1151,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -937,7 +1177,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -964,7 +1204,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -991,7 +1231,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1018,7 +1258,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1045,7 +1285,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1072,7 +1312,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1099,7 +1339,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1129,7 +1369,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1156,7 +1396,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1183,7 +1423,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1210,7 +1450,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1237,7 +1477,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1264,7 +1504,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1291,7 +1531,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1318,7 +1558,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1345,7 +1585,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1372,7 +1612,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1399,7 +1639,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1426,7 +1666,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1453,7 +1693,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1480,7 +1720,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1507,7 +1747,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1534,7 +1774,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1561,7 +1801,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1588,7 +1828,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1615,7 +1855,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1642,7 +1882,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1669,7 +1909,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1696,7 +1936,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1723,7 +1963,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1750,7 +1990,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1777,7 +2017,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1804,7 +2044,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1831,7 +2071,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1858,7 +2098,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1885,7 +2125,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1912,7 +2152,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1939,7 +2179,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1966,7 +2206,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -1993,7 +2233,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -2020,7 +2260,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -2047,7 +2287,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -2074,7 +2314,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -2101,7 +2341,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
@@ -2128,7 +2368,7 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "Datasource": {
         "type": "postgis",
-        "host": "192.168.59.103",
+        "host": "192.168.1.50",
         "port": "49153",
         "user": "osm",
         "dbname": "gis",
