@@ -91,7 +91,19 @@ echo "expanding $PACK..."
 unzip $UNZIP_OPTS data/$PACK.zip \
   -d data/
 
-#index
+# Clip shapefiles to bounding box
+echo "clipping & segmenting shapefiles"
+
+rm -f data/ne_10m_bathymetry_all/proc_*
+rm -f data/ne_10m_bathymetry_all/tmp_*
+for shp in data/ne_10m_bathymetry_all/*.shp; do
+  base=$(basename $shp .shp)
+  ogr2ogr -clipsrc -180 45 180 90 "data/ne_10m_bathymetry_all/tmp_$base.shp" "$shp"
+  ogr2ogr -segmentize 0.5 "data/ne_10m_bathymetry_all/proc_$base.shp" "data/ne_10m_bathymetry_all/tmp_$base.shp"
+done
+rm -f data/ne_10m_bathymetry_all/tmp_*
+
+# index
 echo "indexing shapefiles"
 
 shapeindex --shape_files \
