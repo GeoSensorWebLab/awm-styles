@@ -7,7 +7,6 @@ UNZIP_OPTS=-qqun
 
 mkdir -p data/
 mkdir -p data/world_boundaries
-mkdir -p data/simplified-land-polygons-complete-3857
 mkdir -p data/ne_110m_admin_0_boundary_lines_land
 mkdir -p data/ne_10m_land
 mkdir -p data/land-polygons-split-3857
@@ -23,19 +22,6 @@ echo "dowloading $PACK..."
 curl -z "data/$PACK-spherical.tgz" -L -o "data/$PACK-spherical.tgz" "http://planet.openstreetmap.org/historical-shapefiles/$PACK-spherical.tgz"
 echo "expanding $PACK..."
 tar -xzf data/$PACK-spherical.tgz -C data/
-
-## simplified-land-polygons-complete-3857
-PACK="simplified-land-polygons-complete-3857"
-echo "downloading $PACK..."
-curl -z "data/$PACK.zip" -L -o "data/$PACK.zip" "http://data.openstreetmapdata.com/$PACK.zip"
-echo "$PACK..."
-unzip $UNZIP_OPTS data/$PACK.zip \
-  $PACK/simplified_land_polygons.shp \
-  $PACK/simplified_land_polygons.shx \
-  $PACK/simplified_land_polygons.prj \
-  $PACK/simplified_land_polygons.dbf \
-  $PACK/simplified_land_polygons.cpg \
-  -d data/
 
 ## ne_10m_land
 PACK="ne_10m_land"
@@ -141,7 +127,6 @@ rm -f data/$PACK/tmp_*
 echo "indexing shapefiles"
 
 shapeindex --shape_files \
-data/simplified-land-polygons-complete-3857/simplified_land_polygons.shp \
 data/land-polygons-split-3857/land_polygons.shp \
 data/ne_10m_land/proc_ne_10m_land.shp \
 data/ne_110m_admin_0_boundary_lines_land/proc_ne_110m_admin_0_boundary_lines_land.shp \
