@@ -40,7 +40,7 @@
 }
 
 #graticule-lines {
-  [display = '45 N'] {
+  [display = '60 N'] {
     line-width: 1;
     line-opacity: 0.5;
     line-color: #116688;
@@ -101,6 +101,7 @@
   polygon-fill: darken(@water-color, 8%);
 }
 
+/* disabled due to conflict with OSM water layers */
 #bathymetry-0m {
   polygon-fill: darken(@water-color, 5%);
 }
