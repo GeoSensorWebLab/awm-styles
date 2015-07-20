@@ -40,7 +40,7 @@
 }
 
 #graticule-lines {
-  [display = '60 N'] {
+  [display = '45 N'] {
     line-width: 1;
     line-opacity: 0.5;
     line-color: #116688;
