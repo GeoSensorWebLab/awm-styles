@@ -28,6 +28,10 @@ _parts:
     extent: *world
     srs-name: "WGS84"
     srs: "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+  extents3573: &extents3573
+    extent: *world
+    srs-name: "EPSG:3573"
+    srs: "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
   osm2pgsql: &osm2pgsql
     type: "postgis"
     host: "<%= ENV['DB_HOST'] %>"
@@ -198,7 +202,7 @@ Layer:
     name: "landcover"
     class: ""
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -237,7 +241,7 @@ Layer:
     name: "landcover-line"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -251,7 +255,7 @@ Layer:
     name: "water-lines-casing"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -266,7 +270,7 @@ Layer:
     name: "water-lines-low-zoom"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -279,7 +283,7 @@ Layer:
     name: "water-areas"
     class: ""
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -299,7 +303,7 @@ Layer:
     name: "water-areas-overlay"
     class: ""
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -314,7 +318,7 @@ Layer:
     name: "water-lines"
     class: "water-lines"
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -350,7 +354,7 @@ Layer:
     name: "dam"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -363,7 +367,7 @@ Layer:
     name: "marinas-area"
     class: ""
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -377,7 +381,7 @@ Layer:
     name: "piers-area"
     class: ""
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -391,7 +395,7 @@ Layer:
     name: "piers"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -405,7 +409,7 @@ Layer:
     name: "locks"
     class: ""
     geometry: "point"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -419,7 +423,7 @@ Layer:
     name: "buildings-lz"
     class: ""
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -435,7 +439,7 @@ Layer:
     name: "buildings"
     class: ""
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -458,7 +462,7 @@ Layer:
     name: "tunnels"
     class: "tunnels-fill tunnels-casing access directions"
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -557,7 +561,7 @@ Layer:
     name: "citywalls"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -571,7 +575,7 @@ Layer:
     name: "castlewalls"
     class: "castlewalls"
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -585,7 +589,7 @@ Layer:
     name: "castlewalls-poly"
     class: "castlewalls"
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -599,7 +603,7 @@ Layer:
     name: "landuse-overlay"
     class: ""
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -613,7 +617,7 @@ Layer:
     name: "line-barriers"
     class: "barriers"
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -627,7 +631,7 @@ Layer:
     name: "cliffs"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -641,7 +645,7 @@ Layer:
     name: "area-barriers"
     class: "barriers"
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -655,7 +659,7 @@ Layer:
     name: "tree-row"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -669,7 +673,7 @@ Layer:
     name: "ferry-routes"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -683,7 +687,7 @@ Layer:
     name: "turning-circle-casing"
     class: ""
     geometry: "point"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -712,7 +716,7 @@ Layer:
     name: "highway-area-casing"
     class: ""
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -732,7 +736,7 @@ Layer:
     id: "roads-casing"
     class: "roads-casing"
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -824,7 +828,7 @@ Layer:
     name: "highway-area-fill"
     class: ""
     # FIXME: No geometry?
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -846,7 +850,7 @@ Layer:
     name: "roads-fill"
     class: "roads-fill access directions"
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -950,7 +954,7 @@ Layer:
     name: "turning-circle-fill"
     class: ""
     geometry: "point"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -978,7 +982,7 @@ Layer:
     name: "aerialways"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -988,7 +992,7 @@ Layer:
     name: "roads-low-zoom"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1003,7 +1007,7 @@ Layer:
     name: "waterway-bridges"
     class: "water-lines"
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1013,7 +1017,7 @@ Layer:
     name: "bridges"
     class: "bridges-fill bridges-casing access directions"
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1113,7 +1117,7 @@ Layer:
     name: "guideways"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1123,7 +1127,7 @@ Layer:
     id: "admin-low-zoom"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1138,7 +1142,7 @@ Layer:
     name: "admin-mid-zoom"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1153,7 +1157,7 @@ Layer:
     name: "admin-high-zoom"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1168,7 +1172,7 @@ Layer:
     name: "power-minorline"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1178,7 +1182,7 @@ Layer:
     name: "power-line"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1188,7 +1192,7 @@ Layer:
     name: "nature-reserve-boundaries"
     class: ""
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1198,7 +1202,7 @@ Layer:
     name: "theme-park"
     class: ""
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1208,7 +1212,7 @@ Layer:
     name: "placenames-large"
     class: "country state"
     geometry: "point"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1221,7 +1225,7 @@ Layer:
     name: "placenames-capital"
     class: ""
     geometry: "point"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1234,7 +1238,7 @@ Layer:
     name: "placenames-medium"
     class: ""
     geometry: "point"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1248,7 +1252,7 @@ Layer:
     name: "placenames-small"
     class: ""
     geometry: "point"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1261,7 +1265,7 @@ Layer:
     class: "stations"
     name: "stations"
     geometry: "point"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1275,7 +1279,7 @@ Layer:
     name: "stations-poly"
     class: "stations"
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1289,7 +1293,7 @@ Layer:
     name: "amenity-symbols"
     class: "symbols"
     geometry: "point"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1305,7 +1309,7 @@ Layer:
     name: "amenity-symbols-poly"
     class: "symbols"
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1321,7 +1325,7 @@ Layer:
     name: "amenity-points-poly"
     class: "points"
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1340,7 +1344,7 @@ Layer:
     name: "amenity-points"
     class: "points"
     geometry: "point"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1361,7 +1365,7 @@ Layer:
     name: "power-towers"
     class: ""
     geometry: "point"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1371,7 +1375,7 @@ Layer:
     name: "power-poles"
     class: ""
     geometry: "point"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1381,7 +1385,7 @@ Layer:
     name: "roads-text-ref-low-zoom"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1406,7 +1410,7 @@ Layer:
     name: "junctions"
     class: ""
     geometry: "point"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1419,7 +1423,7 @@ Layer:
     name: "roads-text-ref"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1444,7 +1448,7 @@ Layer:
     name: "roads-area-text-name"
     class: ""
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1457,7 +1461,7 @@ Layer:
     name: "roads-text-name"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1474,7 +1478,7 @@ Layer:
     name: "paths-text-name"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1488,7 +1492,7 @@ Layer:
     name: "text-poly"
     class: "text"
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1515,7 +1519,7 @@ Layer:
     name: "text"
     class: "text"
     geometry: "point"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1543,7 +1547,7 @@ Layer:
     name: "building-text"
     class: ""
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1557,7 +1561,7 @@ Layer:
     name: "interpolation"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1569,7 +1573,7 @@ Layer:
     name: "housenumbers"
     class: ""
     geometry: "point"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1583,7 +1587,7 @@ Layer:
     name: "housenames"
     class: ""
     geometry: "point"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1597,7 +1601,7 @@ Layer:
     name: "water-lines-text"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1611,7 +1615,7 @@ Layer:
     name: "ferry-routes-text"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1625,7 +1629,7 @@ Layer:
     name: "admin-text"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1635,7 +1639,7 @@ Layer:
     name: "nature-reserve-text"
     class: ""
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1646,7 +1650,7 @@ Layer:
     name: "amenity-low-priority"
     class: "amenity-low-priority"
     geometry: "point"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
@@ -1661,7 +1665,7 @@ Layer:
     name: "amenity-low-priority-poly"
     class: "amenity-low-priority"
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |2-
