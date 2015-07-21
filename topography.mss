@@ -1,12 +1,12 @@
 #contours20 {
-  [zoom >= 11][zoom < 12] {
+  [zoom >= 12][zoom < 14] {
     line-width: 0.5;
     line-opacity: 0.5;
     line-color: #96733c;
     line-clip: false;
   }
 
-  [zoom >= 12] {
+  [zoom >= 14] {
  	  line-width: 0.6;
     line-opacity: 0.5;
     line-color: #96733c;
@@ -23,8 +23,15 @@
 }
 
 #contours100 {
-  [zoom >= 10] {
- 	  line-width: 0.7;
+  [zoom >= 10][zoom < 13] {
+    line-width: 0.7;
+    line-opacity: 0.5;
+    line-color: #db6d46;
+    line-clip: false;
+  }
+
+  [zoom >= 13] {
+ 	  line-width: 0.8;
     line-opacity: 0.5;
     line-color: #db6d46;
     line-clip: false;
