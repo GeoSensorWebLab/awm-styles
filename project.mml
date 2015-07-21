@@ -1626,7 +1626,7 @@
         "key_field": "",
         "geometry_field": "way",
         "extent": "-20037508,-20037508,20037508,20037508",
-        "table": "(SELECT way, place, name\n      FROM planet_osm_point\n      WHERE place IN ('city', 'town')\n        AND (capital IS NULL OR capital != 'yes')\n      ) AS placenames_medium"
+        "table": "(SELECT way, place, name, (tags->'gns:lat')::float AS latitude\n      FROM planet_osm_point\n      WHERE place IN ('city', 'town')\n        AND (capital IS NULL OR capital != 'yes')\n      ) AS placenames_medium"
       },
       "advanced": {
       }
@@ -1653,7 +1653,7 @@
         "key_field": "",
         "geometry_field": "way",
         "extent": "-20037508,-20037508,20037508,20037508",
-        "table": "(SELECT way, place, name\n      FROM planet_osm_point\n      WHERE place IN ('suburb', 'village', 'hamlet', 'neighbourhood', 'locality', 'isolated_dwelling', 'farm')\n      ) AS placenames_small"
+        "table": "(SELECT way, place, name, (tags->'gns:lat')::float AS latitude\n      FROM planet_osm_point\n      WHERE place IN ('suburb', 'village', 'hamlet', 'neighbourhood', 'locality', 'isolated_dwelling', 'farm')\n      ) AS placenames_small"
       },
       "advanced": {
       }

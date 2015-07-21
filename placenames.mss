@@ -76,7 +76,28 @@
 }
 
 #placenames-medium::town {
-  [place = 'town'] {
+  // Special style for northern communities
+  [place = 'town'][latitude >= 60] {
+    [zoom >= 7] {
+      text-name: "[name]";
+      text-size: 9;
+      text-fill: @placenames;
+      text-face-name: @book-fonts;
+      text-halo-radius: 1.5;
+      text-wrap-width: 50;
+      text-min-distance: 10;
+    }
+    [zoom >= 11] {
+      text-size: 11;
+      text-wrap-width: 70;
+    }
+    [zoom >= 14] {
+      text-size: 15;
+      text-wrap-width: 90;
+      text-fill: @placenames-light;
+    }
+  }
+  [place = 'town'][latitude < 60] {
     [zoom >= 9] {
       text-name: "[name]";
       text-size: 9;
@@ -116,7 +137,23 @@
 }
 
 #placenames-small::village {
-  [place = 'village'] {
+// Special style for northern communities
+[place = 'village'][latitude > 60] {
+  [zoom >= 7] {
+    text-name: "[name]";
+    text-size: 9;
+    text-fill: @placenames;
+    text-face-name: @book-fonts;
+    text-halo-radius: 1.5;
+    text-wrap-width: 50;
+    text-min-distance: 10;
+    [zoom >= 15] {
+      text-size: 13;
+      text-fill: @placenames-light;
+    }
+  }
+}
+  [place = 'village'][latitude < 60] {
     [zoom >=12] {
       text-name: "[name]";
       text-size: 10;
@@ -134,7 +171,40 @@
 }
 
 #placenames-small::hamlet {
-  [place = 'hamlet'],
+// Special style for northern communities
+[place = 'hamlet'][latitude > 60] {
+  [zoom >= 7] {
+    text-name: "[name]";
+    text-size: 9;
+    text-fill: @placenames;
+    text-face-name: @book-fonts;
+    text-halo-radius: 1.5;
+    text-wrap-width: 50;
+    text-min-distance: 10;
+    [zoom >= 15] {
+      text-size: 13;
+      text-fill: @placenames-light;
+    }
+  }
+}
+  [place = 'hamlet'][latitude < 60] {
+    [zoom >= 14] {
+      text-name: "[name]";
+      text-size: 10;
+      text-fill: @placenames;
+      text-face-name: @book-fonts;
+      text-halo-radius: 1.5;
+      text-wrap-width: 50;
+      text-min-distance: 10;
+      [zoom >= 15] {
+        text-size: 13;
+        text-fill: @placenames-light;
+      }
+    }
+  }
+}
+
+#placenames-small::generic {
   [place = 'locality'],
   [place = 'neighbourhood'],
   [place = 'isolated_dwelling'],

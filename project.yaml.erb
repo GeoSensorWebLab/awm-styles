@@ -1238,7 +1238,7 @@ Layer:
     Datasource:
       <<: *osm2pgsql
       table: |2-
-        (SELECT way, place, name
+        (SELECT way, place, name, (tags->'gns:lat')::float AS latitude
               FROM planet_osm_point
               WHERE place IN ('city', 'town')
                 AND (capital IS NULL OR capital != 'yes')
@@ -1252,7 +1252,7 @@ Layer:
     Datasource:
       <<: *osm2pgsql
       table: |2-
-        (SELECT way, place, name
+        (SELECT way, place, name, (tags->'gns:lat')::float AS latitude
               FROM planet_osm_point
               WHERE place IN ('suburb', 'village', 'hamlet', 'neighbourhood', 'locality', 'isolated_dwelling', 'farm')
               ) AS placenames_small
