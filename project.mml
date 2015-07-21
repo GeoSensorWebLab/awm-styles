@@ -59,10 +59,21 @@
       "key_field": "",
       "geometry_field": "way",
       "extent": "-20037508,-20037508,20037508,20037508"
+    },
+    "canvec": {
+      "type": "postgis",
+      "host": "",
+      "port": "",
+      "user": "",
+      "dbname": "canvec",
+      "key_field": "ogc_fid",
+      "geometry_field": "wkb_geometry",
+      "extent": "-20037508,-20037508,20037508,20037508"
     }
   },
   "Stylesheet": [
     "style.mss",
+    "topography.mss",
     "shapefiles.mss",
     "landcover.mss",
     "water.mss",
@@ -606,6 +617,60 @@
       "Datasource": {
         "file": "data/ne_10m_graticules_15/ne_10m_graticules_15.shp",
         "type": "shape"
+      },
+      "advanced": {
+      }
+    },
+    {
+      "id": "contours100",
+      "name": "contours100",
+      "class": "",
+      "geometry": "linestring",
+      "extent": [
+        -180,
+        -85.05112877980659,
+        180,
+        85.05112877980659
+      ],
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
+      "Datasource": {
+        "type": "postgis",
+        "host": "",
+        "port": "",
+        "user": "",
+        "dbname": "canvec",
+        "key_field": "ogc_fid",
+        "geometry_field": "wkb_geometry",
+        "extent": "-20037508,-20037508,20037508,20037508",
+        "table": "(SELECT wkb_geometry, ogc_fid, elevation\n      FROM FO_1030009_1\n      WHERE elevation::integer % 100 = 0\n      ) AS contours100"
+      },
+      "advanced": {
+      }
+    },
+    {
+      "id": "contours20",
+      "name": "contours20",
+      "class": "",
+      "geometry": "linestring",
+      "extent": [
+        -180,
+        -85.05112877980659,
+        180,
+        85.05112877980659
+      ],
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
+      "Datasource": {
+        "type": "postgis",
+        "host": "",
+        "port": "",
+        "user": "",
+        "dbname": "canvec",
+        "key_field": "ogc_fid",
+        "geometry_field": "wkb_geometry",
+        "extent": "-20037508,-20037508,20037508,20037508",
+        "table": "(SELECT wkb_geometry, ogc_fid, elevation\n      FROM FO_1030009_1\n      WHERE elevation::integer % 20 = 0 AND\n      elevation::integer % 100 != 0\n      ) AS contours20"
       },
       "advanced": {
       }

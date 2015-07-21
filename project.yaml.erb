@@ -41,9 +41,19 @@ _parts:
     key_field: ""
     geometry_field: "way"
     extent: "-20037508,-20037508,20037508,20037508"
+  canvec: &canvec
+    type: "postgis"
+    host: "<%= ENV['DB_HOST'] %>"
+    port: "<%= ENV['DB_PORT'] %>"
+    user: "<%= ENV['DB_USER'] %>"
+    dbname: "canvec"
+    key_field: "ogc_fid"
+    geometry_field: "wkb_geometry"
+    extent: "-20037508,-20037508,20037508,20037508"
 
 Stylesheet:
   - "style.mss"
+  - "topography.mss"
   - "shapefiles.mss"
   - "landcover.mss"
   - "water.mss"
@@ -349,6 +359,33 @@ Layer:
     Datasource:
       file: "data/ne_10m_graticules_15/ne_10m_graticules_15.shp"
       type: "shape"
+    advanced: {}
+  - id: "contours100"
+    name: "contours100"
+    class: ""
+    geometry: "linestring"
+    <<: *extents3573
+    Datasource:
+      <<: *canvec
+      table: |2-
+        (SELECT wkb_geometry, ogc_fid, elevation
+              FROM FO_1030009_1
+              WHERE elevation::integer % 100 = 0
+              ) AS contours100
+    advanced: {}
+  - id: "contours20"
+    name: "contours20"
+    class: ""
+    geometry: "linestring"
+    <<: *extents3573
+    Datasource:
+      <<: *canvec
+      table: |2-
+        (SELECT wkb_geometry, ogc_fid, elevation
+              FROM FO_1030009_1
+              WHERE elevation::integer % 20 = 0 AND
+              elevation::integer % 100 != 0
+              ) AS contours20
     advanced: {}
   - id: "dam"
     name: "dam"
