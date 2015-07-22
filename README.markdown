@@ -38,9 +38,8 @@ Contributions to this project are welcome, see [CONTRIBUTING.md](CONTRIBUTING.md
 
 # Maintainers
 
-* James Badger (jpbadger@ucalgary.ca)
+* James Badger <jpbadger@ucalgary.ca> (@openfirmware)
 
 # License
 
-Copyright GeoSensor Web Lab 2014, all rights reserved.
-
+See LICENSE.
