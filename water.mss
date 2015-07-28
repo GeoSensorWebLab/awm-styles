@@ -39,7 +39,6 @@
     }
   }
 
-  [natural = 'lake']::natural,
   [natural = 'water']::natural,
   [landuse = 'reservoir']::landuse,
   [waterway = 'riverbank']::waterway {
@@ -81,6 +80,12 @@
         [waterway = 'stream'][zoom >= 15] {
           line-width: 3.5;
         }
+        [intermittent = 'yes'] {
+          line-dasharray: 4,3;
+          line-cap: butt;
+          line-join: round;
+          line-clip: false;
+        }
       }
     }
   }
@@ -103,17 +108,9 @@
     line-cap: round;
   }
 
-  [waterway = 'wadi'][zoom >= 13] {
-    line-color: @water-color;
-    line-width: 1;
-    line-dasharray: 4,4;
-    line-cap: round;
-    line-join: round;
-    [zoom >= 16] { line-width: 2; }
-  }
-
   [waterway = 'canal'][zoom >= 12],
-  [waterway = 'river'][zoom >= 12] {
+  [waterway = 'river'][zoom >= 12],
+  [waterway = 'wadi'][zoom >= 13] {
     [bridge = 'yes'] {
       [zoom >= 14] {
         bridgecasing/line-color: black;
@@ -123,6 +120,21 @@
         [zoom >= 17] { bridgecasing/line-width: 11; }
         [zoom >= 18] { bridgecasing/line-width: 13; }
       }
+    }
+    [intermittent = 'yes'],
+    [waterway = 'wadi'] {
+      [bridge = 'yes'][zoom >= 14] {
+        bridgefill/line-color: white;
+        bridgefill/line-join: round;
+        bridgefill/line-width: 4;
+        [zoom >= 15] { bridgefill/line-width: 5; }
+        [zoom >= 17] { bridgefill/line-width: 9; }
+        [zoom >= 18] { bridgefill/line-width: 11; }
+      }
+      line-dasharray: 4,3;
+      line-cap: butt;
+      line-join: round;
+      line-clip: false;
     }
     line-color: @water-color;
     line-width: 2;
@@ -161,6 +173,12 @@
           bridgeglow/line-width: 3;
           [waterway = 'stream'][zoom >= 15] { bridgeglow/line-width: 3; }
         }
+      }
+      [intermittent = 'yes'] {
+        line-dasharray: 4,3;
+        line-cap: butt;
+        line-join: round;
+        line-clip: false;
       }
       line-width: 2;
       line-color: @water-color;

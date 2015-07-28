@@ -81,3 +81,20 @@ A list of changes made to the stylesheet.
 * transparent symbol for private recycling and playgrounds
 * Remove no longer necessary ::leisure attachment
 * fix dy for leisure=water_park
+
+### v2.28.0
+
+* render wadis like rivers and canals
+* disable line-clip to avoid glitches
+* Manually add max/min zoom to layers
+* Drop attachments that are no longer necessary
+* Special rendering for intermittent waterways
+* add rendering for amenity=dentist
+* Add opacity to highway=proposed for less prominent rendering
+* Improve rendering of construction=residential on zoom 13
+* add rendering for amenity=townhall
+* more red in buildings hue, darken building outline
+* Updated yaml2mml.py to no longer produce trailing whitespaces
+* move icons to SVG
+* Remove natural=lake
+* add glacier and bare ground landcovers to text-poly-low-zoom
