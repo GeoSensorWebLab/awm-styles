@@ -53,6 +53,7 @@ _parts:
 
 Stylesheet:
   - "style.mss"
+  - "placenames.mss"
   - "topography.mss"
   - "shapefiles.mss"
   - "landcover.mss"
@@ -61,7 +62,6 @@ Stylesheet:
   - "roads.mss"
   - "power.mss"
   - "citywalls.mss"
-  - "placenames.mss"
   - "buildings.mss"
   - "stations.mss"
   - "amenity-points.mss"
@@ -1555,6 +1555,7 @@ Layer:
           WHERE place IN ('city', 'town')
             AND capital IN ('yes', '4')
             AND name IS NOT NULL
+          ORDER BY population
         ) AS placenames_capital
     properties:
       minzoom: 5
@@ -1577,6 +1578,7 @@ Layer:
           WHERE place IN ('city', 'town')
             AND (capital IS NULL OR capital NOT IN ('yes', '4'))
             AND name IS NOT NULL
+          ORDER BY population
         ) AS placenames_medium
     properties:
       minzoom: 6
@@ -1597,9 +1599,10 @@ Layer:
           FROM planet_osm_point
           WHERE place IN ('suburb', 'village', 'hamlet', 'neighbourhood', 'locality', 'isolated_dwelling', 'farm')
             AND name IS NOT NULL
+          ORDER BY population
         ) AS placenames_small
     properties:
-      minzoom: 12
+      minzoom: 7
     advanced: {}
   - id: "stations"
     class: "stations"

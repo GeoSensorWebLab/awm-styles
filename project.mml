@@ -73,6 +73,7 @@
   },
   "Stylesheet": [
     "style.mss",
+    "placenames.mss",
     "topography.mss",
     "shapefiles.mss",
     "landcover.mss",
@@ -81,7 +82,6 @@
     "roads.mss",
     "power.mss",
     "citywalls.mss",
-    "placenames.mss",
     "buildings.mss",
     "stations.mss",
     "amenity-points.mss",
@@ -1805,7 +1805,7 @@
         "key_field": "",
         "geometry_field": "way",
         "extent": "-20037508,-20037508,20037508,20037508",
-        "table": "(SELECT\n    way,\n    place,\n    name,\n    ref\n  FROM planet_osm_point\n  WHERE place IN ('city', 'town')\n    AND capital IN ('yes', '4')\n    AND name IS NOT NULL\n) AS placenames_capital"
+        "table": "(SELECT\n    way,\n    place,\n    name,\n    ref\n  FROM planet_osm_point\n  WHERE place IN ('city', 'town')\n    AND capital IN ('yes', '4')\n    AND name IS NOT NULL\n  ORDER BY population\n) AS placenames_capital"
       },
       "properties": {
         "minzoom": 5,
@@ -1836,7 +1836,7 @@
         "key_field": "",
         "geometry_field": "way",
         "extent": "-20037508,-20037508,20037508,20037508",
-        "table": "(SELECT\n    way,\n    place,\n    name,\n    (tags->'gns:lat')::float AS latitude\n  FROM planet_osm_point\n  WHERE place IN ('city', 'town')\n    AND (capital IS NULL OR capital NOT IN ('yes', '4'))\n    AND name IS NOT NULL\n) AS placenames_medium"
+        "table": "(SELECT\n    way,\n    place,\n    name,\n    (tags->'gns:lat')::float AS latitude\n  FROM planet_osm_point\n  WHERE place IN ('city', 'town')\n    AND (capital IS NULL OR capital NOT IN ('yes', '4'))\n    AND name IS NOT NULL\n  ORDER BY population\n) AS placenames_medium"
       },
       "properties": {
         "minzoom": 6
@@ -1866,10 +1866,10 @@
         "key_field": "",
         "geometry_field": "way",
         "extent": "-20037508,-20037508,20037508,20037508",
-        "table": "(SELECT\n    way,\n    place,\n    name,\n    (tags->'gns:lat')::float AS latitude\n  FROM planet_osm_point\n  WHERE place IN ('suburb', 'village', 'hamlet', 'neighbourhood', 'locality', 'isolated_dwelling', 'farm')\n    AND name IS NOT NULL\n) AS placenames_small"
+        "table": "(SELECT\n    way,\n    place,\n    name,\n    (tags->'gns:lat')::float AS latitude\n  FROM planet_osm_point\n  WHERE place IN ('suburb', 'village', 'hamlet', 'neighbourhood', 'locality', 'isolated_dwelling', 'farm')\n    AND name IS NOT NULL\n  ORDER BY population\n) AS placenames_small"
       },
       "properties": {
-        "minzoom": 12
+        "minzoom": 7
       },
       "advanced": {
       }
