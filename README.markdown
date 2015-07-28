@@ -18,6 +18,10 @@ Then install Node and carto to build the XML files.
     $ sudo apt-get install nodejs
     $ sudo npm install -g carto
 
+To compile any changes to your project file, edit the `.env` file with database details and then:
+
+    $ source .env && scripts/project
+
 Then use the generation script to prepare the XML files:
 
     $ scripts/generate
