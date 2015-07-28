@@ -1764,32 +1764,6 @@
       }
     },
     {
-      "id": "nepopulated",
-      "name": "nepopulated",
-      "class": "",
-      "geometry": "point",
-      "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
-      ],
-      "srs-name": "WGS84",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-      "Datasource": {
-        "file": "data/ne_10m_populated_places/ne_10m_populated_places_fixed.shp",
-        "type": "shape",
-        "encoding": "windows-1252"
-      },
-      "properties": {
-        "minzoom": 3,
-        "maxzoom": 4
-      },
-      "advanced": {
-        "encoding": "windows-1252"
-      }
-    },
-    {
       "id": "placenames-capital",
       "name": "placenames-capital",
       "class": "",
