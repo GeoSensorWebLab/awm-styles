@@ -242,9 +242,9 @@ Layer:
       table: |-
         (SELECT
             way, name, religion, way_pixels,
-            COALESCE(aeroway, amenity, landuse, leisure, military, "natural", power, tourism, highway) AS feature
-          FROM (SELECT
-              way, COALESCE(name, '') AS name,
+            COALESCE(aeroway, amenity, landuse, leisure, military, "natural", power, tourism, highway, railway) AS feature 
+          FROM (SELECT 
+              way, COALESCE(name, '') AS name, 
               ('aeroway_' || (CASE WHEN aeroway IN ('apron', 'aerodrome') THEN aeroway ELSE NULL END)) AS aeroway,
               ('amenity_' || (CASE WHEN amenity IN ('parking', 'university', 'college', 'school', 'hospital', 'kindergarten', 'grave_yard') THEN amenity ELSE NULL END)) AS amenity,
               ('landuse_' || (CASE WHEN landuse IN ('quarry', 'vineyard', 'orchard', 'cemetery', 'residential', 'garages', 'field', 'meadow', 'grass', 'allotments', 'forest', 'farmyard', 'farm', 'farmland', 'recreation_ground', 'conservation', 'village_green', 'retail', 'industrial', 'railway', 'commercial', 'brownfield', 'landfill', 'construction') THEN landuse ELSE NULL END)) AS landuse,
@@ -254,6 +254,7 @@ Layer:
               ('power_' || (CASE WHEN power IN ('station', 'sub_station', 'substation', 'generator') THEN power ELSE NULL END)) AS power,
               ('tourism_' || (CASE WHEN tourism IN ('attraction', 'camp_site', 'caravan_site', 'picnic_site', 'zoo') THEN tourism ELSE NULL END)) AS tourism,
               ('highway_' || (CASE WHEN highway IN ('services', 'rest_area') THEN highway ELSE NULL END)) AS highway,
+              ('railway_' || (CASE WHEN railway = 'station' THEN railway ELSE NULL END)) AS railway,
               CASE WHEN religion IN ('christian', 'jewish') THEN religion ELSE 'INT-generic'::text END AS religion,
               way_area/(!pixel_width!*!pixel_height!) AS way_pixels
             FROM planet_osm_polygon
@@ -265,7 +266,8 @@ Layer:
               OR "natural" IN ('beach', 'desert', 'heath', 'mud', 'grassland', 'wood', 'sand', 'scrub')
               OR power IN ('station', 'sub_station', 'substation', 'generator')
               OR tourism IN ('attraction', 'camp_site', 'caravan_site', 'picnic_site', 'zoo')
-              OR highway IN ('services', 'rest_area'))
+              OR highway IN ('services', 'rest_area')
+              OR railway = 'station')
               AND way_area/(!pixel_width!*!pixel_height!) > 0.01
             ORDER BY z_order, way_area DESC
           ) AS landcover
@@ -480,22 +482,6 @@ Layer:
           WHERE waterway = 'lock_gate'
         ) AS locks
     advanced: {}
-  - id: "buildings-lz"
-    name: "buildings-lz"
-    class: ""
-    geometry: "polygon"
-    <<: *extents3573
-    Datasource:
-      <<: *osm2pgsql
-      table: |-
-        (SELECT
-            way, building, railway, amenity FROM planet_osm_polygon
-          WHERE railway = 'station'
-            OR building IN ('station', 'supermarket')
-            OR amenity = 'place_of_worship'
-          ORDER BY z_order, way_area DESC
-        ) AS buildings_lz
-    advanced: {}
   - id: "buildings"
     name: "buildings"
     class: ""
@@ -505,19 +491,28 @@ Layer:
       <<: *osm2pgsql
       table: |-
         (SELECT
-            way, aeroway,
-          CASE
-           WHEN building IN ('garage', 'roof', 'garages', 'service', 'shed', 'shelter', 'cabin', 'storage_tank', 'tank', 'support', 'glasshouse', 'greenhouse', 'mobile_home', 'kiosk', 'silo', 'canopy', 'tent') THEN 'INT-light'::text
-           ELSE building
-          END AS building
+            way, building
           FROM planet_osm_polygon
-          WHERE (building IS NOT NULL
-              AND building NOT IN ('no', 'station', 'supermarket', 'planned')
-              AND (railway IS NULL OR railway != 'station')
-              AND (amenity IS NULL OR amenity != 'place_of_worship'))
-            OR aeroway = 'terminal'
+          WHERE (building IS NOT NULL)
+            AND building != 'no'
           ORDER BY z_order, way_area DESC
         ) AS buildings
+    advanced: {}
+  - id: "buildings-major"
+    name: "buildings-major"
+    class: ""
+    geometry: "polygon"
+    <<: *extents3573
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT way, building, amenity, aeroway
+          FROM planet_osm_polygon
+          WHERE (building IS NOT NULL)
+            AND building != 'no'
+            AND (aeroway = 'terminal' OR amenity = 'place_of_worship')
+          ORDER BY z_order,way_area DESC)
+        AS buildings_major
     advanced: {}
   - id: "tunnels"
     name: "tunnels"
@@ -1282,6 +1277,17 @@ Layer:
                WHERE boundary = 'administrative' AND admin_level IN ('2', '4')
               ) AS placenames_large
     advanced: {}
+  - id: "nepopulated"
+    name: "nepopulated"
+    class: ""
+    geometry: "point"
+    <<: *extents84
+    Datasource:
+      file: "data/ne_10m_populated_places/ne_10m_populated_places_fixed.shp"
+      type: "shape"
+      encoding: "windows-1252"
+    advanced:
+      encoding: "windows-1252"
   - id: "placenames-capital"
     name: "placenames-capital"
     class: ""
@@ -1364,11 +1370,11 @@ Layer:
                  OR shop IN ('accessories', 'alcohol', 'antique', 'antiques', 'appliance', 'art', 'baby_goods', 'bag', 'bags', 'bakery', 'bathroom_furnishing', 'beauty', 'bed', 'betting', 'beverages', 'bicycle', 'boat', 'bookmaker', 'books', 'boutique', 'builder', 'building_materials', 'butcher', 'camera', 'car', 'car_parts', 'car_repair', 'car_service', 'carpet', 'charity', 'cheese', 'chemist', 'chocolate', 'clothes', 'coffee', 'communication', 'computer', 'confectionery', 'convenience', 'copyshop', 'cosmetics', 'craft', 'curtain', 'dairy', 'deli', 'delicatessen', 'department_store', 'discount', 'dive', 'doityourself', 'dry_cleaning', 'e-cigarette', 'electrical', 'electronics', 'energy', 'erotic', 'estate_agent', 'fabric', 'farm', 'fashion', 'fish', 'fishing', 'fishmonger', 'flooring', 'florist', 'food', 'frame', 'frozen_food', 'funeral_directors', 'furnace', 'furniture', 'gallery', 'gambling', 'games', 'garden_centre', 'gas', 'general', 'gift', 'glaziery', 'greengrocer', 'grocery', 'hairdresser', 'hardware', 'health', 'health_food', 'hearing_aids', 'herbalist', 'hifi', 'hobby', 'household', 'houseware', 'hunting', 'ice_cream', 'insurance', 'interior_decoration', 'jewellery', 'jewelry', 'kiosk', 'kitchen', 'laundry', 'leather', 'lighting', 'locksmith', 'lottery', 'mall', 'market', 'massage', 'medical', 'medical_supply', 'mobile_phone', 'money_lender', 'motorcycle', 'motorcycle_repair', 'music', 'musical_instrument', 'newsagent', 'office_supplies', 'optician', 'organic', 'outdoor', 'paint', 'pastry', 'pawnbroker', 'perfumery', 'pet', 'pets', 'pharmacy', 'phone', 'photo', 'photo_studio', 'photography', 'pottery', 'printing', 'radiotechnics', 'real_estate', 'religion', 'rental', 'salon', 'scuba_diving', 'seafood', 'second_hand', 'sewing', 'shoe_repair', 'shoes', 'shopping_centre', 'solarium', 'souvenir', 'sports', 'stationery', 'supermarket', 'tailor', 'tanning', 'tattoo', 'tea', 'ticket', 'tiles', 'tobacco', 'toys', 'trade', 'travel_agency', 'tyres', 'vacuum_cleaner', 'variety_store', 'video', 'video_games', 'watches', 'wholesale', 'wine', 'winery', 'yes')
                  OR tourism IN ('alpine_hut', 'camp_site', 'picnic_site', 'caravan_site', 'guest_house', 'hostel', 'hotel', 'motel', 'museum', 'viewpoint', 'information', 'chalet')
                  OR highway IN ('bus_stop', 'traffic_signals')
-                 OR man_made IN ('mast', 'water_tower', 'lighthouse', 'power_wind', 'windmill')
+                 OR man_made IN ('mast', 'water_tower', 'lighthouse', 'windmill')
                  OR historic IN ('memorial', 'archaeological_site')
                  OR leisure IN ('playground', 'picnic_table')
                  OR aeroway IN ('aerodrome', 'helipad')
-                 OR "natural" IN ('peak', 'volcano', 'spring', 'tree')
+                 OR "natural" IN ('peak', 'volcano', 'saddle', 'spring', 'tree')
                  OR (power = 'generator' AND ("generator:source" = 'wind' OR power_source = 'wind'))
          ORDER BY way_area desc      ) AS amenity_points_poly
     advanced: {}
@@ -1392,7 +1398,7 @@ Layer:
                  OR lock = 'yes'
                  OR leisure IN ('playground', 'slipway', 'picnic_table')
                  OR aeroway IN ('aerodrome', 'helipad')
-                 OR "natural" IN ('peak', 'volcano', 'spring', 'tree', 'cave_entrance')
+                 OR "natural" IN ('peak', 'volcano', 'saddle', 'spring', 'tree', 'cave_entrance')
                  OR (power = 'generator' AND ("generator:source" = 'wind' OR power_source = 'wind'))
               ) AS amenity_points
     advanced: {}

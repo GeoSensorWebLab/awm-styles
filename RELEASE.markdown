@@ -30,3 +30,23 @@ A list of changes made to the stylesheet.
 * Split landcover and text-poly in high zoom (>= 10) and low zoom (< z10) layer
 * Change rendering theme park boundaries
 * Improve marsh/wetland/mud rendering
+
+### v2.26.0
+
+* changing color for air transport symbols and icons to violet
+* adding new svg icons for air transport
+* render mud from z10
+* Refactor buildings code
+* Stops rendering supermarkets in a crazy pink
+* Moves the rendering of train station areas to landcover
+* Removes outline differences based on a distinction that no one fully understands
+* Correct SQL error
+* tourism=attraction - partially restore old label, stop rendering areas
+* stop attempts to display major buildings on z10 z11, special display across all levels
+* Add WHERE clause to buildings-major layer
+* add rendering for natural=saddle
+* fix text-dy for highway=traffic_signals
+* Don't let cities hide country and state names
+* removed deprecated man_made=power_wind query
+* Make buildings more gray
+* Make buildings a bit darker on low zoom levels

@@ -4,6 +4,7 @@
 @shop-icon: #ac39ac;
 @transportation-icon: #0092da;
 @transportation-text: #0066ff;
+@airtransport: #8461C4;
 
 @landcover-font-size: 10;
 @landcover-font-size-big: 12;
@@ -424,13 +425,15 @@
   }
 
   [feature = 'aeroway_helipad'][zoom >= 16]::aeroway {
-    point-file: url('symbols/helipad.p.16.png');
-    point-placement: interior;
+    marker-file: url('symbols/helipad.svg');
+    marker-clip: false;
+    marker-fill: @airtransport;
   }
 
   [feature = 'aeroway_aerodrome'][zoom >= 10][zoom < 14]::aeroway {
-    point-file: url('symbols/aerodrome.p.16.png');
-    point-placement: interior;
+    marker-file: url('symbols/aerodrome.svg');
+    marker-clip: false;
+    marker-fill: @airtransport;
   }
 
   [feature = 'man_made_lighthouse'][zoom >= 15]::man_made {
@@ -447,6 +450,12 @@
   [feature = 'natural_volcano'][zoom >= 11]::natural {
     marker-file: url('symbols/peak.svg');
     marker-fill: #d40000;
+    marker-placement: interior;
+  }
+
+  [feature = 'natural_saddle'][zoom >= 15]::natural {
+    marker-file: url('symbols/saddle.svg');
+    marker-fill: #d08f55;
     marker-placement: interior;
   }
 
@@ -659,6 +668,29 @@
   [feature = 'natural_peak'],
   [feature = 'natural_volcano'] {
     [zoom >= 13] {
+      text-name: "[name]";
+      text-size: 10;
+      text-fill: brown;
+      text-dy: 7;
+      text-face-name: @book-fonts;
+      text-halo-radius: 1;
+      text-wrap-width: @standard-wrap-width;
+      text-placement: interior;
+      ele/text-name: "[ele]";
+      ele/text-size: 9;
+      ele/text-fill: brown;
+      ele/text-dy: 6;
+      ele/text-face-name: @oblique-fonts;
+      ele/text-halo-radius: 1;
+      ele/text-placement: interior;
+      [name != ''] {
+        ele/text-dy: 19;
+      }
+    }
+  }
+
+  [feature = 'natural_saddle'] {
+    [zoom >= 15] {
       text-name: "[name]";
       text-size: 10;
       text-fill: brown;
@@ -1409,10 +1441,9 @@
       text-size: @landcover-font-size;
       [way_pixels > 12000] { text-size: @landcover-font-size-big; }
       [way_pixels > 48000] { text-size: @landcover-font-size-bigger; }
-      text-fill: darken(@attraction, 40%);
-      text-face-name: @landcover-face-name;
-      text-halo-radius: 1;
-      text-halo-fill: rgba(255,255,255,0.6);
+      text-fill: #660033;
+      text-face-name: @book-fonts;
+      text-halo-radius: 2;
       text-wrap-width: @landcover-wrap-width-size;
       [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
       [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
@@ -1827,7 +1858,7 @@
   [feature = 'aeroway_helipad'][zoom >= 16]::aeroway {
     text-name: "[name]";
     text-size: 8;
-    text-fill: #6692da;
+    text-fill: @airtransport;
     text-dy: -10;
     text-face-name: @bold-fonts;
     text-halo-radius: 1;
@@ -1838,8 +1869,8 @@
   [feature = 'aeroway_aerodrome'][zoom >= 10][zoom < 14]::aeroway {
     text-name: "[name]";
     text-size: 8;
-    text-fill: #6692da;
-    text-dy: -12;
+    text-fill: darken(@airtransport, 15%);
+    text-dy: -10;
     text-face-name: @oblique-fonts;
     text-halo-radius: 1;
     text-placement: interior;
