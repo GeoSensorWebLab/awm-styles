@@ -2171,7 +2171,7 @@
     text-wrap-width: @standard-wrap-width;
   }
 
-  [feature = 'aeroway_aerodrome'][zoom >= 10][zoom < 14] {
+  [feature = 'aeroway_aerodrome'][zoom >= 12][zoom < 14] {
     text-name: "[name]";
     text-size: 8;
     text-fill: darken(@airtransport, 15%);
