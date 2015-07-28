@@ -188,3 +188,22 @@ A list of changes made to the stylesheet.
 * Render cutline as thinner line
 * add rendering for historic=monument
 * reuse symbol of DIY shop for hardware shop
+
+### v2.31.0
+
+* move icons to SVG
+* Render tourism=zoo like tourism=theme_park
+* Drop lower zoomlevel for zoo and theme park to z10
+* stop rendering railway=rail on z6
+* Adjust text-dy on tourism housing
+* Refactor way_area conditionals
+* Add name IS NOT NULL conditions to text layers
+* Order placenames to place lower levels first, then by area
+* add rendering for amenity=taxi
+* Move recycling icon to z17
+* Add zoom to citywalls layer
+* Set min-zoom on text-line
+* Add name IS NOT NULL to placename layers
+* Remove castle_walls
+* model aerialways with dashed lines
+* Add line-clip to aerialway dashes
