@@ -629,7 +629,7 @@
     }
 
     [feature = 'railway_rail'][zoom >= 13],
-    [feature = 'railway_preserved'][zoom >= 14],
+    [feature = 'railway_preserved'][zoom >= 13],
     [feature = 'railway_monorail'][zoom >= 14] {
       .bridges-casing {
         line-width: 5;
@@ -2316,7 +2316,7 @@
       text-size: 9;
       text-halo-radius: 1;
       text-halo-fill: rgba(255,255,255,0.8);
-      text-spacing: 200;
+      text-spacing: 300;
       text-clip: false;
       text-placement: line;
       text-face-name: @book-fonts;

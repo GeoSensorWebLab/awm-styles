@@ -50,3 +50,34 @@ A list of changes made to the stylesheet.
 * removed deprecated man_made=power_wind query
 * Make buildings more gray
 * Make buildings a bit darker on low zoom levels
+
+### v2.27.0
+
+* Added golf_course-color to leisure=miniature_golf-areas
+* Added symbol to minigolf-courses and if available its name also shows up (both at zoom>=17)
+* Added golf-symbol to areas and points with leisure=golf_course
+* Adding water park styles and icon
+* prison area with grey hatching
+* glacier labels changes
+* Render amenity=food_court
+* Drop rendering military=barracks
+* Drop rendering for natural=desert
+* Drop rendering for landuse=field
+* moved hospital and pharmacy icons to SVG
+* move recycling icon to SVG
+* Increase text-spacing for paths
+* Don't render waterway names in culverts
+* move religion related icons to SVG
+* change playground icon to SVG
+* changed ATM and bank icons to SVG
+* render amenity=place_of_worship as a primary tag
+* Add transparency to halo placename labels
+* fix inner bridge casing zlevel mismatch
+* move bakery icon to SVG
+* move camping icon to SVG
+* add rendering for amenity=doctors
+* patterned rendering of bare_rock and scree, less strong yellow for sand
+* change cinema icon to SVG
+* transparent symbol for private recycling and playgrounds
+* Remove no longer necessary ::leisure attachment
+* fix dy for leisure=water_park
