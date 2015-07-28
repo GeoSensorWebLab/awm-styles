@@ -98,3 +98,53 @@ A list of changes made to the stylesheet.
 * move icons to SVG
 * Remove natural=lake
 * add glacier and bare ground landcovers to text-poly-low-zoom
+
+### v2.29.0
+
+* Make living street casing darker to increase contrast
+* Improve widths aeroway
+* Make halos transparent
+* move icons to SVG
+* Don't render place=town on z16 and higher, and place=suburb and place=village on z17 and higher
+* Render place=hamlet, place=locality, place=neighbourhood, place=isolated_dwelling, and place=farm from z15 rather than from z14
+* Render place=town black rather than gray
+* Make font sizes more consistent by increasing font size for place=town on z12 and z13, for place=suburb on z16, and for place=village on z14 and z16
+* Treat capital=4 like capital=yes
+* Make text-wrap consistent
+* Use French-style tree rendering
+* Switch from ST_Buffer to rendering circles
+* Remove blur from trees
+* Make tree-rows more narrow on z19/z20
+* Restore railways on z12
+* Restore roads and aeroways on z10 and z11
+* Increase minimum carto version
+* Clean up low-zoom road definitions
+* fix aerialway zoom regression
+* Clean up SQL involving access
+* Slightly lighten colour of house names and numbers
+* correct minzoom value for amenity_points layers
+* Render paths under construction more narrow
+* Move casing and background of path tunnels to correct attachment
+* change cliff line pattern images
+* removed duplicate text-placement
+* Improve construction name zoom levels
+* Always render road area names from z17 independent of size
+* add rendering for amenity=nightclub
+* Add back missing line-opacity for paths
+* Fix color text kindergarten
+* Match label colors to icons
+* Add missing text-placement and marker-clip tags
+* Reformat admin_level SQL
+* Darken label for peak and saddle
+* Resolve bugs related to COALESCE problems
+* Prevent mismatch between icons and labels
+* Use a null check for shop in where clauses
+* use colour variables for often used POI colours
+* add rendering for amenity=car_rental
+* Refactor water-features
+* Render arrows for implied “oneway” on roundabouts
+* Render intermittend rivers with dashed line also on low zoom levels
+* improve rendering of viewpoint+peak (display peak)
+* fix dy for golf labels
+* restore cave entrance icon
+* add icon for shop=books

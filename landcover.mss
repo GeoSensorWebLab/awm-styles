@@ -563,7 +563,7 @@
     }
   }
   [man_made = 'embankment'][zoom >= 15]::man_made {
-    line-pattern-file: url('symbols/cliff.png');
+    line-pattern-file: url('symbols/embankment.png');
   }
 }
 
@@ -589,15 +589,6 @@
   [barrier = 'hedge'][zoom >= 16] {
     line-width: 3;
     line-color: #aed1a0;
-  }
-}
-
-#tree-row {
-  [natural = 'tree_row'][zoom >= 16] {
-    line-pattern-file: url('symbols/tree_row.png');
-    [zoom >= 17] {
-      line-pattern-file: url('symbols/tree_row2.png');
-    }
   }
 }
 

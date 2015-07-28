@@ -7,6 +7,7 @@
 @transportation-text: #0066ff;
 @airtransport: #8461C4;
 @health-color: #da0092;
+@amenity-brown: #734a08;
 
 @landcover-font-size: 10;
 @landcover-font-size-big: 12;
@@ -18,6 +19,7 @@
 
 @standard-wrap-width: 30;
 
+/* Note that .points is also used in water-features.mss */
 .points {
   [feature = 'tourism_alpine_hut'][zoom >= 13] {
     point-file: url('symbols/alpinehut.p.16.png');
@@ -45,14 +47,16 @@
 
   [feature = 'amenity_bar'][zoom >= 17] {
     marker-file: url('symbols/bar.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
   }
 
   [feature = 'amenity_bicycle_rental'][zoom >= 17] {
-    point-file: url('symbols/rental_bicycle.p.20.png');
-    point-placement: interior;
+    marker-file: url('symbols/rental_bicycle.16.svg');
+    marker-fill: @transportation-icon;
+    marker-placement: interior;
+    marker-clip: false;
   }
 
   [feature = 'highway_bus_stop'] {
@@ -61,6 +65,7 @@
       marker-fill: @transportation-icon;
       marker-placement: interior;
       marker-width: 6;
+      marker-clip: false;
     }
     [zoom >= 17] {
       marker-file: url('symbols/bus_stop.p.12.png');
@@ -77,18 +82,19 @@
     marker-file: url('symbols/traffic_light.svg');
     marker-fill: #0a0a0a;
     marker-placement: interior;
+    marker-clip: false;
   }
 
   [feature = 'amenity_cafe'][zoom >= 17] {
     marker-file: url('symbols/cafe.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
   }
 
   [feature = 'tourism_camp_site'][zoom >= 16] {
     marker-file: url('symbols/camping.16.svg');
-    marker-fill: #0092da;
+    marker-fill: @transportation-icon;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -108,6 +114,13 @@
     point-placement: interior;
   }
 
+  [feature = 'amenity_car_rental'][zoom >= 16] {
+    marker-file: url('symbols/rental_car.16.svg');
+    marker-fill: @transportation-icon;
+    marker-placement: interior;
+    marker-clip: false;
+  }
+
   [feature = 'tourism_chalet'][zoom >= 17] {
     point-file: url('symbols/chalet.p.16.png');
     point-placement: interior;
@@ -115,21 +128,30 @@
 
   [feature = 'amenity_cinema'][zoom >= 16] {
     marker-file: url('symbols/cinema.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
+    marker-placement: interior;
+    marker-clip: false;
+  }
+
+  [feature = 'amenity_nightclub'][zoom >= 17] {
+    marker-file: url('symbols/nightclub.18.svg');
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
   }
 
   [feature = 'amenity_fire_station'][zoom >= 16] {
     marker-file: url('symbols/firestation.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
   }
 
   [feature = 'amenity_fuel'][zoom >= 17] {
-    point-file: url('symbols/fuel.p.16.png');
-    point-placement: interior;
+    marker-file: url('symbols/fuel.16.svg');
+    marker-fill: @transportation-icon;
+    marker-placement: interior;
+    marker-clip: false;
   }
 
   [feature = 'tourism_guest_house'][zoom >= 17] {
@@ -166,7 +188,7 @@
 
   [feature = 'amenity_embassy'][zoom >= 17] {
     marker-file: url('symbols/embassy.16.svg');
-    marker-fill: #0092da;
+    marker-fill: @transportation-icon;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -176,36 +198,28 @@
     point-placement: interior;
   }
 
-  [feature = 'amenity_courthouse'][zoom > 16] {
+  [feature = 'amenity_courthouse'][zoom >= 16] {
     point-file: url('symbols/amenity_court.p.20.png');
     point-placement: interior;
   }
 
-  [feature = 'amenity_townhall'][zoom > 16] {
+  [feature = 'amenity_townhall'][zoom >= 16] {
     marker-file: url('symbols/town_hall.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
   }
 
-  [feature = 'waterway_lock'],
-  [feature = 'lock_yes'] {
-    [zoom >= 15] {
-      marker-fill: #969494;
-      marker-width: 9;
-      marker-line-width: 0;
-      marker-placement: interior;
-    }
-  }
-
   [feature = 'man_made_mast'][zoom >= 17] {
-    point-file: url('symbols/communications.p.20.png');
-    point-placement: interior;
+    marker-file: url('symbols/communications.16.svg');
+    marker-fill: #555;
+    marker-placement: interior;
+    marker-clip: false;
   }
 
   [feature = 'tourism_museum'][zoom >= 16] {
     marker-file: url('symbols/museum.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -277,7 +291,7 @@
 
   [feature = 'amenity_police'][zoom >= 16] {
     marker-file: url('symbols/police.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -294,21 +308,21 @@
 
   [feature = 'amenity_pub'][zoom >= 17] {
     marker-file: url('symbols/pub.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
   }
 
   [feature = 'amenity_biergarten'][zoom >= 17] {
     marker-file: url('symbols/biergarten.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
   }
 
   [feature = 'amenity_recycling'][zoom >= 16] {
     marker-file: url('symbols/recycling.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
     [access != ''][access != 'yes'] {
@@ -319,14 +333,14 @@
   [feature = 'amenity_restaurant'][zoom >= 17],
   [feature = 'amenity_food_court'][zoom >= 17] {
     marker-file: url('symbols/restaurant.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
   }
 
   [feature = 'amenity_fast_food'][zoom >= 17] {
     marker-file: url('symbols/fast_food.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -343,25 +357,28 @@
 
   [feature = 'amenity_theatre'][zoom >= 16] {
     marker-file: url('symbols/theatre.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
   }
 
   [feature = 'amenity_toilets'][zoom >= 17] {
-    point-file: url('symbols/toilets.p.20.png');
-    point-placement: interior;
+    marker-file: url('symbols/toilets.16.svg');
+    marker-fill: @amenity-brown;
+    marker-placement: interior;
+    marker-clip: false;
   }
 
   [feature = 'amenity_drinking_water'][zoom >= 17] {
     marker-file: url('symbols/drinking_water.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
+    marker-clip: false;
   }
 
   [feature = 'amenity_prison'][zoom >= 17] {
     marker-file: url('symbols/prison.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -378,7 +395,7 @@
 
   [feature = 'historic_memorial'][zoom >= 17] {
     marker-file: url('symbols/tourist_memorial.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
   }
@@ -405,6 +422,13 @@
 
   [feature = 'shop_bakery'][zoom >= 17] {
     marker-file: url('symbols/shop_bakery.16.svg');
+    marker-fill: @shop-icon;
+    marker-placement: interior;
+    marker-clip: false;
+  }
+
+  [feature = 'shop_books'][zoom >= 17] {
+    marker-file: url('symbols/shop_books.16.svg');
     marker-fill: @shop-icon;
     marker-placement: interior;
     marker-clip: false;
@@ -445,15 +469,17 @@
   }
 
   [feature = 'shop_florist'][zoom >= 17] {
-    marker-file: url('symbols/florist.p.16.png');
+    marker-file: url('symbols/florist.16.svg');
     marker-placement: interior;
     marker-clip: false;
+    marker-fill: @shop-icon;
   }
 
   [feature = 'shop_hairdresser'][zoom >= 17] {
-    marker-file: url('symbols/shop_hairdresser.p.16.png');
+    marker-file: url('symbols/shop_hairdresser.16.svg');
     marker-placement: interior;
     marker-clip: false;
+    marker-fill: @shop-icon;
   }
 
   [feature = 'shop_car'][zoom >= 17] {
@@ -464,15 +490,23 @@
   }
 
   [feature = 'shop_car_repair'][zoom >= 17] {
-    marker-file: url('symbols/shopping_car_repair.p.16.png');
+    marker-file: url('symbols/shopping_car_repair.16.svg');
     marker-placement: interior;
     marker-clip: false;
+    marker-fill: @shop-icon;
   }
 
   [feature = 'shop_bicycle'][zoom >= 17] {
     marker-file: url('symbols/shopping_bicycle.p.16.png');
     marker-placement: interior;
     marker-clip: false;
+  }
+
+  [feature = 'shop_pet'][zoom >= 17] {
+    marker-file: url('symbols/shop_pet.16.svg');
+    marker-placement: interior;
+    marker-clip: false;
+    marker-fill: @shop-icon;
   }
 
   [feature = 'leisure_water_park'][zoom >= 17] {
@@ -482,7 +516,7 @@
 
   [feature = 'leisure_playground'][zoom >= 17] {
     marker-file: url('symbols/playground.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
     [access != ''][access != 'yes'] {
@@ -502,15 +536,16 @@
 
   [feature = 'tourism_picnic_site'][zoom >= 16] {
     marker-file: url('symbols/picnic.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
     marker-clip: false;
   }
 
   [feature = 'leisure_picnic_table'][zoom >= 17] {
     marker-file: url('symbols/picnic.16.svg');
-    marker-fill: #734a08;
+    marker-fill: @amenity-brown;
     marker-placement: interior;
+    marker-clip: false;
   }
 
   [feature = 'leisure_slipway'][zoom >= 17] {
@@ -520,12 +555,14 @@
 
   [feature = 'aeroway_helipad'][zoom >= 16] {
     marker-file: url('symbols/helipad.svg');
+    marker-placement: interior;
     marker-clip: false;
     marker-fill: @airtransport;
   }
 
   [feature = 'aeroway_aerodrome'][zoom >= 10][zoom < 14] {
     marker-file: url('symbols/aerodrome.svg');
+    marker-placement: interior;
     marker-clip: false;
     marker-fill: @airtransport;
   }
@@ -539,18 +576,21 @@
     marker-file: url('symbols/peak.svg');
     marker-fill: #d08f55;
     marker-placement: interior;
+    marker-clip: false;
   }
 
   [feature = 'natural_volcano'][zoom >= 11] {
     marker-file: url('symbols/peak.svg');
     marker-fill: #d40000;
     marker-placement: interior;
+    marker-clip: false;
   }
 
   [feature = 'natural_saddle'][zoom >= 15] {
     marker-file: url('symbols/saddle.svg');
     marker-fill: #d08f55;
     marker-placement: interior;
+    marker-clip: false;
   }
 
   [feature = 'natural_cave_entrance'][zoom >= 15] {
@@ -561,19 +601,7 @@
   [feature = 'natural_spring'][zoom >= 14] {
     marker-file: url('symbols/spring.svg');
     marker-placement: interior;
-  }
-
-  [feature = 'natural_tree'][zoom >= 16] {
-    marker-placement: interior;
-    marker-ignore-placement: true;
-    marker-line-width: 0;
-    marker-width: 3;
-    marker-fill: #239c45;
-    [zoom >= 17] {
-      marker-line-width: 1;
-      marker-line-color: #8ef2ab;
-      marker-width: 4;
-    }
+    marker-clip: false;
   }
 
   [feature = 'power_generator']['generator:source' = 'wind'],
@@ -586,11 +614,6 @@
 
   [feature = 'man_made_windmill'][zoom >= 16] {
     point-file: url('symbols/windmill.png');
-    point-placement: interior;
-  }
-
-  [feature = 'man_made_mast'][zoom >= 17] {
-    point-file: url('symbols/communications.p.20.png');
     point-placement: interior;
   }
 }
@@ -607,19 +630,22 @@
   [highway = 'mini_roundabout'][zoom >= 16]::highway {
     marker-file: url('symbols/mini_roundabout.svg');
     marker-placement: interior;
+    marker-clip: false;
   }
 
   [barrier = 'gate']::barrier {
     [zoom >= 16] {
       marker-file: url('symbols/gate.svg');
       marker-placement: interior;
+      marker-clip: false;
     }
   }
 
   [barrier = 'lift_gate'][zoom >= 16]::barrier {
     marker-file: url('symbols/liftgate.svg');
     marker-fill: #3f3f3f;
-    marker-placement: interior
+    marker-placement: interior;
+    marker-clip: false;
   }
 
   [barrier = 'bollard'],
@@ -650,6 +676,7 @@
     [way_pixels > 48000] { text-size: 15; }
     text-face-name: @oblique-fonts;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
   }
@@ -660,14 +687,16 @@
   [feature = 'amenity_cafe'],
   [feature = 'amenity_fast_food'],
   [feature = 'amenity_biergarten'],
-  [feature = 'amenity_bar'] {
+  [feature = 'amenity_bar'],
+  [feature = 'amenity_nightclub'] {
     [zoom >= 17] {
       text-name: "[name]";
-      text-fill: #734a08;
+      text-fill: @amenity-brown;
       text-size: 10;
       text-dy: 11;
       text-face-name: @bold-fonts;
       text-halo-radius: 1;
+      text-halo-fill: rgba(255,255,255,0.6);
       text-wrap-width: @standard-wrap-width;
       text-placement: interior;
       [feature = 'amenity_bar']{
@@ -677,6 +706,7 @@
   }
 
   [feature = 'amenity_library'],
+  [feature = 'tourism_museum'],
   [feature = 'amenity_theatre'],
   [feature = 'amenity_courthouse'],
   [feature = 'amenity_townhall'],
@@ -684,17 +714,32 @@
     [zoom >= 17] {
       text-name: "[name]";
       text-size: 10;
-      text-fill: #734a08;
+      text-fill: @amenity-brown;
       text-dy: 13;
       text-face-name: @bold-fonts;
+      [feature = 'tourism_museum'] { text-face-name: @book-fonts; }
       text-halo-radius: 1;
+      text-halo-fill: rgba(255,255,255,0.6);
       text-wrap-width: @standard-wrap-width;
       text-placement: interior;
+      [feature = 'tourism_museum'],
       [feature = 'amenity_theatre'],
       [feature = 'amenity_cinema'] {
         text-dy: 11;
       }
     }
+  }
+
+  [feature = 'amenity_car_rental'][zoom >= 17] {
+    text-name: "[name]";
+    text-size: 9;
+    text-fill: @transportation-text;
+    text-dy: 10;
+    text-face-name: @book-fonts;
+    text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
+    text-wrap-width: @standard-wrap-width;
+    text-placement: interior;
   }
 
   [feature = 'amenity_parking'][zoom >= 17] {
@@ -704,6 +749,7 @@
     text-dy: 9;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
     [access != ''][access != 'public'][access != 'yes'] {
@@ -711,24 +757,16 @@
     }
   }
 
-  [feature = 'amenity_police'][zoom >= 17] {
-    text-name: "[name]";
-    text-size: 10;
-    text-fill: #734a08;
-    text-dy: 11;
-    text-face-name: @book-fonts;
-    text-halo-radius: 1;
-    text-wrap-width: @standard-wrap-width;
-    text-placement: interior;
-  }
 
+  [feature = 'amenity_police'][zoom >= 17],
   [feature = 'amenity_fire_station'][zoom >= 17] {
     text-name: "[name]";
     text-size: 10;
-    text-fill: #734a08;
+    text-fill: @amenity-brown;
     text-dy: 11;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
   }
@@ -740,6 +778,7 @@
     text-dy: 12;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
   }
@@ -762,62 +801,44 @@
     }
   }
 
-  [feature = 'natural_peak'],
-  [feature = 'natural_volcano'] {
-    [zoom >= 13] {
-      text-name: "[name]";
-      text-size: 10;
-      text-fill: brown;
-      text-dy: 7;
-      text-face-name: @book-fonts;
-      text-halo-radius: 1;
-      text-wrap-width: @standard-wrap-width;
-      text-placement: interior;
-    }
-  }
-
-  [feature = 'natural_saddle'] {
-    [zoom >= 15] {
-      text-name: "[name]";
-      text-size: 10;
-      text-fill: brown;
-      text-dy: 7;
-      text-face-name: @book-fonts;
-      text-halo-radius: 1;
-      text-wrap-width: @standard-wrap-width;
-      text-placement: interior;
-    }
+  [feature = 'natural_peak'][zoom >= 13],
+  [feature = 'natural_volcano'][zoom >= 13],
+  [feature = 'natural_saddle'][zoom >= 15] {
+    text-name: "[name]";
+    text-size: 10;
+    [feature = 'natural_peak'] { text-fill: darken(#d08f55, 30%); }
+    [feature = 'natural_volcano'] { text-fill: #d40000; }
+    [feature = 'natural_saddle'] { text-fill: darken(#d08f55, 30%); }
+    text-dy: 7;
+    text-face-name: @book-fonts;
+    text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
+    text-wrap-width: @standard-wrap-width;
+    text-placement: interior;
   }
 
   [feature = 'natural_cave_entrance'][zoom >= 15] {
     text-name: "[name]";
     text-size: 10;
-    text-fill: brown;
+    text-fill: black;
     text-dy: 11;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
   }
 
-  [feature = 'historic_memorial'][zoom >= 17] {
-    text-name: "[name]";
-    text-size: 9;
-    text-fill: brown;
-    text-dy: 11;
-    text-face-name: @book-fonts;
-    text-halo-radius: 1;
-    text-wrap-width: @standard-wrap-width;
-    text-placement: interior;
-  }
-
+  [feature = 'historic_memorial'][zoom >= 17],
   [feature = 'historic_archaeological_site'][zoom >= 17] {
     text-name: "[name]";
     text-size: 9;
-    text-fill: brown;
+    text-fill: @amenity-brown;
     text-dy: 15;
+    [feature = 'historic_memorial'] { text-dy: 11; }
     text-face-name: @book-fonts;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
   }
@@ -839,6 +860,7 @@
       text-fill: @water-text;
       text-face-name: @oblique-fonts;
       text-halo-radius: 1;
+      text-halo-fill: rgba(255,255,255,0.6);
       text-wrap-width: @standard-wrap-width;
       text-placement: interior;
     }
@@ -854,6 +876,7 @@
       text-fill: @mud-text;
       text-face-name: @landcover-face-name;
       text-halo-radius: 1;
+      text-halo-fill: rgba(255,255,255,0.6);
       text-wrap-width: @landcover-wrap-width-size;
       [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
       [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
@@ -872,6 +895,7 @@
       text-fill: @wetland-text;
       text-face-name: @landcover-face-name;
       text-halo-radius: 1;
+      text-halo-fill: rgba(255,255,255,0.6);
       text-wrap-width: @landcover-wrap-width-size;
       [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
       [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
@@ -889,6 +913,7 @@
       text-fill: @marina-text;
       text-face-name: @landcover-face-name;
       text-halo-radius: 1;
+      text-halo-fill: rgba(255,255,255,0.6);
       text-wrap-width: @landcover-wrap-width-size;
       [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
       [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
@@ -923,7 +948,7 @@
     text-halo-radius: 1;
     text-halo-fill: rgba(255,255,255,0.6);
     text-placement: interior;
-    text-dy: 11;
+    text-dy: 13;
     text-wrap-width: 40;
   }
 
@@ -956,6 +981,7 @@
       text-fill: darken(@track, 40%);
       text-face-name: @landcover-face-name;
       text-halo-radius: 1;
+      text-halo-fill: rgba(255,255,255,0.6);
       text-wrap-width: @landcover-wrap-width-size;
       [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
       [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
@@ -1309,6 +1335,7 @@
     text-fill: #6699cc;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
   }
@@ -1319,6 +1346,7 @@
     text-fill: #6699cc;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
     text-dy: 6;
@@ -1331,6 +1359,7 @@
     text-dy: 11;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
   }
@@ -1352,6 +1381,7 @@
     text-fill: black;
     text-dy: 12;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
     text-face-name: @book-fonts;
@@ -1368,6 +1398,7 @@
       text-dy: 13;
       text-face-name: @book-fonts;
       text-halo-radius: 1;
+      text-halo-fill: rgba(255,255,255,0.6);
       text-wrap-width: @standard-wrap-width;
       text-placement: interior;
       [feature = 'tourism_chalet'] {
@@ -1383,6 +1414,7 @@
     text-dy: 10;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
   }
@@ -1394,6 +1426,7 @@
     text-dy: 10;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
   }
@@ -1408,6 +1441,7 @@
       text-dy: 11;
       text-face-name: @book-fonts;
       text-halo-radius: 1;
+      text-halo-fill: rgba(255,255,255,0.6);
       text-wrap-width: @standard-wrap-width;
       text-placement: interior;
       [feature = 'highway_bus_stop'] {
@@ -1423,6 +1457,7 @@
     text-dy: 15;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
   }
@@ -1446,23 +1481,13 @@
     }
   }
 
-  [feature = 'waterway_lock'][zoom >= 15] {
-    text-name: "[name]";
-    text-size: 9;
-    text-dy: 10;
-    text-fill: #0066ff;
-    text-face-name: @book-fonts;
-    text-halo-radius: 1;
-    text-wrap-width: @standard-wrap-width;
-    text-placement: interior;
-  }
-
   [feature = 'leisure_marina'][zoom >= 15] {
     text-name: "[name]";
     text-size: 8;
     text-fill: @marina-text;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
     [zoom >= 17] {
@@ -1488,24 +1513,14 @@
     }
   }
 
-  [feature = 'tourism_museum'][zoom >= 17] {
-    text-name: "[name]";
-    text-size: 10;
-    text-dy: 11;
-    text-fill: #734a08;
-    text-face-name: @book-fonts;
-    text-halo-radius: 1;
-    text-wrap-width: @standard-wrap-width;
-    text-placement: interior;
-  }
-
   [feature = 'amenity_prison'][zoom >= 17] {
     text-name: "[name]";
     text-size: 10;
-    text-fill: #734a08;
+    text-fill: @amenity-brown;
     text-dy: 12;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
   }
@@ -1520,6 +1535,7 @@
       text-fill: #660033;
       text-face-name: @book-fonts;
       text-halo-radius: 2;
+      text-halo-fill: rgba(255,255,255,0.6);
       text-wrap-width: @landcover-wrap-width-size;
       [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
       [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
@@ -1527,6 +1543,9 @@
     }
   }
 
+  [feature = 'amenity_kindergarten'][is_building = 'no'],
+  [feature = 'amenity_school'][is_building = 'no'],
+  [feature = 'amenity_college'][is_building = 'no'],
   [feature = 'amenity_university'][is_building = 'no'] {
     [zoom >= 10][way_pixels > 3000],
     [zoom >= 17] {
@@ -1545,50 +1564,14 @@
     }
   }
 
-  [feature = 'amenity_school'][is_building = 'no'],
-  [feature = 'amenity_college'][is_building = 'no'] {
-    [zoom >= 10][way_pixels > 3000],
-    [zoom >= 17] {
-      text-name: "[name]";
-      text-size: @landcover-font-size;
-      [way_pixels > 12000] { text-size: @landcover-font-size-big; }
-      [way_pixels > 48000] { text-size: @landcover-font-size-bigger; }
-      text-fill: darken(@school, 70%);
-      text-face-name: @landcover-face-name;
-      text-halo-radius: 1;
-      text-halo-fill: rgba(255,255,255,0.6);
-      text-wrap-width: @landcover-wrap-width-size;
-      [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
-      [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
-      text-placement: interior;
-    }
-  }
-
-  [feature = 'amenity_kindergarten'][is_building = 'no'] {
-    [zoom >= 10][way_pixels > 3000],
-    [zoom >= 17] {
-      text-name: "[name]";
-      text-size: @landcover-font-size;
-      [way_pixels > 12000] { text-size: @landcover-font-size-big; }
-      [way_pixels > 48000] { text-size: @landcover-font-size-bigger; }
-      text-fill: darken(@school, 65%);
-      text-face-name: @landcover-face-name;
-      text-halo-radius: 1;
-      text-halo-fill: rgba(255,255,255,0.6);
-      text-wrap-width: @landcover-wrap-width-size;
-      [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
-      [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
-      text-placement: interior;
-    }
-  }
-
   [feature = 'man_made_lighthouse'][zoom >= 15] {
     text-name: "[name]";
     text-size: 9;
-    text-fill: #000033;
+    text-fill: #6699cc;
     text-dy: 16;
     text-face-name: @book-fonts;
     text-halo-radius: 2;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
   }
@@ -1596,10 +1579,11 @@
   [feature = 'man_made_windmill'][zoom >= 17] {
     text-name: "[name]";
     text-size: 9;
-    text-fill: #734a08;
+    text-fill: @amenity-brown;
     text-dy: 12;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
   }
@@ -1611,6 +1595,7 @@
     text-dy: 10;
     text-face-name: @book-fonts;
     text-halo-radius: 2;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
   }
@@ -1625,12 +1610,14 @@
       text-fill: @health-color;
       text-face-name: @book-fonts;
       text-halo-radius: 1;
+      text-halo-fill: rgba(255,255,255,0.6);
       text-wrap-width: @standard-wrap-width;
       text-placement: interior;
     }
   }
 
   [feature = 'shop_bakery'],
+  [feature = 'shop_books'],
   [feature = 'shop_clothes'],
   [feature = 'shop_fashion'],
   [feature = 'shop_convenience'],
@@ -1641,6 +1628,7 @@
   [feature = 'shop_car_repair'],
   [feature = 'shop_bicycle'],
   [feature = 'shop_florist'],
+  [feature = 'shop_pet'],
   [feature = 'shop_other']{
     [zoom >= 17] {
       text-name: "[name]";
@@ -1649,7 +1637,7 @@
       text-fill: #939;
       text-face-name: @book-fonts;
       text-halo-radius: 1.5;
-      text-halo-fill: rgba(255, 255, 255, 0.8);
+      text-halo-fill: rgba(255, 255, 255, 0.6);
       text-wrap-width: @standard-wrap-width;
       text-placement: interior;
     }
@@ -1664,7 +1652,7 @@
       text-fill: #939;
       text-face-name: @book-fonts;
       text-halo-radius: 1.5;
-      text-halo-fill: rgba(255, 255, 255, 0.8);
+      text-halo-fill: rgba(255, 255, 255, 0.6);
       text-wrap-width: @standard-wrap-width;
       text-placement: interior;
     }
@@ -1712,6 +1700,7 @@
     text-fill: #aa66cc;
     text-face-name: @book-fonts;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-wrap-width: @standard-wrap-width;
     text-placement: interior;
   }
@@ -1899,6 +1888,7 @@
       text-wrap-width: @landcover-wrap-width-size;
       [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
       [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
+      text-placement: interior;
     }
   }
 
@@ -1917,6 +1907,7 @@
       text-wrap-width: @landcover-wrap-width-size;
       [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
       [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
+      text-placement: interior;
     }
   }
 
@@ -1927,6 +1918,7 @@
     text-dy: -10;
     text-face-name: @bold-fonts;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-placement: interior;
     text-wrap-width: 30;
   }
@@ -1938,7 +1930,71 @@
     text-dy: -10;
     text-face-name: @oblique-fonts;
     text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
     text-placement: interior;
     text-wrap-width: 30;
+  }
+}
+
+#trees [zoom >= 16] {
+  ::canopy {
+    opacity: 0.3;
+    [natural = 'tree_row'] {
+      line-color: green;
+      line-cap: round;
+      line-width: 2.5;
+      [zoom >= 17] {
+        line-width: 5;
+      }
+      [zoom >= 18] {
+        line-width: 10;
+      }
+      [zoom >= 19] {
+        line-width: 15;
+      }
+      [zoom >= 20] {
+        line-width: 30;
+      }
+    }
+    [natural = 'tree'] {
+      marker-fill: green;
+      marker-allow-overlap: true;
+      marker-line-width: 0;
+      marker-width: 2.5;
+      marker-height: 2.5;
+      [zoom >= 17] {
+        marker-width: 5;
+        marker-height: 5;
+      }
+      [zoom >= 18] {
+        marker-width: 10;
+        marker-height: 10;
+      }
+      [zoom >= 19] {
+        marker-width: 15;
+        marker-height: 15;
+      }
+      [zoom >= 20] {
+        marker-width: 30;
+        marker-height: 30;
+      }
+    }
+  }
+  [natural = 'tree']::trunk {
+    [zoom >= 18] {
+      trunk/marker-fill: #b27f36;
+      trunk/marker-allow-overlap: true;
+      trunk/marker-line-width: 0;
+      trunk/marker-width: 2;
+      trunk/marker-height: 2;    
+    }
+    [zoom >= 19] {
+      trunk/marker-width: 3;
+      trunk/marker-height: 3;    
+    }
+    [zoom >= 20] {
+      trunk/marker-width: 6;
+      trunk/marker-height: 6;    
+    }
   }
 }

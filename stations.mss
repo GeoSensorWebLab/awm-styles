@@ -11,6 +11,7 @@
     marker-placement: interior;
     marker-fill: @station-color;
     marker-width: 4;
+    marker-clip: false;
     [zoom >= 13] {
       marker-width: 6;
     }
@@ -21,6 +22,7 @@
       text-fill: #66f;
       text-dy: -8;
       text-halo-radius: 1;
+      text-halo-fill: rgba(255,255,255,0.6);
       text-wrap-width: 0;
       text-placement: interior;
     }
@@ -39,6 +41,7 @@
       marker-placement: interior;
       marker-fill: @station-color;
       marker-width: 4;
+      marker-clip: false;
     }
     [zoom >= 15] {
       marker-width: 6;
@@ -50,6 +53,7 @@
       text-fill: #66f;
       text-dy: -8;
       text-halo-radius: 1;
+      text-halo-fill: rgba(255,255,255,0.6);
       text-wrap-width: 0;
       text-placement: interior;
       [zoom >= 15] {
