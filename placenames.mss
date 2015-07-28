@@ -99,9 +99,11 @@
       text-wrap-width: 70;
     }
     [zoom >= 14] {
+      text-face-name: @book-fonts;
+      text-fill: @placenames-light;
+      text-name: "[name]";
       text-size: 15;
       text-wrap-width: 90;
-      text-fill: @placenames-light;
     }
   }
   [place = 'town'][latitude < 60] {
