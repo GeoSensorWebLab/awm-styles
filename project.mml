@@ -182,6 +182,26 @@
       }
     },
     {
+      "id": "lakes-low",
+      "name": "lakes-low",
+      "class": "",
+      "geometry": "polygon",
+      "extent": [
+        -180,
+        -85.05112877980659,
+        180,
+        85.05112877980659
+      ],
+      "srs-name": "WGS84",
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "Datasource": {
+        "file": "data/ne_10m_lakes/proc_ne_10m_lakes.shp",
+        "type": "shape"
+      },
+      "advanced": {
+      }
+    },
+    {
       "id": "bathymetry-200m",
       "name": "bathymetry-200m",
       "class": "",

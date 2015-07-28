@@ -13,6 +13,7 @@ mkdir -p data/land-polygons-split-3857
 mkdir -p data/ne_10m_geographic_lines
 mkdir -p data/ne_10m_graticules_15
 mkdir -p data/ne_10m_bathymetry_all
+mkdir -p data/ne_10m_lakes
 
 # Download Packs
 
@@ -88,6 +89,14 @@ echo "expanding $PACK..."
 unzip $UNZIP_OPTS data/$PACK.zip \
   -d data/
 
+## ne_10m_lakes
+PACK="ne_10m_lakes"
+echo "dowloading $PACK..."
+curl -z "data/$PACK.zip" -L -o "data/$PACK.zip" "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/$PACK.zip"
+echo "expanding $PACK..."
+unzip $UNZIP_OPTS data/$PACK.zip \
+  -d data/$PACK/
+
 # Clip shapefiles to bounding box
 echo "clipping & segmenting shapefiles"
 SRS="EPSG:4326"
@@ -123,15 +132,27 @@ for shp in data/$PACK/*.shp; do
 done
 rm -f data/$PACK/tmp_*
 
+PACK="ne_10m_lakes"
+rm -f data/$PACK/proc_*
+rm -f data/$PACK/tmp_*
+for shp in data/$PACK/*.shp; do
+  base=$(basename $shp .shp)
+  echo "Processing ${shp}…"
+  ogr2ogr -clipsrc -180 45 180 90 "data/$PACK/tmp_$base.shp" "$shp"
+  ogr2ogr -segmentize 0.5 "data/$PACK/proc_$base.shp" "data/$PACK/tmp_$base.shp"
+done
+rm -f data/$PACK/tmp_*
+
 # Index Shapefiles
 echo "indexing shapefiles"
 
 shapeindex --shape_files \
-data/land-polygons-split-3857/land_polygons.shp \
-data/ne_10m_land/proc_ne_10m_land.shp \
-data/ne_110m_admin_0_boundary_lines_land/proc_ne_110m_admin_0_boundary_lines_land.shp \
-data/ne_10m_geographic_lines/ne_10m_geographic_lines.shp \
-data/ne_10m_geographic_lines/ne_10m_graticules_15.shp \
-data/ne_10m_bathymetry_all/*.shp
+  data/land-polygons-split-3857/land_polygons.shp \
+  data/ne_10m_land/proc_ne_10m_land.shp \
+  data/ne_110m_admin_0_boundary_lines_land/proc_ne_110m_admin_0_boundary_lines_land.shp \
+  data/ne_10m_geographic_lines/ne_10m_geographic_lines.shp \
+  data/ne_10m_geographic_lines/ne_10m_graticules_15.shp \
+  data/ne_10m_bathymetry_all/*.shp \
+  data/ne_10m_lakes/*.shp
 
 echo "...done!"

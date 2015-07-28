@@ -101,7 +101,6 @@
   polygon-fill: darken(@water-color, 8%);
 }
 
-/* disabled due to conflict with OSM water layers */
-#bathymetry-0m {
-  polygon-fill: darken(@water-color, 5%);
+#lakes-low [zoom >= 4][zoom < 6] {
+  polygon-fill: @water-color;
 }
