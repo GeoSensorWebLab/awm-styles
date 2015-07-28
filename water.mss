@@ -1,7 +1,6 @@
 @water-text: #6699cc;
 @glacier: #ddecec;
 @glacier-line: #9cf;
-@mud: #e6dcd1;
 
 #water-areas {
   [natural = 'glacier']::natural {
@@ -52,19 +51,37 @@
       }
     }
   }
-
-  [natural = 'mud'][zoom >= 10]::natural {
-    polygon-fill: @mud;
-    polygon-pattern-file: url('symbols/mud.png');
-    polygon-pattern-alignment: global;
-  }
 }
 
 #water-areas-overlay {
-  [natural = 'marsh'],
-  [natural = 'wetland'] {
-    [zoom >= 10] {
-      polygon-pattern-file: url('symbols/wetland.png');
+  [zoom >= 10] {
+    polygon-pattern-file: url('symbols/wetland.png');
+    polygon-pattern-alignment: global;
+  }
+  [zoom >= 14] {
+    [int_wetland = 'marsh'],
+    [int_wetland = 'saltmarsh'],
+    [int_wetland = 'wet_meadow'],
+    [int_wetland = 'fen'] {
+      polygon-pattern-file: url('symbols/wetland_marsh.png');
+      polygon-pattern-alignment: global;
+    }
+    [int_wetland = 'reedbed'] {
+      polygon-pattern-file: url('symbols/wetland_reed.png');
+      polygon-pattern-alignment: global;
+    }
+    [int_wetland = 'mangrove'] {
+      polygon-pattern-file: url('symbols/wetland_mangrove.png');
+      polygon-pattern-alignment: global;
+    }
+    [int_wetland = 'swamp'] {
+      polygon-pattern-file: url('symbols/wetland_swamp.png');
+      polygon-pattern-alignment: global;
+    }
+    [int_wetland = 'bog'],
+    [int_wetland = 'string_bog'] {
+      polygon-pattern-file: url('symbols/wetland_bog.png');
+      polygon-pattern-alignment: global;
     }
   }
 }
@@ -98,7 +115,7 @@
       line-cap: butt;
       line-join: round;
       line-clip: false;
-    }  
+    }
     line-color: @water-color;
     line-width: 0.7;
     [zoom >= 9] { line-width: 1.2; }
@@ -286,6 +303,24 @@
       [zoom >= 14] {
         text-size: 12;
       }
+    }
+  }
+}
+
+.text[zoom >= 10] {
+  [feature = 'natural_water'],
+  [feature = 'landuse_reservoir'],
+  [feature = 'landuse_basin'] {
+    [zoom >= 10][way_pixels > 3000],
+    [zoom >= 17] {
+      text-name: "[name]";
+      text-size: 12;
+      text-fill: @water-text;
+      text-face-name: @oblique-fonts;
+      text-halo-radius: 1;
+      text-halo-fill: rgba(255,255,255,0.6);
+      text-wrap-width: @standard-wrap-width;
+      text-placement: interior;
     }
   }
 }

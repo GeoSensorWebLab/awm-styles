@@ -7,6 +7,7 @@
 @wood: #aed1a0;
 @vineyard: #b3e2a8;
 @grassland: #c6e4b4;
+@scrub: #b5e3b5;
 
 // --- sports ---
 
@@ -44,6 +45,7 @@
 @danger_area: pink;
 @garages: #dfddce;
 @heath: #d6d99f;
+@mud: rgba(203,177,154,0.3); // produces #e6dcd1 over @land
 @parking: #f7efb7;
 @place_of_worship: #cdccc9;
 @place_of_worship_outline: #111;
@@ -53,7 +55,6 @@
 @sand: #f5e9c6;
 @school: #f0f0d8; // also university, college, hospital, kindergarten
 @station: #d4aaaa;
-@scrub: #b5e3b5;
 @orchard: #9ed88f;
 @theme_park: #734a08;
 @quarry: #c5c3c3;
@@ -63,7 +64,19 @@
 
 #landcover-low-zoom[zoom < 10],
 #landcover[zoom >= 10] {
- [feature = 'leisure_swimming_pool'][zoom >= 14] {
+
+  ::first {
+    [feature = 'wetland_mud'],
+    [feature = 'wetland_tidalflat'] {
+      [zoom >= 9] {
+        polygon-fill: @mud;
+        [way_pixels >= 4]  { polygon-gamma: 0.75; }
+        [way_pixels >= 64] { polygon-gamma: 0.3;  }
+      }
+    }
+  }
+
+  [feature = 'leisure_swimming_pool'][zoom >= 14] {
     polygon-fill: @water-color;
     line-color: saturate(darken(@water-color, 40%), 30%);
     line-width: 0.5;
@@ -278,7 +291,8 @@
   }
 
   [feature = 'landuse_farm'],
-  [feature = 'landuse_farmland'] {
+  [feature = 'landuse_farmland'],
+  [feature = 'landuse_greenhouse_horticulture'] {
     [zoom >= 10] {
       polygon-fill: @farmland;
       [zoom >= 16] {
@@ -440,6 +454,30 @@
       [way_pixels >= 64] { polygon-pattern-gamma: 0.3;  }
     }
   }
+ 
+  [feature = 'wetland_swamp'][zoom >= 8] {
+    polygon-fill: @wood;
+    [way_pixels >= 4]  { polygon-gamma: 0.75; }
+    [way_pixels >= 64] { polygon-gamma: 0.3;  }
+  }
+
+  [feature = 'wetland_bog'],
+  [feature = 'wetland_string_bog'] {
+    [zoom >= 10] {
+      polygon-fill: @heath;
+      [way_pixels >= 4]  { polygon-gamma: 0.75; }
+      [way_pixels >= 64] { polygon-gamma: 0.3;  }
+    }
+  }
+
+  [feature = 'wetland_wet_meadow'],
+  [feature = 'wetland_marsh'] {
+    [zoom >= 10] {
+      polygon-fill: @grass;
+      [way_pixels >= 4]  { polygon-gamma: 0.75; }
+      [way_pixels >= 64] { polygon-gamma: 0.3;  }
+    }
+  }
 
   [feature = 'amenity_university'],
   [feature = 'amenity_college'],
@@ -457,7 +495,8 @@
     }
   }
 
-  [feature = 'amenity_parking'][zoom >= 10] {
+  [feature = 'amenity_parking'][zoom >= 10],
+  [feature = 'amenity_bicycle_parking'][zoom >= 10] {
     polygon-fill: @parking;
     [zoom >= 15] {
       line-width: 0.3;
@@ -535,12 +574,12 @@
 /* man_made=cutline */
 #landcover-line {
   [zoom >= 14] {
-    line-width: 3;
+    line-width: 1.5;
     line-join: round;
     line-cap: square;
     line-color: @land-color;
     [zoom >= 16] {
-      line-width: 6;
+      line-width: 2;
     }
   }
 }
@@ -612,5 +651,20 @@
       b/line-width: 6;
       b/line-offset: -3;
     }
+  }
+}
+
+#text-line {
+  [feature = 'natural_cliff'][zoom >= 15],
+  [feature = 'man_made_embankment'][zoom >= 15] {
+    text-name: "[name]";
+    text-halo-radius: 1;
+    text-halo-fill: rgba(255,255,255,0.6);
+    text-fill: #999;
+    text-size: 10;
+    text-face-name: @book-fonts;
+    text-placement: line;
+    text-dy: 8;
+    text-spacing: 400;
   }
 }

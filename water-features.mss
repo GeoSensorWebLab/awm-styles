@@ -25,7 +25,7 @@
       marker-line-color: @dam-line;
       marker-line-width: 1;
       marker-width: 8;
-      marker-height: 8;
+      [zoom >= 18] { marker-width: 10; }
       marker-allow-overlap: true;
       marker-ignore-placement: true;
     }
@@ -42,7 +42,7 @@
       marker-line-color: @weir-line;
       marker-line-width: 1;
       marker-width: 8;
-      marker-height: 8;
+      [zoom >= 18] { marker-width: 10; }
       marker-allow-overlap: true;
       marker-ignore-placement: true;
     }
@@ -57,7 +57,7 @@
       marker-fill: @lock-gate;
       marker-line-width: 0;
       marker-width: 8;
-      marker-height: 8;
+      [zoom >= 18] { marker-width: 10; }
       marker-allow-overlap: true;
       marker-ignore-placement: true;
     }
@@ -122,6 +122,7 @@
     #text-point[zoom >= 17] {
       text-name: "[name]";
       text-halo-radius: 1;
+      text-halo-fill: rgba(255,255,255,0.6);
       text-fill: #222;
       text-size: 10;
       text-face-name: @book-fonts;
@@ -147,6 +148,7 @@
     #text-line {
       text-name: "[name]";
       text-halo-radius: 1;
+      text-halo-fill: rgba(255,255,255,0.6);
       text-fill: #222;
       text-size: 10;
       text-face-name: @book-fonts;

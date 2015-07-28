@@ -934,7 +934,7 @@ residential is rendered from z10 and is not included in osm_planet_roads. */
           [zoom < 13] {
             line-width: 0;
             b/line-width: 0;
-          }            
+          }
           [zoom >= 13][zoom < 14] {
             line-width: 3;
             b/line-width: 2;
@@ -1843,6 +1843,19 @@ residential is rendered from z10 and is not included in osm_planet_roads. */
     marker-ignore-placement: true;
     marker-line-width: 0;
   }
+
+  [int_tc_type = 'track'][zoom >= 15] {
+    marker-fill: @track-fill;
+    marker-width: 12;
+    marker-height: 12;
+    [zoom >= 17] {
+      marker-width: 14;
+      marker-height: 14;
+    }
+    marker-allow-overlap: true;
+    marker-ignore-placement: true;
+    marker-line-width: 0;
+  }
 }
 
 #highway-area-casing {
@@ -2250,7 +2263,7 @@ residential is rendered from z10 and is not included in osm_planet_roads. */
       text-placement: line;
       text-face-name: @book-fonts;
       text-halo-radius: 1;
-      text-halo-fill: @secondary-fill; 
+      text-halo-fill: @secondary-fill;
     }
     [zoom >= 14] {
       text-size: 9;

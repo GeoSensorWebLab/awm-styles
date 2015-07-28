@@ -148,3 +148,43 @@ A list of changes made to the stylesheet.
 * fix dy for golf labels
 * restore cave entrance icon
 * add icon for shop=books
+
+### v2.30.0
+
+* Add turning circles for tracks
+* Add rendering for bicycle_parking
+* Add labels for bicycle parking
+* unify styles for parking and bicycle parking
+* switch to haloless icon
+* Add label for tourism=viewpoint
+* Add transparency to halo for water-features
+* Make weir, dam, and lock_gate slightly larger on z>18
+* Move water labels to water.mss and use way_pixels
+* Move @scrub to green things
+* Allow icons to overlap trees
+* Add label to cliff and embankment
+* Fix SQL for rail service/yard
+* Don't exclude supermarket and station from building name rendering
+* Do not render island/islet name when way_pixels is big
+* Repair island labels on low zoom levels
+* Add icon for hunting stand
+* move icons to SVG
+* add icon for shop=shoes
+* unify label styling for various hotel-like objects
+* remove rendering on areas for natural=peak, volcano, saddle, cave_entrance
+* Add nature reserve text to lowzoom layer
+* really remove rendering of natural=lake
+* Refactor treatment of “ele” key
+* Order by elevation
+* Treat MML files as binary
+* add icons for popular shop types alcohol, electronics, furniture, gift, jewelry/jewellery, mobile_phone and optician
+* make clothes shop icon more distinct
+* Render greenhouse_horticulture as farmland
+* Add icon for amenity=bench and amenity=waste_basket
+* Move link trimming to outer select
+* Add labels to various objects
+* Add missing font size for bank
+* wetland rendering differentiated by wetland type
+* Render cutline as thinner line
+* add rendering for historic=monument
+* reuse symbol of DIY shop for hardware shop
