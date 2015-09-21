@@ -24,7 +24,7 @@ styles.each do |style|
   IO.write(style["basename"] + ".mml", JSON.pretty_generate(project))
 
   # Convert to XML using carto
-  `carto #{style["basename"]}.mml > #{style["basename"]}.xml`
+  `/usr/bin/carto #{style["basename"]}.mml > #{style["basename"]}.xml`
 
   # Remove intermediary MML file
   FileUtils.rm(style["basename"] + ".mml")
