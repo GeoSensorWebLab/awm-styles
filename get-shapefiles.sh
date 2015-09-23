@@ -70,47 +70,69 @@ expand_pack "ne_10m_lakes.zip"
 echo "clipping & segmenting shapefiles"
 SRS="EPSG:4326"
 
+clip_shape() {
+  TMPFILE="/tmp/$(basename $1 .shp).$$.clip.shp"
+  ogr2ogr -t_srs $SRS -clipdst -180 0 180 90 "$TMPFILE" "$1"
+  echo $TMPFILE
+}
+
+segment_shape() {
+  TMPFILE="/tmp/$(basename $1 .shp).$$.segment.shp"
+  ogr2ogr -segmentize 0.5 "$TMPFILE" "$1"
+  echo $TMPFILE
+}
+
+save_shape() {
+  base=$(basename $1 .shp)
+  for file in /tmp/${base}*; do
+    base=$(basename file)
+    extension="${file##*.}"
+    cp $file data/$2/proc_$2.$extension
+  done
+}
+
+cleanup() {
+  rm -f /tmp/*.clip.shp
+  rm -f /tmp/*.segment.shp
+}
+
 PACK="ne_10m_land"
 rm -f data/$PACK/proc_*
 for shp in data/$PACK/*.shp; do
-  base=$(basename $shp .shp)
   echo "Processing ${shp}…"
-  ogr2ogr -t_srs $SRS -clipdst -180 0 180 90 "data/$PACK/tmp_$base.shp" "$shp"
-  ogr2ogr -segmentize 0.5 "data/$PACK/proc_$base.shp" "data/$PACK/tmp_$base.shp"
-  rm -f data/$PACK/tmp_${base}*
+  clipped=$(clip_shape $shp)
+  segmented=$(segment_shape $clipped)
+  save_shape $segmented $PACK
 done
 
 PACK="ne_110m_admin_0_boundary_lines_land"
 rm -f data/$PACK/proc_*
 for shp in data/$PACK/*.shp; do
-  base=$(basename $shp .shp)
   echo "Processing ${shp}…"
-  ogr2ogr -t_srs $SRS -clipdst -180 0 180 90 "data/$PACK/tmp_$base.shp" "$shp"
-  ogr2ogr -segmentize 0.5 "data/$PACK/proc_$base.shp" "data/$PACK/tmp_$base.shp"
-  rm -f data/$PACK/tmp_${base}*
+  clipped=$(clip_shape $shp)
+  segmented=$(segment_shape $clipped)
+  save_shape $segmented $PACK
 done
 
 PACK="ne_10m_bathymetry_all"
 rm -f data/$PACK/proc_*
-rm -f data/$PACK/tmp_*
 for shp in data/$PACK/*.shp; do
-  base=$(basename $shp .shp)
   echo "Processing ${shp}…"
-  ogr2ogr -clipsrc -180 45 180 90 "data/$PACK/tmp_$base.shp" "$shp"
-  ogr2ogr -segmentize 0.5 "data/$PACK/proc_$base.shp" "data/$PACK/tmp_$base.shp"
+  clipped=$(clip_shape $shp)
+  segmented=$(segment_shape $clipped)
+  save_shape $segmented $PACK
 done
-rm -f data/$PACK/tmp_*
 
 PACK="ne_10m_lakes"
 rm -f data/$PACK/proc_*
-rm -f data/$PACK/tmp_*
 for shp in data/$PACK/*.shp; do
-  base=$(basename $shp .shp)
   echo "Processing ${shp}…"
-  ogr2ogr -clipsrc -180 45 180 90 "data/$PACK/tmp_$base.shp" "$shp"
-  ogr2ogr -segmentize 0.5 "data/$PACK/proc_$base.shp" "data/$PACK/tmp_$base.shp"
+  clipped=$(clip_shape $shp)
+  segmented=$(segment_shape $clipped)
+  save_shape $segmented $PACK
 done
-rm -f data/$PACK/tmp_*
+
+cleanup
 
 # Index Shapefiles
 echo "indexing shapefiles"
