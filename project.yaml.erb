@@ -26,7 +26,7 @@ _parts:
     srs: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
   extents84: &extents84
     extent: *world
-    srs-name: "WGS84"
+    srs-name: "EPSG:4326"
     srs: "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
   extents3573: &extents3573
     extent: *world
@@ -87,7 +87,7 @@ Layer:
     geometry: "polygon"
     <<: *extents
     Datasource:
-      file: "data/land-polygons-split-3857/land_polygons.shp"
+      file: "data/land-polygons-split-3857/proc_land_polygons.shp"
       type: "shape"
     properties:
       minzoom: 10
@@ -100,7 +100,7 @@ Layer:
     srs-name: "mercator"
     srs: "+proj=merc +datum=WGS84 +over"
     Datasource:
-      file: "data/world_boundaries/builtup_area.shp"
+      file: "data/world_boundaries/proc_builtup_area.shp"
       type: "shape"
     properties:
       minzoom: 8
@@ -420,7 +420,7 @@ Layer:
     geometry: "linestring"
     <<: *extents84
     Datasource:
-      file: "data/ne_10m_geographic_lines/ne_10m_geographic_lines.shp"
+      file: "data/ne_10m_geographic_lines/proc_ne_10m_geographic_lines.shp"
       type: "shape"
     advanced: {}
   - id: "graticule-lines"
@@ -429,7 +429,7 @@ Layer:
     geometry: "linestring"
     <<: *extents84
     Datasource:
-      file: "data/ne_10m_graticules_15/ne_10m_graticules_15.shp"
+      file: "data/ne_10m_graticules_15/proc_ne_10m_graticules_15.shp"
       type: "shape"
     advanced: {}
   - id: "contours100"
