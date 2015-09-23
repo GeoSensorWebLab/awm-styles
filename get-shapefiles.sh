@@ -91,46 +91,25 @@ save_shape() {
   done
 }
 
-cleanup() {
-  rm -f /tmp/*.clip.shp
-  rm -f /tmp/*.segment.shp
+process_pack() {
+  rm -f data/$1/proc_*
+  for shp in data/$1/*.shp; do
+    echo "Processing ${shp}…"
+    clipped=$(clip_shape $shp)
+    segmented=$(segment_shape $clipped)
+    save_shape $segmented $1
+  done
 }
 
-PACK="ne_10m_land"
-rm -f data/$PACK/proc_*
-for shp in data/$PACK/*.shp; do
-  echo "Processing ${shp}…"
-  clipped=$(clip_shape $shp)
-  segmented=$(segment_shape $clipped)
-  save_shape $segmented $PACK
-done
+cleanup() {
+  rm -f /tmp/*.clip.*
+  rm -f /tmp/*.segment.*
+}
 
-PACK="ne_110m_admin_0_boundary_lines_land"
-rm -f data/$PACK/proc_*
-for shp in data/$PACK/*.shp; do
-  echo "Processing ${shp}…"
-  clipped=$(clip_shape $shp)
-  segmented=$(segment_shape $clipped)
-  save_shape $segmented $PACK
-done
-
-PACK="ne_10m_bathymetry_all"
-rm -f data/$PACK/proc_*
-for shp in data/$PACK/*.shp; do
-  echo "Processing ${shp}…"
-  clipped=$(clip_shape $shp)
-  segmented=$(segment_shape $clipped)
-  save_shape $segmented $PACK
-done
-
-PACK="ne_10m_lakes"
-rm -f data/$PACK/proc_*
-for shp in data/$PACK/*.shp; do
-  echo "Processing ${shp}…"
-  clipped=$(clip_shape $shp)
-  segmented=$(segment_shape $clipped)
-  save_shape $segmented $PACK
-done
+process_pack "ne_10m_land"
+process_pack "ne_110m_admin_0_boundary_lines_land"
+process_pack "ne_10m_bathymetry_all"
+process_pack "ne_10m_lakes"
 
 cleanup
 
