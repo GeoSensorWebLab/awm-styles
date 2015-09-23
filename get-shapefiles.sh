@@ -95,12 +95,22 @@ save_shape() {
 
 process_pack() {
   rm -f data/$1/proc_*
-  for shp in data/$1/*.shp; do
-    echo "Processing ${shp}…"
-    clipped=$(clip_shape $shp)
+
+  if [ -z ${2+x} ]; then
+    # Process all shapefiles
+    for shp in data/$1/*.shp; do
+      echo "Processing ${shp}…"
+      clipped=$(clip_shape $shp)
+      segmented=$(segment_shape $clipped)
+      save_shape $segmented $1 $shp
+    done
+  else
+    # Process only shapefile in $2
+    echo "Processing data/$1/${2}…"
+    clipped=$(clip_shape data/$1/$2)
     segmented=$(segment_shape $clipped)
-    save_shape $segmented $1 $shp
-  done
+    save_shape $segmented $1 $2
+  fi
 }
 
 cleanup() {
@@ -108,13 +118,16 @@ cleanup() {
   rm -f /tmp/*.segment.*
 }
 
+cleanup
+
 process_pack "land-polygons-split-3857"
-process_pack "ne_10m_land"
-process_pack "ne_110m_admin_0_boundary_lines_land"
+process_pack "ne_10m_bathymetry_all"
 process_pack "ne_10m_geographic_lines"
 process_pack "ne_10m_graticules_15"
-process_pack "ne_10m_bathymetry_all"
 process_pack "ne_10m_lakes"
+process_pack "ne_10m_land"
+process_pack "ne_110m_admin_0_boundary_lines_land"
+process_pack "world_boundaries" "builtup_area.shp"
 
 cleanup
 
@@ -123,11 +136,12 @@ echo "indexing shapefiles"
 
 shapeindex --shape_files \
   data/land-polygons-split-3857/proc_land_polygons.shp \
-  data/ne_10m_land/proc_ne_10m_land.shp \
-  data/ne_110m_admin_0_boundary_lines_land/proc_ne_110m_admin_0_boundary_lines_land.shp \
+  data/ne_10m_bathymetry_all/proc_*.shp \
   data/ne_10m_geographic_lines/proc_*.shp \
   data/ne_10m_graticules_15/proc_*.shp \
-  data/ne_10m_bathymetry_all/proc_*.shp \
-  data/ne_10m_lakes/proc_*.shp
+  data/ne_10m_lakes/proc_*.shp \
+  data/ne_10m_land/proc_ne_10m_land.shp \
+  data/ne_110m_admin_0_boundary_lines_land/proc_ne_110m_admin_0_boundary_lines_land.shp \
+  data/world_boundaries/proc_*.shp
 
 echo "...done!"
