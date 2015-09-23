@@ -1,7 +1,24 @@
 #!/bin/sh
 set -e -u
 
-UNZIP_OPTS=-qqun
+UNZIP_OPTS=-qqunj
+
+download_pack() {
+  filename=$(basename $1)
+  echo "Downloading ${filename}…"
+  curl -z "data/$filename" -L -o "data/$filename" "$1"
+}
+
+expand_pack() {
+  echo "expanding $1…"
+
+  if [ ${1: -4} == ".tgz" ]; then
+    tar xzf data/$1 -C data/
+  elif [ ${1: -4} == ".zip" ]; then
+    base=$(basename $1 .zip)
+    unzip $UNZIP_OPTS data/$1 -d data/$base
+  fi
+}
 
 # create and populate data dir
 
@@ -18,84 +35,36 @@ mkdir -p data/ne_10m_lakes
 # Download Packs
 
 ## world_boundaries
-PACK="world_boundaries"
-echo "dowloading $PACK..."
-curl -z "data/$PACK-spherical.tgz" -L -o "data/$PACK-spherical.tgz" "http://planet.openstreetmap.org/historical-shapefiles/$PACK-spherical.tgz"
-echo "expanding $PACK..."
-tar -xzf data/$PACK-spherical.tgz -C data/
+download_pack "http://planet.openstreetmap.org/historical-shapefiles/world_boundaries-spherical.tgz"
+expand_pack "world_boundaries-spherical.tgz"
 
 ## ne_10m_land
-PACK="ne_10m_land"
-echo "downloading $PACK..."
-curl -z "data/$PACK.zip" -L -o "data/$PACK.zip" "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/${PACK}.zip"
-echo "$PACK..."
-unzip $UNZIP_OPTS data/$PACK.zip \
-  -d data/$PACK
+download_pack "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_land.zip"
+expand_pack "ne_10m_land.zip"
 
 ## ne_110m_admin_0_boundary_lines_land
-PACK="ne_110m_admin_0_boundary_lines_land"
-echo "dowloading $PACK..."
-curl -z data/$PACK.zip -L -o data/$PACK.zip http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/110m/cultural/$PACK.zip
-echo "expanding $PACK..."
-unzip $UNZIP_OPTS data/$PACK.zip \
-  $PACK.shp \
-  $PACK.shx \
-  $PACK.prj \
-  $PACK.dbf \
-  -d data/$PACK/
+download_pack "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/110m/cultural/ne_110m_admin_0_boundary_lines_land.zip"
+expand_pack "ne_110m_admin_0_boundary_lines_land.zip"
 
 ## land-polygons-split-3857
-PACK="land-polygons-split-3857"
-echo "dowloading $PACK..."
-curl -z "data/$PACK.zip" -L -o "data/$PACK.zip" "http://data.openstreetmapdata.com/$PACK.zip"
-echo "expanding $PACK..."
-unzip $UNZIP_OPTS data/$PACK.zip \
-  $PACK/land_polygons.shp \
-  $PACK/land_polygons.shx \
-  $PACK/land_polygons.prj \
-  $PACK/land_polygons.dbf \
-  $PACK/land_polygons.cpg \
-  -d data/
+download_pack "http://data.openstreetmapdata.com/land-polygons-split-3857.zip"
+expand_pack "land-polygons-split-3857.zip"
 
 ## ne_10m_geographic_lines
-PACK="ne_10m_geographic_lines"
-echo "dowloading $PACK..."
-curl -z "data/$PACK.zip" -L -o "data/$PACK.zip" "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/$PACK.zip"
-echo "expanding $PACK..."
-unzip $UNZIP_OPTS data/$PACK.zip \
-  $PACK.shp \
-  $PACK.shx \
-  $PACK.prj \
-  $PACK.dbf \
-  -d data/$PACK/
+download_pack "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_geographic_lines.zip"
+expand_pack "ne_10m_geographic_lines.zip"
 
 ## ne_10m_graticules_15
-PACK="ne_10m_graticules_15"
-echo "dowloading $PACK..."
-curl -z "data/$PACK.zip" -L -o "data/$PACK.zip" "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/$PACK.zip"
-echo "expanding $PACK..."
-unzip $UNZIP_OPTS data/$PACK.zip \
-  $PACK.shp \
-  $PACK.shx \
-  $PACK.prj \
-  $PACK.dbf \
-  -d data/$PACK/
+download_pack "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_graticules_15.zip"
+expand_pack "ne_10m_graticules_15.zip"
 
 ## ne_10m_bathymetry_all
-PACK="ne_10m_bathymetry_all"
-echo "dowloading $PACK..."
-curl -z "data/$PACK.zip" -L -o "data/$PACK.zip" "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/$PACK.zip"
-echo "expanding $PACK..."
-unzip $UNZIP_OPTS data/$PACK.zip \
-  -d data/
+download_pack "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_bathymetry_all.zip"
+expand_pack "ne_10m_bathymetry_all.zip"
 
 ## ne_10m_lakes
-PACK="ne_10m_lakes"
-echo "dowloading $PACK..."
-curl -z "data/$PACK.zip" -L -o "data/$PACK.zip" "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/$PACK.zip"
-echo "expanding $PACK..."
-unzip $UNZIP_OPTS data/$PACK.zip \
-  -d data/$PACK/
+download_pack "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_lakes.zip"
+expand_pack "ne_10m_lakes.zip"
 
 # Clip shapefiles to bounding box
 echo "clipping & segmenting shapefiles"
