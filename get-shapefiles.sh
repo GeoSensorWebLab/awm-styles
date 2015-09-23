@@ -83,11 +83,13 @@ segment_shape() {
 }
 
 save_shape() {
-  base=$(basename $1 .shp)
-  for file in /tmp/${base}*; do
-    base=$(basename file)
-    extension="${file##*.}"
-    cp $file data/$2/proc_$2.$extension
+  edited_base=$(basename $1 .shp)
+  original_dir=$2
+  original_base=$(basename $3 .shp)
+  for file in /tmp/${edited_base}*; do
+    file_base=$(basename $file)
+    extension="${file_base##*.}"
+    cp $file data/$original_dir/proc_${original_base}.$extension
   done
 }
 
@@ -97,7 +99,7 @@ process_pack() {
     echo "Processing ${shp}…"
     clipped=$(clip_shape $shp)
     segmented=$(segment_shape $clipped)
-    save_shape $segmented $1
+    save_shape $segmented $1 $shp
   done
 }
 
