@@ -110,6 +110,8 @@ cleanup() {
 
 process_pack "ne_10m_land"
 process_pack "ne_110m_admin_0_boundary_lines_land"
+process_pack "ne_10m_geographic_lines"
+process_pack "ne_10m_graticules_15"
 process_pack "ne_10m_bathymetry_all"
 process_pack "ne_10m_lakes"
 
@@ -122,9 +124,9 @@ shapeindex --shape_files \
   data/land-polygons-split-3857/land_polygons.shp \
   data/ne_10m_land/proc_ne_10m_land.shp \
   data/ne_110m_admin_0_boundary_lines_land/proc_ne_110m_admin_0_boundary_lines_land.shp \
-  data/ne_10m_geographic_lines/ne_10m_geographic_lines.shp \
-  data/ne_10m_geographic_lines/ne_10m_graticules_15.shp \
-  data/ne_10m_bathymetry_all/*.shp \
-  data/ne_10m_lakes/*.shp
+  data/ne_10m_geographic_lines/proc_*.shp \
+  data/ne_10m_graticules_15/proc_*.shp \
+  data/ne_10m_bathymetry_all/proc_*.shp \
+  data/ne_10m_lakes/proc_*.shp
 
 echo "...done!"
