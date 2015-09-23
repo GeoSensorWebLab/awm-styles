@@ -108,6 +108,7 @@ cleanup() {
   rm -f /tmp/*.segment.*
 }
 
+process_pack "land-polygons-split-3857"
 process_pack "ne_10m_land"
 process_pack "ne_110m_admin_0_boundary_lines_land"
 process_pack "ne_10m_geographic_lines"
@@ -121,7 +122,7 @@ cleanup
 echo "indexing shapefiles"
 
 shapeindex --shape_files \
-  data/land-polygons-split-3857/land_polygons.shp \
+  data/land-polygons-split-3857/proc_land_polygons.shp \
   data/ne_10m_land/proc_ne_10m_land.shp \
   data/ne_110m_admin_0_boundary_lines_land/proc_ne_110m_admin_0_boundary_lines_land.shp \
   data/ne_10m_geographic_lines/proc_*.shp \
