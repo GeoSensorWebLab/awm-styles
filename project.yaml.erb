@@ -20,7 +20,7 @@ srs: "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +
 # Various parts to be included later on
 _parts:
   # Extents are used for tilemill, and don't actually make it to the generated XML
-  extents: &extents
+  extents: &extents3857
     extent: *world
     srs-name: "900913"
     srs: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
@@ -85,7 +85,7 @@ Layer:
     name: "coast-poly"
     class: ""
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3857
     Datasource:
       file: "data/land-polygons-split-3857/proc_land_polygons.shp"
       type: "shape"
@@ -230,7 +230,7 @@ Layer:
     name: "landcover-low-zoom"
     class: ""
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -478,7 +478,7 @@ Layer:
     name: "water-barriers-poly"
     class: ""
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -1650,7 +1650,7 @@ Layer:
     name: "trees"
     class: ""
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -1941,7 +1941,7 @@ Layer:
     name: "text-poly-low-zoom"
     class: "text-low-zoom"
     geometry: "polygon"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
@@ -2035,7 +2035,7 @@ Layer:
     name: "text-line"
     class: "text"
     geometry: "linestring"
-    <<: *extents
+    <<: *extents3573
     Datasource:
       <<: *osm2pgsql
       table: |-
