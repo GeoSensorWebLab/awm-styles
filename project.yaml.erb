@@ -2,6 +2,7 @@ scale: 1
 metatile: 2
 name: "ArcticWebMap 3573"
 description: "ArcticWebMap in EPSG:3573 projection"
+# These bounds are for TileMill only
 bounds: &world
   - -180
   - -85.05112877980659
@@ -16,20 +17,34 @@ interactivity: false
 minzoom: 0
 maxzoom: 18
 srs: "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+buffer-size: 128
+maximum-extent: "-20037508,-20037508,20037508,20037508"
 
 # Various parts to be included later on
 _parts:
   # Extents are used for tilemill, and don't actually make it to the generated XML
-  extents: &extents3857
-    extent: *world
+  extents:
+    extent:
+      - -180
+      - -85.05112877980659
+      - 180
+      - 85.05112877980659
     srs-name: "900913"
     srs: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
-  extents84: &extents84
-    extent: *world
+  extents84:
+    extent:
+      - -180
+      - -90
+      - 180
+      - 90
     srs-name: "EPSG:4326"
     srs: "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
   extents3573: &extents3573
-    extent: *world
+    extent:
+      - -20037508
+      - -20037508
+      - 20037508
+      - 20037508
     srs-name: "EPSG:3573"
     srs: "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
   osm2pgsql: &osm2pgsql
@@ -74,7 +89,7 @@ Layer:
     name: "world"
     class: ""
     geometry: "polygon"
-    <<: *extents84
+    <<: *extents3573
     Datasource:
       file: "data/ne_10m_land/proc_ne_10m_land.shp"
       type: "shape"
@@ -85,7 +100,7 @@ Layer:
     name: "coast-poly"
     class: ""
     geometry: "polygon"
-    <<: *extents3857
+    <<: *extents3573
     Datasource:
       file: "data/land-polygons-split-3857/proc_land_polygons.shp"
       type: "shape"
@@ -96,7 +111,7 @@ Layer:
     name: "builtup"
     geometry: "polygon"
     class: ""
-    extent: *world
+    extent: *extents3573
     srs-name: "mercator"
     srs: "+proj=merc +datum=WGS84 +over"
     Datasource:
@@ -110,7 +125,7 @@ Layer:
     name: "necountries"
     class: ""
     geometry: "linestring"
-    <<: *extents84
+    <<: *extents3573
     Datasource:
       file: "data/ne_110m_admin_0_boundary_lines_land/proc_ne_110m_admin_0_boundary_lines_land.shp"
       type: "shape"
@@ -119,7 +134,7 @@ Layer:
     name: "lakes-low"
     class: ""
     geometry: "polygon"
-    <<: *extents84
+    <<: *extents3573
     Datasource:
       file: "data/ne_10m_lakes/proc_ne_10m_lakes.shp"
       type: "shape"
@@ -128,7 +143,7 @@ Layer:
     name: "bathymetry-200m"
     class: ""
     geometry: "polygon"
-    <<: *extents84
+    <<: *extents3573
     Datasource:
       file: "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_K_200.shp"
       type: "shape"
@@ -137,7 +152,7 @@ Layer:
     name: "bathymetry-1km"
     class: ""
     geometry: "polygon"
-    <<: *extents84
+    <<: *extents3573
     Datasource:
       file: "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_J_1000.shp"
       type: "shape"
@@ -146,7 +161,7 @@ Layer:
     name: "bathymetry-2km"
     class: ""
     geometry: "polygon"
-    <<: *extents84
+    <<: *extents3573
     Datasource:
       file: "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_I_2000.shp"
       type: "shape"
@@ -155,7 +170,7 @@ Layer:
     name: "bathymetry-3km"
     class: ""
     geometry: "polygon"
-    <<: *extents84
+    <<: *extents3573
     Datasource:
       file: "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_H_3000.shp"
       type: "shape"
@@ -164,7 +179,7 @@ Layer:
     name: "bathymetry-4km"
     class: ""
     geometry: "polygon"
-    <<: *extents84
+    <<: *extents3573
     Datasource:
       file: "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_G_4000.shp"
       type: "shape"
@@ -173,7 +188,7 @@ Layer:
     name: "bathymetry-5km"
     class: ""
     geometry: "polygon"
-    <<: *extents84
+    <<: *extents3573
     Datasource:
       file: "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_F_5000.shp"
       type: "shape"
@@ -182,7 +197,7 @@ Layer:
     name: "bathymetry-6km"
     class: ""
     geometry: "polygon"
-    <<: *extents84
+    <<: *extents3573
     Datasource:
       file: "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_E_6000.shp"
       type: "shape"
@@ -191,7 +206,7 @@ Layer:
     name: "bathymetry-7km"
     class: ""
     geometry: "polygon"
-    <<: *extents84
+    <<: *extents3573
     Datasource:
       file: "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_D_7000.shp"
       type: "shape"
@@ -200,7 +215,7 @@ Layer:
     name: "bathymetry-8km"
     class: ""
     geometry: "polygon"
-    <<: *extents84
+    <<: *extents3573
     Datasource:
       file: "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_C_8000.shp"
       type: "shape"
@@ -209,7 +224,7 @@ Layer:
     name: "bathymetry-9km"
     class: ""
     geometry: "polygon"
-    <<: *extents84
+    <<: *extents3573
     Datasource:
       file: "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_B_9000.shp"
       type: "shape"
@@ -218,7 +233,7 @@ Layer:
     name: "bathymetry-10km"
     class: ""
     geometry: "polygon"
-    <<: *extents84
+    <<: *extents3573
     Datasource:
       file: "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_A_10000.shp"
       type: "shape"
@@ -418,7 +433,7 @@ Layer:
     name: "geographic-lines"
     class: ""
     geometry: "linestring"
-    <<: *extents84
+    <<: *extents3573
     Datasource:
       file: "data/ne_10m_geographic_lines/proc_ne_10m_geographic_lines.shp"
       type: "shape"
@@ -427,7 +442,7 @@ Layer:
     name: "graticule-lines"
     class: ""
     geometry: "linestring"
-    <<: *extents84
+    <<: *extents3573
     Datasource:
       file: "data/ne_10m_graticules_15/proc_ne_10m_graticules_15.shp"
       type: "shape"

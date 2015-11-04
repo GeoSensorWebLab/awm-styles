@@ -70,6 +70,7 @@ expand_pack "ne_10m_lakes.zip"
 echo "clipping & segmenting shapefiles"
 SRS="EPSG:4326"
 
+# Convert to EPSG:4326 to make clipping use a simple bbox
 clip_shape() {
   TMPFILE="/tmp/$(basename $1 .shp).$$.clip.shp"
   ogr2ogr -t_srs $SRS -clipdst -180 0 180 90 "$TMPFILE" "$1"
@@ -79,6 +80,12 @@ clip_shape() {
 segment_shape() {
   TMPFILE="/tmp/$(basename $1 .shp).$$.segment.shp"
   ogr2ogr -segmentize 0.5 "$TMPFILE" "$1"
+  echo $TMPFILE
+}
+
+reproject_shape() {
+  TMPFILE="/tmp/$(basename $1 .shp).$$.reproject.shp"
+  ogr2ogr -t_srs EPSG:3573 "$TMPFILE" "$1"
   echo $TMPFILE
 }
 
@@ -102,20 +109,23 @@ process_pack() {
       echo "Processing ${shp}…"
       clipped=$(clip_shape $shp)
       segmented=$(segment_shape $clipped)
-      save_shape $segmented $1 $shp
+      reprojected=$(reproject_shape $segmented)
+      save_shape $reprojected $1 $shp
     done
   else
     # Process only shapefile in $2
     echo "Processing data/$1/${2}…"
     clipped=$(clip_shape data/$1/$2)
     segmented=$(segment_shape $clipped)
-    save_shape $segmented $1 $2
+    reprojected=$(reproject_shape $segmented)
+    save_shape $reprojected $1 $2
   fi
 }
 
 cleanup() {
   rm -f /tmp/*.clip.*
   rm -f /tmp/*.segment.*
+  rm -f /tmp/*.reproject.*
 }
 
 cleanup

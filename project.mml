@@ -19,6 +19,8 @@
   "minzoom": 0,
   "maxzoom": 18,
   "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
+  "buffer-size": 128,
+  "maximum-extent": "-20037508,-20037508,20037508,20037508",
   "_parts": {
     "extents": {
       "extent": [
@@ -33,19 +35,19 @@
     "extents84": {
       "extent": [
         -180,
-        -85.05112877980659,
+        -90,
         180,
-        85.05112877980659
+        90
       ],
-      "srs-name": "WGS84",
+      "srs-name": "EPSG:4326",
       "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
     },
     "extents3573": {
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
@@ -97,13 +99,13 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "WGS84",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "file": "data/ne_10m_land/proc_ne_10m_land.shp",
         "type": "shape"
@@ -120,15 +122,15 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
-        "file": "data/land-polygons-split-3857/land_polygons.shp",
+        "file": "data/land-polygons-split-3857/proc_land_polygons.shp",
         "type": "shape"
       },
       "properties": {
@@ -142,16 +144,20 @@
       "name": "builtup",
       "geometry": "polygon",
       "class": "",
-      "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
-      ],
+      "extent": {
+        "extent": [
+          -20037508,
+          -20037508,
+          20037508,
+          20037508
+        ],
+        "srs-name": "EPSG:3573",
+        "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+      },
       "srs-name": "mercator",
       "srs": "+proj=merc +datum=WGS84 +over",
       "Datasource": {
-        "file": "data/world_boundaries/builtup_area.shp",
+        "file": "data/world_boundaries/proc_builtup_area.shp",
         "type": "shape"
       },
       "properties": {
@@ -167,13 +173,13 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "WGS84",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "file": "data/ne_110m_admin_0_boundary_lines_land/proc_ne_110m_admin_0_boundary_lines_land.shp",
         "type": "shape"
@@ -187,13 +193,13 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "WGS84",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "file": "data/ne_10m_lakes/proc_ne_10m_lakes.shp",
         "type": "shape"
@@ -207,13 +213,13 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "WGS84",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_K_200.shp",
         "type": "shape"
@@ -227,13 +233,13 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "WGS84",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_J_1000.shp",
         "type": "shape"
@@ -247,13 +253,13 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "WGS84",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_I_2000.shp",
         "type": "shape"
@@ -267,13 +273,13 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "WGS84",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_H_3000.shp",
         "type": "shape"
@@ -287,13 +293,13 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "WGS84",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_G_4000.shp",
         "type": "shape"
@@ -307,13 +313,13 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "WGS84",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_F_5000.shp",
         "type": "shape"
@@ -327,13 +333,13 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "WGS84",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_E_6000.shp",
         "type": "shape"
@@ -347,13 +353,13 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "WGS84",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_D_7000.shp",
         "type": "shape"
@@ -367,13 +373,13 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "WGS84",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_C_8000.shp",
         "type": "shape"
@@ -387,13 +393,13 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "WGS84",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_B_9000.shp",
         "type": "shape"
@@ -407,13 +413,13 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "WGS84",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_A_10000.shp",
         "type": "shape"
@@ -431,13 +437,13 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "type": "postgis",
         "host": "",
@@ -461,10 +467,10 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -491,10 +497,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -521,10 +527,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -551,10 +557,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -582,10 +588,10 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -612,10 +618,10 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -642,10 +648,10 @@
       "class": "water-lines",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -672,15 +678,15 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "WGS84",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
-        "file": "data/ne_10m_geographic_lines/ne_10m_geographic_lines.shp",
+        "file": "data/ne_10m_geographic_lines/proc_ne_10m_geographic_lines.shp",
         "type": "shape"
       },
       "advanced": {
@@ -692,15 +698,15 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "WGS84",
-      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
-        "file": "data/ne_10m_graticules_15/ne_10m_graticules_15.shp",
+        "file": "data/ne_10m_graticules_15/proc_ne_10m_graticules_15.shp",
         "type": "shape"
       },
       "advanced": {
@@ -712,10 +718,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -739,10 +745,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -766,10 +772,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -796,13 +802,13 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "type": "postgis",
         "host": "",
@@ -826,10 +832,10 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -856,10 +862,10 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -886,10 +892,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -916,10 +922,10 @@
       "class": "",
       "geometry": "point",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -946,10 +952,10 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -976,10 +982,10 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1006,10 +1012,10 @@
       "class": "tunnels-fill tunnels-casing access directions",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1037,10 +1043,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1067,10 +1073,10 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1097,10 +1103,10 @@
       "class": "barriers",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1127,10 +1133,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1157,10 +1163,10 @@
       "class": "barriers",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1187,10 +1193,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1217,10 +1223,10 @@
       "class": "",
       "geometry": "point",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1247,10 +1253,10 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1277,10 +1283,10 @@
       "class": "roads-casing",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1306,10 +1312,10 @@
       "name": "highway-area-fill",
       "class": "",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1336,10 +1342,10 @@
       "class": "roads-fill access directions",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1366,10 +1372,10 @@
       "class": "",
       "geometry": "point",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1396,10 +1402,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1426,10 +1432,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1457,10 +1463,10 @@
       "class": "water-lines",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1487,10 +1493,10 @@
       "class": "bridges-fill bridges-casing access directions",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1518,10 +1524,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1548,10 +1554,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1578,10 +1584,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1609,10 +1615,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1639,10 +1645,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1669,10 +1675,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1699,10 +1705,10 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1729,10 +1735,10 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1759,10 +1765,10 @@
       "class": "country state",
       "geometry": "point",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1789,10 +1795,10 @@
       "class": "",
       "geometry": "point",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1820,10 +1826,10 @@
       "class": "",
       "geometry": "point",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1850,10 +1856,10 @@
       "class": "",
       "geometry": "point",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1880,10 +1886,10 @@
       "name": "stations",
       "geometry": "point",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1910,10 +1916,10 @@
       "class": "stations",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -1940,13 +1946,13 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "type": "postgis",
         "host": "",
@@ -1970,10 +1976,10 @@
       "class": "points",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2000,10 +2006,10 @@
       "class": "points",
       "geometry": "point",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2030,10 +2036,10 @@
       "class": "",
       "geometry": "point",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2060,10 +2066,10 @@
       "class": "",
       "geometry": "point",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2090,10 +2096,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2121,10 +2127,10 @@
       "class": "",
       "geometry": "point",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2151,10 +2157,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2181,10 +2187,10 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2211,10 +2217,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2241,10 +2247,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2271,13 +2277,13 @@
       "class": "text-low-zoom",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "type": "postgis",
         "host": "",
@@ -2302,10 +2308,10 @@
       "class": "text",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2332,13 +2338,13 @@
       "class": "text",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "EPSG:3573",
+      "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
       "Datasource": {
         "type": "postgis",
         "host": "",
@@ -2362,10 +2368,10 @@
       "class": "text",
       "geometry": "point",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2392,10 +2398,10 @@
       "class": "",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2422,10 +2428,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2452,10 +2458,10 @@
       "class": "",
       "geometry": "point",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2482,10 +2488,10 @@
       "class": "",
       "geometry": "point",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2512,10 +2518,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2542,10 +2548,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2572,10 +2578,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2602,10 +2608,10 @@
       "class": "",
       "geometry": "linestring",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2632,10 +2638,10 @@
       "class": "amenity-low-priority",
       "geometry": "point",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -2662,10 +2668,10 @@
       "class": "amenity-low-priority",
       "geometry": "polygon",
       "extent": [
-        -180,
-        -85.05112877980659,
-        180,
-        85.05112877980659
+        -20037508,
+        -20037508,
+        20037508,
+        20037508
       ],
       "srs-name": "EPSG:3573",
       "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
