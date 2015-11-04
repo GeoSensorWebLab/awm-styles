@@ -459,6 +459,8 @@ Layer:
               FROM FO_1030009_1
               WHERE elevation::integer % 100 = 0
               ) AS contours100
+    properties:
+      minzoom: 10
     advanced: {}
   - id: "contours20"
     name: "contours20"
@@ -473,6 +475,8 @@ Layer:
               WHERE elevation::integer % 20 = 0 AND
               elevation::integer % 100 != 0
               ) AS contours20
+    properties:
+      minzoom: 12
     advanced: {}
   - id: "water-barriers-line"
     name: "water-barriers-line"

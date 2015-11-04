@@ -736,6 +736,9 @@
         "extent": "-20037508,-20037508,20037508,20037508",
         "table": "(SELECT wkb_geometry, ogc_fid, elevation\n      FROM FO_1030009_1\n      WHERE elevation::integer % 100 = 0\n      ) AS contours100"
       },
+      "properties": {
+        "minzoom": 10
+      },
       "advanced": {
       }
     },
@@ -762,6 +765,9 @@
         "geometry_field": "wkb_geometry",
         "extent": "-20037508,-20037508,20037508,20037508",
         "table": "(SELECT wkb_geometry, ogc_fid, elevation\n      FROM FO_1030009_1\n      WHERE elevation::integer % 20 = 0 AND\n      elevation::integer % 100 != 0\n      ) AS contours20"
+      },
+      "properties": {
+        "minzoom": 12
       },
       "advanced": {
       }
