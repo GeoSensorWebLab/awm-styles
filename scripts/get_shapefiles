@@ -10,7 +10,6 @@ shapefiles = YAML.load(IO.read('shapefiles.yaml'))
 # Create and populate data directory
 
 FileUtils.mkdir_p("data")
-FileUtils.mkdir_p("data/world_boundaries")
 FileUtils.mkdir_p("data/ne_110m_admin_0_boundary_lines_land")
 FileUtils.mkdir_p("data/ne_10m_land")
 FileUtils.mkdir_p("data/land-polygons-split-3857")

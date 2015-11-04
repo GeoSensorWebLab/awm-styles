@@ -140,34 +140,6 @@
       }
     },
     {
-      "id": "builtup",
-      "name": "builtup",
-      "geometry": "polygon",
-      "class": "",
-      "extent": {
-        "extent": [
-          -20037508,
-          -20037508,
-          20037508,
-          20037508
-        ],
-        "srs-name": "EPSG:3573",
-        "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
-      },
-      "srs-name": "mercator",
-      "srs": "+proj=merc +datum=WGS84 +over",
-      "Datasource": {
-        "file": "data/world_boundaries/proc_builtup_area.shp",
-        "type": "shape"
-      },
-      "properties": {
-        "minzoom": 8,
-        "maxzoom": 9
-      },
-      "advanced": {
-      }
-    },
-    {
       "id": "necountries",
       "name": "necountries",
       "class": "",
