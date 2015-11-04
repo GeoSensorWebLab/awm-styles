@@ -20,7 +20,7 @@ end
 # modified-date. Returns the filename.
 def download_pack(url)
   filename = File.basename(url)
-  # `curl -z "data/#{filename}" -L -o "data/#{filename}" "#{shapefile["url"]}"`
+  `curl -z "data/#{filename}" -L -o "data/#{filename}" "#{url}"`
   filename
 end
 
