@@ -424,10 +424,6 @@
         "file": "data/ne_10m_bathymetry_all/proc_ne_10m_bathymetry_A_10000.shp",
         "type": "shape"
       },
-      "properties": {
-        "minzoom": 1,
-        "maxzoom": 3
-      },
       "advanced": {
       }
     },
