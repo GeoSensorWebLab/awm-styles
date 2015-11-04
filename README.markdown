@@ -20,15 +20,19 @@ Then install Node and carto to build the XML files.
     $ sudo apt-get install nodejs
     $ sudo npm install -g carto
 
+Next download the shapefiles using the Ruby script:
+
+    $ scripts/get_shapefiles
+
 To compile any changes to your project file, edit the `.env` file with database details and then:
 
     $ source .env && scripts/project
 
-Then use the generation script to prepare the XML files:
+Then use the Ruby generation script to prepare the XML files:
 
     $ scripts/generate
 
-This will generate a set of XML files in the current directory, one for each AWM style. Use the install script to copy these to the Mapnik style directory:
+This will generate a set of XML files in the current directory, one for each AWM style. Use the Bash install script to copy these to the Mapnik style directory:
 
     $ sudo scripts/install
 

@@ -1,0 +1,56 @@
+- name: world_boundaries
+  url: http://planet.openstreetmap.org/historical-shapefiles/world_boundaries-spherical.tgz
+  shapefile_regex: builtup_area
+  clip_srs: EPSG:4326
+  clip_bounds: -180 0 180 90
+  segment_interval: 0.5
+  project_to_srs: EPSG:3573
+
+- name: ne_10m_land
+  url: http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_land.zip
+  clip_srs: EPSG:4326
+  clip_bounds: -180 0 180 90
+  segment_interval: 0.5
+  project_to_srs: EPSG:3573
+
+- name: ne_110m_admin_0_boundary_lines_land
+  url: http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/110m/cultural/ne_110m_admin_0_boundary_lines_land.zip
+  clip_srs: EPSG:4326
+  clip_bounds: -180 0 180 90
+  segment_interval: 0.5
+  project_to_srs: EPSG:3573
+
+- name: land-polygons-split-3857
+  url: http://data.openstreetmapdata.com/land-polygons-split-3857.zip
+  clip_srs: EPSG:4326
+  clip_bounds: -180 0 180 90
+  segment_interval: 0.5
+  project_to_srs: EPSG:3573
+
+- name: ne_10m_geographic_lines
+  url: http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_geographic_lines.zip
+  clip_srs: EPSG:4326
+  clip_bounds: -180 0 180 90
+  segment_interval: 0.5
+  project_to_srs: EPSG:3573
+
+- name: ne_10m_graticules_15
+  url: http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_graticules_15.zip
+  clip_srs: EPSG:4326
+  clip_bounds: -180 0 180 90
+  segment_interval: 0.5
+  project_to_srs: EPSG:3573
+
+- name: ne_10m_bathymetry_all
+  url: http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_bathymetry_all.zip
+  clip_srs: EPSG:4326
+  clip_bounds: -180 45 180 90
+  segment_interval: 0.5
+  project_to_srs: EPSG:3573
+
+- name: ne_10m_lakes
+  url: http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_lakes.zip
+  clip_srs: EPSG:4326
+  clip_bounds: -180 45 180 90
+  segment_interval: 0.5
+  project_to_srs: EPSG:3573
