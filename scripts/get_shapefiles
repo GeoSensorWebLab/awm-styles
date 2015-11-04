@@ -7,36 +7,31 @@ require 'yaml'
 
 shapefiles = YAML.load(IO.read('shapefiles.yaml'))
 
-# Create and populate data directory
-
+# Basic Initialization
 FileUtils.mkdir_p("data")
-shapefiles.each do |shapefile|
-  FileUtils.mkdir_p("data/#{shapefile["name"]}")
+
+# Create and populate data directory
+def initialize_directory(name)
+  FileUtils.mkdir_p("data/#{name}")
 end
 
-# Download packs
+# Download pack
 # Uses external curl. Will only download if the remote file has a different
-# modified-date.
-
-shapefiles.each do |shapefile|
-  filename = File.basename(shapefile["url"])
-  shapefile["filename"] = filename
-  puts "\nDownloading #{filename}…"
-  `curl -z "data/#{filename}" -L -o "data/#{filename}" "#{shapefile["url"]}"`
+# modified-date. Returns the filename.
+def download_pack(url)
+  filename = File.basename(url)
+  # `curl -z "data/#{filename}" -L -o "data/#{filename}" "#{shapefile["url"]}"`
+  filename
 end
 
 # Decompress packs
 UNZIP_OPTS = "-qqunj"
-
-shapefiles.each do |shapefile|
-  filename = shapefile["filename"]
-  puts "\nExpanding #{filename}…"
-
-  if filename.match(/tgz$/) != nil
-    `tar xzf data/#{filename} -C data/`
-  elsif filename.match(/zip$/) != nil
-    base = File.basename(filename, ".zip")
-    `unzip #{UNZIP_OPTS} data/#{filename} -d data/#{base}`
+def decompress_pack(file)
+  if file.match(/tgz$/) != nil
+    `tar xzf data/#{file} -C data/`
+  elsif file.match(/zip$/) != nil
+    base = File.basename(file, ".zip")
+    `unzip #{UNZIP_OPTS} data/#{file} -d data/#{base}`
   else
     puts "Unknown archive"
     exit 1
@@ -75,12 +70,21 @@ def save(input, directory, original)
   end
 end
 
+# Processing Iterator
 shapefiles.each do |shapefile|
   name = shapefile["name"]
+  initialize_directory(name)
+
+  puts "\nDownloading #{name}…"
+  filename = download_pack(shapefile["url"])
+
+  puts "\nExpanding #{filename}…"
+  decompress_pack(filename)
+
   # Remove previously processed files
   FileUtils.rm_f(Dir.glob("data/#{name}/proc_*"))
 
-  shapefile["processed"] = []
+  processed = []
   files = Dir.glob("data/#{name}/*.shp")
 
   # If a filter regex is specified, we will only process matching files
@@ -92,7 +96,7 @@ shapefiles.each do |shapefile|
 
   files.each do |shp|
     puts "\nProcessing #{shp}…"
-    shapefile["processed"].push(shp)
+    processed.push(shp)
 
     # clip
     puts "Clipping…"
@@ -117,6 +121,12 @@ shapefiles.each do |shapefile|
     # save
     save(reprojected, name, base)
   end
+
+  processed.each do |file|
+    puts "\nIndexing #{file}…"
+    base = File.basename(file, ".shp")
+    `shapeindex --shape_files data/#{name}/proc_#{base}.shp`
+  end
 end
 
 # Cleanup
@@ -124,14 +134,3 @@ end
 FileUtils.rm_f(Dir.glob("/tmp/*.clip.*"))
 FileUtils.rm_f(Dir.glob("/tmp/*.segment.*"))
 FileUtils.rm_f(Dir.glob("/tmp/*.reproject.*"))
-
-# Index Shapefiles
-
-shapefiles.each do |shapefile|
-  name = shapefile["name"]
-  shapefile["processed"].each do |file|
-    puts "\nIndexing #{file}…"
-    base = File.basename(file, ".shp")
-    `shapeindex --shape_files data/#{name}/proc_#{base}.shp`
-  end
-end
