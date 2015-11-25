@@ -11,8 +11,6 @@ You need a PostGIS database populated with OpenStreetMap data in the standard os
 For our production system, we have Mapnik using the XML configuration in `/etc/mapnik-osm-carto-data`. In order to install the latest version of our styles you will have to clone this repository to the tile server.
 
     $ git clone https://github.com/GeoSensorWebLab/awm-styles
-    OR
-    $ git clone https://bitbucket.org/geosensorweblab/awm-styles.git
     $ cd awm-styles
 
 Then install Node and carto to build the XML files.
