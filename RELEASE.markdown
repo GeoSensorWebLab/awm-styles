@@ -2,6 +2,22 @@
 
 A list of changes made to the stylesheet.
 
+### 2015-12-16
+
+* Reproject shapefiles into EPSG:3573
+* Modify minzoom for water layers
+* Use minzoom on contour layers
+* Remove limit on 10km bathymetry layer
+* Replace shapefile script
+* Remove unused builtup areas shapefile
+* Remove hard-coded directories from setup script
+* Add partial indexes file
+* Add custom prerendering script
+
+### 2015-09-22
+
+* Use processed shapefiles in stylesheet
+
 ### 2015-07-28
 
 * Forked from v2.24.0 of [gravitystorm/openstreetmap-carto](https://github.com/gravitystorm/openstreetmap-carto)
@@ -12,6 +28,11 @@ A list of changes made to the stylesheet.
 * Updates shapefile retrieval script
 * Shapefiles are clipped to region of interest (45˚ – 90˚ North)
 * Uses ERB for generating TileMill project files with dynamic database details
+* Merge tags up to v2.31.0 from upstream
+* Show major lakes at zoom levels 4 and 5 using Natural Earth data
+* Clip shapefiles to above 45˚ N
+* Display airport names at higher zoom levels
+* Re-enable prominence for northern communities
 
 ### v2.25.0
 
