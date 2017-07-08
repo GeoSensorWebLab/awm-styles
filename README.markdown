@@ -1,5 +1,7 @@
 # Arctic Web Map Mapnik Styles
 
+![screenshot](preview.png)
+
 These are CartoCSS map stylesheets based on the openstreetmap-carto repository. They are used for Arctic Web Map styling.
 
 # Local Installation
