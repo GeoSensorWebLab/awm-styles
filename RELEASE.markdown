@@ -2,6 +2,58 @@
 
 A list of changes made to the stylesheet.
 
+### 2017-07-07
+
+* Switch DB to use 4326 projection
+* Merge changes from v2.32.0
+    * Antarctica shapefile not used due to bounding box/projection
+    * Icon and YAML for shop=computer
+    * Icon and YAML for shop=seafood and shop=fishmonger
+    * Icon and YAML for amenity=ice_cream and shop=ice_cream
+    * New icons for post office and post box
+    * Icon and YAML for shop=motorcycles
+    * change symbol for railway=subway_entrance
+    * move emergency phone to SVG
+    * move telephone icon to SVG
+    * different rendering for aerialway=goods
+    * stop displaying really small zoos and theme parks
+    * YAML for shop=wine
+    * rework display of railway=tram
+    * Modify z12
+    * Note mapnik3 support is not yet here
+    * start displaying minor rail from z13
+    * Avoid auto text-vertical-alignment for admin polygon labels
+    * Set text-vertical-alignment: middle for linear features
+    * unify colors and new patterns for some green landcovers
+    * taking out landuse=conservation change
+    * Change color of amenity=bank and amenity=atm to @amenity-brown
+    * render educational areas as distinct later
+    * Use layer instead of z_order
+    * stop displaying proposed roads
+    * make variable name less misleading
+    * render service rail under normal rail
+    * Icon and YAML for amenity=motorcycle_parking
+    * make turning circles on highway=track smaller
+    * make railway=tram with service tags less visible
+    * use @bridge-casing also for railways
+    * render minor tram lines from z15
+    * render residential and living_street from z13, not from z10
+    * render highway=unclassified from z11, not from z10
+    * start displaying buildings from z13, not from z12
+    * start displaying amenity=place_of_worship from z13, not from z10
+    * Icon and YAML for highway=elevator
+    * introduce variable for oneway-arrow-color
+    * introduce variable for junction text color
+    * Icon and YAML for shop=variety_store
+    * tweak adjusted zoom levels slightly
+    * Order place layers by place type
+    * make highway=residential at z12 thinner
+    * fixed display of residential and unclassified roads at z13
+    * stop hiding the hospital between the education stuff
+    * New icons and YAML for amenity=post_office and amenity=post_box
+    * inherit fill for living street and pedestrian
+
+
 ### 2015-12-16
 
 * Reproject shapefiles into EPSG:3573
