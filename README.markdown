@@ -22,7 +22,7 @@ Next download the shapefiles using the Ruby script:
 
     $ scripts/get_shapefiles
 
-To compile any changes to your project file, edit the `.env` file with database details and then:
+To compile any changes to your project file, edit the `.env` file (use `.env.sample` as a template) with database details and then:
 
     $ source .env && scripts/project
 
