@@ -78,6 +78,17 @@ A list of changes made to the stylesheet.
     * detect also paved and lack of surface info
     * display missing surface specially and display unpaved footways
     * better labels for bridges
+* Merge changes from v2.35.0
+    * move ford to SVG
+    * make major power lines less prominent
+    * adding sources and double resolution versions for bare ground and wetland patterns
+    * changed file names for hr renderings
+    * fix text-dy for nightclub
+    * remove halo from nightclub icon 
+    * introduce variable for shop names
+    * more visible color of lighthouse labels 
+    * add shop=winery to list of ignored shop values
+    * stop rendering landuse=conservation 
 
 ### 2015-12-16
 
