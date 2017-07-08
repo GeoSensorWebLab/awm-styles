@@ -17,12 +17,6 @@
   }
 }
 
-#builtup {
-  [zoom >= 8][zoom < 10] {
-    polygon-fill: #ddd;
-  }
-}
-
 #geographic-lines {
   [name = 'Arctic Circle'] {
     line-width: 1;
