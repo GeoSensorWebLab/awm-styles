@@ -89,6 +89,99 @@ A list of changes made to the stylesheet.
     * more visible color of lighthouse labels 
     * add shop=winery to list of ignored shop values
     * stop rendering landuse=conservation 
+* Merge changes from v2.36.0
+    * make railway=rail and roads more distinguishable. increase rail
+    * visibility
+    * New road style - rework road colours, road widths and display of
+    * railway=rail
+    * rework width for service roads
+    * refactor setting casings
+    * reduce casing for secondaries at z14 and z13
+    * fix bug in script producing a wrong comment
+    * fix tertiary construction
+    * allow setting motorway, trunk width on z8
+    * motorway, trunk, primary - width 1.0 on z8
+    * glow for secondary on z9 and z10 and for tertiary on z11
+    * z11 is now again without casings and using low zoom style
+    * YAML for shop=car_repair in amenity-brown
+    * narrower trunk on z7
+    * less wide railway on z7
+    * fix inconsistent widths on z10 and z11
+    * add missing glow for decondaries at z11
+    * handle cases like min_h = 280; max_h = 460
+    * tweak and extend halos to z10 tertiary and z12 unclassified
+    * show red dashes for steps
+    * rework private access width
+    * make access=private/no visible on red roads
+    * rework also destination marks
+    * remove duplicated and dead code
+    * stronger casing for minor roads at z14
+    * refactoring of minor details
+    * proper definition of highway=road
+    * drop unneded duplicates of z limits
+    * fix name collision
+    * unify code style
+    * introduce new variable for unimportant roads
+    * Icon and YAML for amenity=fountain
+    * stop importing unused modules in the helper script
+    * better documentation of development dependencies
+    * stop using numpy in the helper script
+    * Restore numpy in the helper script
+    * Refact road colour generation script
+    * Order placenames by population-based score and substitute NE usage on
+    * low zoom levels
+    * Tune smaller towns in rural areas
+    * Render name for power=plant
+    * Prioritize power over landuse in coalesce statement
+    * Icon and YAML for amenity=car_wash
+    * Icon and YAML for shop=bag and getting rid of shop=bags
+    * Adding line breaks in YAML to make it easier to maintain
+    * render crosses
+    * named crosses are no longer displayed at z14
+    * Add text about creating issues and PRs
+    * Markdown, link, and formatting fixes
+    * Update roadmap to reflect where we are
+    * Add reference to Kosmtik, and rework yaml to json section
+    * Dependency rewording
+    * Do not sort placenames-medium by category (is yet done in
+    * placenames.mss)
+    * standard halo also for shops
+    * make generate_road_colours executable
+    * variable instead of repeated hardcoding
+    * Don't assume sh is bash for create_shield
+    * remove variable path-fill as it is no longer used
+    * rework oneway arrows
+    * Adding documentation for quarry pattern
+    * Make roads wider at zoom 18 and 19
+    * Changing water features color to already defined water-text variable
+    * Update CONTRIBUTING.md
+    * Icon and YAML for shop=outdoor
+    * Move rendering of tram labels later
+    * refactor yaml2mml.py
+    * special priority for railway=station and railway=subway_entrance
+    * Add missing comma
+    * rework road shields
+    * smaller font, black text, colour generation script
+    * Reworking station labels and code cleaning
+    * reduce repetitions in  definitions of labels
+    * style improvements, bigger size versions for z16, z18
+    * increase shield spacing
+    * refactor style definitions
+    * Removing deprecated shops
+    * Remove car_sharing rendering
+    * Simplify WHERE clause of text layers
+    * tweak crosses to not appear earlier than place_of_worship
+    * make residential refs less prominent
+    * Move taxi to z17
+    * Significantly increase minimum zoom level for bridge names
+    * change colour of station labels
+    * move tree layer below placename layer
+    * fix state name labels are displayed up to z19 - caused by potential
+    * carto bug
+    * thinner and solid lines for glacier outlines at low zooms for improved
+    * readability
+    * removing now unused glaciers pattern image
+    * Render marina labels like other landuse labels, including font size
 
 ### 2015-12-16
 

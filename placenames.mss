@@ -1,5 +1,6 @@
 @placenames: #222;
 @placenames-light: #777777;
+
 .country {
   [admin_level = '2'][zoom >= 2][way_pixels > 3000][way_pixels < 196000] {
     text-name: "[name]";
@@ -17,7 +18,7 @@
 
 .state {
   [admin_level = '4'] {
-    [zoom >= 4][zoom < 5][way_pixels > 750][way_pixels < 196000],
+    [zoom >= 4][zoom < 5][way_pixels > 750],
     [zoom >= 5][way_pixels > 3000][way_pixels < 196000] {
       text-name: "[ref]";
       text-size: 9;
@@ -38,39 +39,24 @@
   }
 }
 
-#placenames-capital {
-  [zoom >= 6][zoom < 15] {
-    text-name: "[name]";
-    text-size: 10;
-    text-fill: @placenames;
-    text-face-name: @book-fonts;
-    text-halo-radius: 1.5;
-    text-halo-fill: rgba(255,255,255,0.6);
-    text-wrap-width: 45;
-    text-min-distance: 10;
-    [zoom >= 6] {
-      text-size: 12;
-      text-wrap-width: 60;
-    }
-    [zoom >= 11] {
-      text-size: 15;
-      text-wrap-width: 75;
-    }
-  }
-}
-
-#placenames-medium::city {
-  [place = 'city'] {
-    [zoom >= 6][zoom < 15] {
+#placenames-medium::high-importance {
+  [category = 1][zoom < 14] {
+    [zoom >= 3][score >= 5000000],
+    [zoom >= 4][score >= 3000000],
+    [zoom >= 5][score >= 400000] {
       text-name: "[name]";
-      text-size: 9;
+      text-size: 8;
       text-fill: @placenames;
       text-face-name: @book-fonts;
       text-halo-radius: 1.5;
       text-halo-fill: rgba(255,255,255,0.6);
-      text-wrap-width: 45;
+      text-wrap-width: 30;
       text-min-distance: 10;
-      [zoom >= 9] {
+      [zoom >= 5] {
+        text-size: 10;
+        text-wrap-width: 45;
+      }
+      [zoom >= 6] {
         text-size: 12;
         text-wrap-width: 60;
       }
@@ -82,25 +68,25 @@
   }
 }
 
-#placenames-medium::town {
-  // Special style for northern communities
-  [place = 'town'][latitude >= 60] {
-    [zoom >= 7][zoom < 16] {
+#placenames-medium::medium-importance {
+  [category = 1][score < 400000][zoom < 15] {
+    [zoom >= 6][score >= 70000],
+    [zoom >= 7] {
       text-name: "[name]";
       text-size: 9;
       text-fill: @placenames;
       text-face-name: @book-fonts;
       text-halo-radius: 1.5;
       text-halo-fill: rgba(255,255,255,0.6);
-      text-wrap-width: 45;
+      text-wrap-width: 30;
       text-min-distance: 10;
-      [zoom >= 11] {
+      [zoom >= 9] {
         text-size: 11;
-        text-wrap-width: 55;
+        text-wrap-width: 60;
       }
-      [zoom >= 12] {
-        text-size: 13;
-        text-wrap-width: 65;
+      [zoom >= 11] {
+        text-size: 14;
+        text-wrap-width: 70;
       }
       [zoom >= 14] {
         text-size: 15;
@@ -108,7 +94,10 @@
       }
     }
   }
-  [place = 'town'][latitude < 60] {
+}
+
+#placenames-medium::low-importance {
+  [category = 2] {
     [zoom >= 9][zoom < 16] {
       text-name: "[name]";
       text-size: 9;
@@ -128,7 +117,7 @@
       }
       [zoom >= 14] {
         text-size: 15;
-        text-wrap-width: 75;
+        text-wrap-width: 70;
       }
     }
   }
