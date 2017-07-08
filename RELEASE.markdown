@@ -52,7 +52,18 @@ A list of changes made to the stylesheet.
     * stop hiding the hospital between the education stuff
     * New icons and YAML for amenity=post_office and amenity=post_box
     * inherit fill for living street and pedestrian
-
+* Merge changes from v2.33.0
+    * less wide steps
+    * move power areas closer to industrial areas
+    * tweak highway=raceway width
+    * YAML and icon for shop=musical_instrument
+    * Use a random symbology for forests and move grassland colour to grass
+    * new pattern for forests
+    * restore old scrub
+    * display highway=path like highway=footway
+    * drop case that was redefining cycleways
+    * set-up infrastructure for rendering unpaved surface in SQL
+    * render surface for footways and cycleways
 
 ### 2015-12-16
 
