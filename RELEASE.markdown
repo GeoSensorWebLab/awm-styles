@@ -64,6 +64,20 @@ A list of changes made to the stylesheet.
     * drop case that was redefining cycleways
     * set-up infrastructure for rendering unpaved surface in SQL
     * render surface for footways and cycleways
+* Merge changes from v2.34.0
+    * New icon for landuse=quarry
+    * Icon and YAML for amenity=veterinary
+    * Stop displaying really small hatched areas 
+    * render huge military areas earlier
+    * merge definitions of grass landcovers
+    * show man_made=bridge
+    * Icon and YAML for amenity=community_centre
+    * Move car sharing to zoom 18
+    * Move car rental to zoom level 17
+    * change colour of admin boundaries to be consistent on z1-3
+    * detect also paved and lack of surface info
+    * display missing surface specially and display unpaved footways
+    * better labels for bridges
 
 ### 2015-12-16
 
