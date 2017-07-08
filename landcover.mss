@@ -1,13 +1,12 @@
 // --- Parks, woods, other green things ---
 
 @forest: #a0cf85;
-@grass: #cfeca8; // also meadow, common, garden, village_green, conservation
+@grass: #cdebb0; // also meadow, common, garden, village_green, conservation
 @golf_course: #b5e3b5;
 @park: #cdf7c9; // also recreation_ground
 @wood: #aed1a0;
-@vineyard: #b3e2a8;
-@grassland: #c6e4b4;
 @scrub: #b5e3b5;
+@orchard: #aedfa3;
 
 // --- sports ---
 
@@ -17,7 +16,7 @@
 
 // --- "base" landuses ---
 
-@residential: #E1E1E1;      // Lch(89,0,0)
+@residential: #e0dfdf;      // Lch(89,0,0)
 @residential-line: #B9B9B9; // Lch(75,0,0)
 @retail: #FFD6D1;           // Lch(89,16,30)
 @retail-line: #D99C95;      // Lch(70,25,30)
@@ -53,9 +52,8 @@
 @power: #bbb;
 @rest_area: #efc8c8; // also services
 @sand: #f5e9c6;
-@school: #f0f0d8; // also university, college, hospital, kindergarten
+@educational_areas_and_hospital: #f0f0d8;
 @station: #d4aaaa;
-@orchard: #9ed88f;
 @tourism: #734a08;
 @quarry: #c5c3c3;
 @military: #f55;
@@ -114,23 +112,30 @@
 
   [feature = 'landuse_vineyard'] {
     [zoom >= 10] {
-      polygon-fill: @vineyard;
+      polygon-fill: @orchard;
       [way_pixels >= 4]  { polygon-gamma: 0.75; }
       [way_pixels >= 64] { polygon-gamma: 0.3;  }
     }
-    [zoom >= 13] {
+    [zoom >= 14] {
       polygon-pattern-file: url('symbols/vineyard.png');
+      polygon-pattern-alignment: global;
       [way_pixels >= 4]  { polygon-pattern-gamma: 0.75; }
       [way_pixels >= 64] { polygon-pattern-gamma: 0.3;  }
     }
   }
 
-  [feature = 'landuse_orchard'][zoom >= 10] {
-    polygon-fill: @orchard;
-    polygon-pattern-file: url('symbols/orchard.png');
-    polygon-pattern-alignment: global;
-    [way_pixels >= 4]  { polygon-pattern-gamma: 0.75; }
-    [way_pixels >= 64] { polygon-pattern-gamma: 0.3;  }
+  [feature = 'landuse_orchard'] {
+    [zoom >= 10] {
+      polygon-fill: @orchard;
+      [way_pixels >= 4]  { polygon-gamma: 0.75; }
+      [way_pixels >= 64] { polygon-gamma: 0.3;  }
+    }
+    [zoom >= 14] {
+      polygon-pattern-file: url('symbols/orchard.png');
+      polygon-pattern-alignment: global;
+      [way_pixels >= 4]  { polygon-pattern-gamma: 0.75; }
+      [way_pixels >= 64] { polygon-pattern-gamma: 0.3;  }
+    }
   }
 
   [feature = 'landuse_cemetery'],
@@ -153,7 +158,7 @@
     }
   }
 
-  [feature = 'amenity_place_of_worship'] {
+  [feature = 'amenity_place_of_worship'][zoom >= 13] {
     polygon-fill: @place_of_worship;
     polygon-clip: false;
     [zoom >= 15] {
@@ -429,7 +434,7 @@
   }
 
   [feature = 'natural_grassland'][zoom >= 10] {
-    polygon-fill: @grassland;
+    polygon-fill: @grass;
     [way_pixels >= 4]  { polygon-gamma: 0.75; }
     [way_pixels >= 64] { polygon-gamma: 0.3;  }
   }
@@ -471,16 +476,19 @@
     }
   }
 
+  [feature = 'amenity_hospital'],
   [feature = 'amenity_university'],
   [feature = 'amenity_college'],
   [feature = 'amenity_school'],
-  [feature = 'amenity_hospital'],
   [feature = 'amenity_kindergarten'] {
     [zoom >= 10] {
-      polygon-fill: @school;
+      polygon-fill: @residential;
       [zoom >= 12] {
-        line-width: 0.3;
-        line-color: brown;
+        polygon-fill: @educational_areas_and_hospital;
+        [zoom >= 13] {
+          line-width: 0.3;
+          line-color: brown;
+        }
       }
       [way_pixels >= 4]  { polygon-gamma: 0.75; }
       [way_pixels >= 64] { polygon-gamma: 0.3;  }
@@ -488,7 +496,8 @@
   }
 
   [feature = 'amenity_parking'][zoom >= 10],
-  [feature = 'amenity_bicycle_parking'][zoom >= 10] {
+  [feature = 'amenity_bicycle_parking'][zoom >= 10],
+  [feature = 'amenity_motorcycle_parking'][zoom >= 10] {
     polygon-fill: @parking;
     [zoom >= 15] {
       line-width: 0.3;
@@ -624,20 +633,23 @@
 }
 
 #tourism-boundary {
-  [tourism = 'zoo'][zoom >= 10],
-  [tourism = 'theme_park'][zoom >= 10] {
+  [tourism = 'zoo'][zoom >= 10][way_pixels >= 20],
+  [tourism = 'theme_park'][zoom >= 10][way_pixels >= 20] {
     a/line-width: 1;
     a/line-offset: -0.5;
     a/line-color: @tourism;
     a/line-opacity: 0.5;
     a/line-join: round;
     a/line-cap: round;
-    b/line-width: 4;
-    b/line-offset: -2;
-    b/line-color: @tourism;
-    b/line-opacity: 0.3;
-    b/line-join: round;
-    b/line-cap: round;
+    [zoom >= 17],
+    [way_pixels >= 60] {
+      b/line-width: 4;
+      b/line-offset: -2;
+      b/line-color: @tourism;
+      b/line-opacity: 0.3;
+      b/line-join: round;
+      b/line-cap: round;    
+    }
     [zoom >= 17] {
       a/line-width: 2;
       a/line-offset: -1;
@@ -658,6 +670,7 @@
     text-face-name: @book-fonts;
     text-placement: line;
     text-dy: 8;
+    text-vertical-alignment: middle;
     text-spacing: 400;
   }
 }
