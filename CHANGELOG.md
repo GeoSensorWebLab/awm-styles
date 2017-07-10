@@ -125,6 +125,28 @@ A list of changes made to the stylesheet.
     * Minimal font size 10 for stations
     * simplify placenames (font size)
     * Fix spacing and zoom in syntax
+* Merge changes from v2.43.0
+    * Dog parks using playground color
+    * changing allotments pattern
+    * tuning allotments and farmyard color
+    * tuning pattern
+    * Render railway=crossing
+    * Do not label waterway inside tunnel
+    * Less dominant construction color
+    * Comments about fonts.
+    * Add an index for water polygons
+    * Split select statements into multiple lines
+    * Move one way arrow rendering from several roads fill related layers to roads-text-name, so arrows get lower precedence than names. As the arrow symbol is quite small, most of the time it can still be squeezed in.
+    * use variables for commonly used halo values
+    * minimal font size for adresses
+    * Modified so it conforms more Python's PEP-8.
+    * Fix whitespace in generate_road_colours
+    * Set minimum zoom for layer landcover_low_zoom, so it doesn't fetch data for ZLs 0-6, where it doesn't render anything.
+    * Restore address rendering at z17 and move adress color to a variable
+    * Add a changelog, backfilled from old list messages
+    * Add changelog to release instructions
+    * Add minzoom to admin-low-zoom.
+    * Add v2.43.0 release notes
 
 ### 2017-07-07
 
