@@ -35,6 +35,54 @@ A list of changes made to the stylesheet.
     * render swing_gate like lift_gate
     * Drop 'disused' from stations SQL
     * Replacing tourism information PNG icon with SVG version
+* Merge changes from v2.40.0
+    * Reformat road SQL
+    * Add water polygons to the files to be downloaded
+    * Replace land shapefiles with ocean shapefiles in rendering
+    * Remove land polygon files
+    * Move water layers to their old position
+    * Refactor water area MSS
+    * Make tertiary road yellowish
+    * explain purpose of scripts in /scripts
+    * attempt to clarify purpose of shop_values.rb fixes part of #2080
+    * Revert "Make tertiary road yellowish"
+    * Remove outdated references to land polygons
+    * Add custom index information
+    * Mention that some issues are tagged as easy
+    * Fix bug that prevents inaccessible tracks on bridges from being rendered
+    * Remove IF NOT EXISTS for indexes
+    * Make place ordering better defined
+    * Pull in upstream default.style changes
+    * Use a script to create indexes, with adjustable options
+    * Remove unnecessary index and duplicate WHERE
+    * Add a way_area index for z6 performance
+    * Add guideline on symbolizers which change per zoom.
+    * exclude shop values that should no be rendered
+    * drop unneeded whitespace
+    * drop dead shop=fishmonger code
+    * wider rails on z18, wider service rail at z18+
+    * introduce @standard-text-size, resize 11, 9, 8 sized POI text labels to 10
+    * Replacing library PNG icon with SVG version
+    * fix positioning of icon
+    * set text dy to 11
+    * render shop=fishmonger, fixes #2155
+    * Add label for tourism=viewpoint areas
+    * more readable code, the same selector style for all turning circles
+    * fix  missing forest pattern on forests with unexpected natural key
+    * shop=books reusing library icon with the shop color
+    * thinner power=line and power=minor_line
+    * darker standard rail on higher zoom
+    * resize turning circles automagically, make customization easier, fixes #1931
+    * placenames-medium is not used on z3
+    * Revert "Merge remote-tracking branch 'pnorman/water_polygons'"
+    * rewrite low priority layer to make it like main amenity layer
+    * stop displaying highway=mini_roundabout and highway=level_crossing mapped as areas
+    * larger labels for placenames
+    * Filter placenames-large based on way_area
+    * Add name IS NOT NULL check to medium placenames
+    * synchronise description in Github repo and project file
+    * it is not necessary to query buildings for z12, as buildings are not displayed on z12
+    * show bus_guideway tunnels
 
 ### 2017-07-07
 

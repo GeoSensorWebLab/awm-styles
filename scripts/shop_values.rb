@@ -1,4 +1,8 @@
 #!/usr/bin/ruby
+
+#this script generates list of popular shop values - more than MIN_COUNT occurences in OpenStreetMap database according to taginfo
+#it is useful during creating/updating list of shops displayed with generic dot icon
+
 require 'net/http'
 require 'json'
 require 'pp'
@@ -25,6 +29,8 @@ EXCEPTIONS = [
    "gambling", #see https://github.com/gravitystorm/openstreetmap-carto/pull/1900
    "insurance", #see https://github.com/gravitystorm/openstreetmap-carto/pull/1900
    "pharmacy", #see https://github.com/gravitystorm/openstreetmap-carto/pull/1900
+   "street_vendor", #see https://github.com/gravitystorm/openstreetmap-carto/issues/2090
+   "storage_rental", #see https://github.com/gravitystorm/openstreetmap-carto/issues/2090
 ]
 
 
