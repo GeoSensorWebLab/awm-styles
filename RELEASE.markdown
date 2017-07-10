@@ -83,6 +83,34 @@ A list of changes made to the stylesheet.
     * synchronise description in Github repo and project file
     * it is not necessary to query buildings for z12, as buildings are not displayed on z12
     * show bus_guideway tunnels
+* Merge changes from v2.41.0
+    * changing sports related colors
+    * changing color name from @educational_areas_and_hospital to @societal_amenities
+    * fix possible admin label and line rendering mismatch by changing admin label table
+    * show ref for aeroway=gate and ele for peaks/volcano/saddle/alpine_hut without names
+    * remove text-min-distance - increase label density
+    * switch to book font for POI labels
+    * add @standard-halo-radius
+    * Remove Mallige from font list
+    * Replace ttf-indic-fonts-core with new package names
+    * Use new font package for DejaVu Sans
+    * Remove font instructions for Ubuntu 13.10
+    * Reformat font install line
+    * Font documentation wording improvements
+    * Add Tibetan Machine Uni to documentation, as it was missing
+    * Remove fonts not present in installed packages
+    * Update droid font info to Ubuntu 16.04
+    * Add new name for Arundina fonts
+    * Add notes about Debian Testing font packages
+    * render man_made=obelisk, fixes #2126
+    * Add rendering of leisure=dog_park
+    * Split up roads.mss, refactor road colour script
+    * Use argparse for arguments
+    * Move all road colour printing together
+    * Use 2sp in road-colors.yaml to be the same as other yaml
+    * Move colour name generation later
+    * Let generate_shields use road-colors.yaml
+    * Use binary mode for mml in yaml2mml
 
 ### 2017-07-07
 

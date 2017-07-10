@@ -7,3 +7,6 @@ localconfig.json
 project.mml
 .env
 /tmp
+# Generated at runtime by Python.
+*.pyc
+**/*.pyc
