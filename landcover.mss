@@ -487,12 +487,11 @@
     [way_pixels >= 64] { polygon-gamma: 0.3;  }
   }
 
-  [feature = 'natural_beach'][zoom >= 10] {
+  [feature = 'natural_beach'][zoom >= 10],
+  [feature = 'natural_shoal'][zoom >= 10] {
     polygon-fill: @beach;
-    polygon-pattern-file: url('symbols/beach.png');
-    polygon-pattern-alignment: global;
-    [way_pixels >= 4]  { polygon-pattern-gamma: 0.75; }
-    [way_pixels >= 64] { polygon-pattern-gamma: 0.3;  }
+    [way_pixels >= 4]  { polygon-gamma: 0.75; }
+    [way_pixels >= 64] { polygon-gamma: 0.3;  }
   }
 
   [feature = 'highway_services'],
@@ -541,12 +540,15 @@
 /* man_made=cutline */
 #landcover-line {
   [zoom >= 14] {
-    line-width: 1.5;
+    line-width: 3;
     line-join: round;
     line-cap: square;
-    line-color: @land-color;
+    line-color: @grass;
     [zoom >= 16] {
-      line-width: 2;
+      line-width: 6;
+      [zoom >= 18] {
+        line-width: 12;
+      }
     }
   }
 }
@@ -554,6 +556,10 @@
 #landcover-area-symbols {
   [int_wetland != null][zoom >= 10] {
     polygon-pattern-file: url('symbols/wetland.png');
+    polygon-pattern-alignment: global;
+  }
+  [natural = 'reef'][zoom >= 10] {
+    polygon-pattern-file: url('symbols/reef.png');
     polygon-pattern-alignment: global;
   }
   [zoom >= 14] {
@@ -580,6 +586,23 @@
     [int_wetland = 'string_bog'] {
       polygon-pattern-file: url('symbols/wetland_bog.png');
       polygon-pattern-alignment: global;
+    }
+    [natural = 'beach'],
+    [natural = 'shoal'] {
+      [surface = 'sand'] {
+        polygon-pattern-file: url('symbols/beach.png');
+        polygon-pattern-alignment: global;
+      }
+      [surface = 'gravel'],
+      [surface = 'fine_gravel'],
+      [surface = 'pebbles'],
+      [surface = 'pebblestone'],
+      [surface = 'shingle'],
+      [surface = 'stones'],
+      [surface = 'shells'] {
+        polygon-pattern-file: url('symbols/beach_coarse.png');
+        polygon-pattern-alignment: global;
+      }
     }
   }
   //Also landuse = forest, converted in the SQL

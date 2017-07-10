@@ -18,6 +18,16 @@ A list of changes made to the stylesheet.
     * Add SQL conditions for low level admin lines and labels
     * Don't use centroid for low-zoom admin calcs
     * remove admin_level 0,1,3 from label rendering and consolidate table aliases
+* Merge changes from v2.38.0
+    * Code change for man_made=cutline
+    * Increase size of small place names on z15 by one pixel
+    * Icon and YAML for amenity=social_facility
+    * Revert "rework admin boundaries and admin labels on lower zooms"
+    * rework admin boundaries (without z4 logic)
+    * Adding rendering of shoal and reef Rendering surface on shoal and beach through pattern variation
+    * updating surface values based on actual use
+    * remove line barrier catch-all rendering
+    * Adding code and icon for shop=sports
 
 ### 2017-07-07
 

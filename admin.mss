@@ -6,8 +6,7 @@ For each zoomlevel, all borders come from a single attachment, to handle
 overlapping borders correctly.
 */
 
-#admin-very-low-zoom[zoom >= 4][zoom < 5],
-#admin-low-zoom[zoom >= 5][zoom < 11],
+#admin-low-zoom[zoom < 11],
 #admin-mid-zoom[zoom >= 11][zoom < 13],
 #admin-high-zoom[zoom >= 13] {
   [admin_level = '2'] {
@@ -36,6 +35,7 @@ overlapping borders correctly.
       line-width: 6;
     }
   }
+
   [admin_level = '3'] {
     [zoom >= 4] {
       background/line-join: bevel;
@@ -56,13 +56,14 @@ overlapping borders correctly.
       line-clip: false;
     }
   }
+
   [admin_level = '4'] {
     [zoom >= 4] {
       background/line-join: bevel;
       background/line-color: white;
       background/line-width: 0.4;
-      line-join: bevel;
       line-color: @admin-boundaries;
+      line-join: bevel;
       line-width: 0.4;
       line-dasharray: 4,3;
       line-clip: false;

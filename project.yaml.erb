@@ -277,7 +277,7 @@ Layer:
                                                     'golf_course', 'miniature_golf', 'picnic_table', 'sports_centre', 'stadium', 'pitch',
                                                     'track') THEN leisure ELSE NULL END)) AS leisure,
               ('military_' || (CASE WHEN military IN ('danger_area') THEN military ELSE NULL END)) AS military,
-              ('natural_' || (CASE WHEN "natural" IN ('beach', 'heath', 'grassland', 'wood', 'sand', 'scree', 'shingle', 'bare_rock', 'scrub') THEN "natural" ELSE NULL END)) AS "natural",
+              ('natural_' || (CASE WHEN "natural" IN ('beach', 'shoal', 'heath', 'grassland', 'wood', 'sand', 'scree', 'shingle', 'bare_rock', 'scrub') THEN "natural" ELSE NULL END)) AS "natural",
               ('wetland_' || (CASE WHEN "natural" IN ('wetland', 'marsh', 'mud') THEN (CASE WHEN "natural" IN ('marsh', 'mud') THEN "natural" ELSE wetland END) ELSE NULL END)) AS wetland,
               ('power_' || (CASE WHEN power IN ('station', 'sub_station', 'substation', 'generator') THEN power ELSE NULL END)) AS power,
               ('tourism_' || (CASE WHEN tourism IN ('attraction', 'camp_site', 'caravan_site', 'picnic_site') THEN tourism ELSE NULL END)) AS tourism,
@@ -292,7 +292,7 @@ Layer:
               OR amenity IN ('parking', 'bicycle_parking', 'motorcycle_parking', 'university', 'college', 'school', 'hospital', 'kindergarten',
                              'grave_yard', 'place_of_worship', 'prison', 'clinic')
               OR military IN ('danger_area')
-              OR "natural" IN ('beach', 'heath', 'mud', 'marsh', 'wetland', 'grassland', 'wood', 'sand', 'scree', 'shingle', 'bare_rock', 'scrub')
+              OR "natural" IN ('beach', 'shoal', 'heath', 'mud', 'marsh', 'wetland', 'grassland', 'wood', 'sand', 'scree', 'shingle', 'bare_rock', 'scrub')
               OR power IN ('station', 'sub_station', 'substation', 'generator')
               OR tourism IN ('attraction', 'camp_site', 'caravan_site', 'picnic_site')
               OR highway IN ('services', 'rest_area')
@@ -389,7 +389,7 @@ Layer:
       <<: *osm2pgsql
       table: |-
         (SELECT
-            way,
+            way, surface, 
             COALESCE("natural", CASE WHEN landuse = 'forest' THEN 'wood' ELSE NULL END) AS "natural",
             CASE WHEN "natural" IN ('marsh', 'mud')
                 THEN "natural"
@@ -402,7 +402,7 @@ Layer:
                 END
               END AS int_wetland
           FROM planet_osm_polygon
-          WHERE ("natural" IN ('marsh', 'mud', 'wetland', 'wood') OR landuse = 'forest')
+          WHERE ("natural" IN ('marsh', 'mud', 'wetland', 'wood', 'beach', 'shoal', 'reef') OR landuse = 'forest')
             AND building IS NULL
             AND way_area > 0.01*!pixel_width!::real*!pixel_height!::real
           ORDER BY z_order, way_area DESC
@@ -815,10 +815,12 @@ Layer:
         (SELECT
             way, barrier
           FROM planet_osm_line
-          WHERE barrier IS NOT NULL
+          WHERE barrier IN ('chain', 'city_wall', 'embankment', 'ditch', 'fence', 'guard_rail',
+                  'handrail', 'hedge', 'kerb', 'retaining_wall', 'wall')
+            AND (waterway IS NULL OR waterway NOT IN ('river', 'canal', 'derelict_canal', 'stream', 'drain', 'ditch', 'wadi'))
         ) AS line_barriers
     properties:
-      minzoom: 16
+      minzoom: 14
     advanced: {}
   - id: "cliffs"
     name: "cliffs"
@@ -1461,39 +1463,6 @@ Layer:
     properties:
       minzoom: 13
     advanced: {}
-  - name: "admin-very-low-zoom"
-    id: "admin-very-low-zoom"
-    class: ""
-    geometry: "linestring"
-    <<: *extents84
-    Datasource:
-      <<: *osm2pgsql
-      table: |-
-        (SELECT
-            way,
-            admin_level
-          FROM planet_osm_roads o
-          WHERE boundary = 'administrative'
-            AND (admin_level IN ('0', '1', '2')
-              OR (admin_level IN ('3', '4')
-                AND EXISTS
-                  (SELECT 1
-                    FROM planet_osm_polygon i
-                    WHERE boundary = 'administrative'
-                      AND admin_level = '2'
-                      AND way_area > 9e+12
-                      AND ST_Within(o.way, i.way)
-                      AND osm_id < 0
-                  )
-              )
-            )
-            AND osm_id < 0
-          ORDER BY admin_level DESC
-          ) AS admin_very_low_zoom
-    properties:
-      minzoom: 4
-      maxzoom: 4
-    advanced: {}
   - name: "admin-low-zoom"
     id: "admin-low-zoom"
     class: ""
@@ -1512,7 +1481,6 @@ Layer:
           ORDER BY admin_level DESC
         ) AS admin_low_zoom
     properties:
-      minzoom: 5
       maxzoom: 10
     advanced: {}
   - id: "admin-mid-zoom"
@@ -1650,67 +1618,6 @@ Layer:
     properties:
       minzoom: 16
     advanced: {}
-  - id: "placenames-large-very-low-zoom"
-    name: "placenames-large-very-low-zoom"
-    class: "country state"
-    geometry: "point"
-    <<: *extents84
-    Datasource:
-      <<: *osm2pgsql
-      table: |-
-        (SELECT
-            way,
-            way_area/NULLIF(!pixel_width!::real*!pixel_height!::real,0) AS way_pixels,
-            name,
-            ref,
-            admin_level
-          FROM planet_osm_polygon
-          WHERE boundary = 'administrative'
-            AND admin_level = '2'
-            AND name IS NOT NULL
-            AND way_area > 100*!pixel_width!::real*!pixel_height!::real -- Conditions in the MSS filter this down even more
-          ORDER BY admin_level ASC, way_area DESC
-        ) AS placenames_large_very_low_zoom
-    properties:
-      minzoom: 2
-      maxzoom: 3
-    advanced: {}
-  - id: "placenames-large-low-zoom"
-    name: "placenames-large-low-zoom"
-    class: "country state"
-    geometry: "point"
-    <<: *extents84
-    Datasource:
-      <<: *osm2pgsql
-      table: |-
-        (SELECT
-            way,
-            way_area/NULLIF(!pixel_width!::real*!pixel_height!::real,0) AS way_pixels,
-            name,
-            ref,
-            admin_level
-          FROM planet_osm_polygon o
-          WHERE boundary = 'administrative'
-            AND (admin_level = '2'
-              OR (admin_level = '4'
-                AND EXISTS
-                  (SELECT 1
-                    FROM planet_osm_polygon i
-                    WHERE boundary = 'administrative'
-                      AND admin_level = '2'
-                      AND way_area > 9e+12
-                      AND ST_Within(o.way, i.way)
-                      AND osm_id < 0
-                  )
-              )
-            )
-            AND way_area > 100*!pixel_width!::real*!pixel_height!::real -- Conditions in the MSS filter this down even more
-          ORDER BY admin_level ASC, way_area DESC
-        ) AS placenames_large_low_zoom
-    properties:
-      minzoom: 4
-      maxzoom: 4
-    advanced: {}
   - id: "placenames-large"
     name: "placenames-large"
     class: "country state"
@@ -1729,11 +1636,10 @@ Layer:
           WHERE boundary = 'administrative'
             AND admin_level IN ('2', '4')
             AND name IS NOT NULL
-            AND way_area > 100*!pixel_width!::real*!pixel_height!::real -- Conditions in the MSS filter this down even more
           ORDER BY admin_level ASC, way_area DESC
         ) AS placenames_large
     properties:
-      minzoom: 5
+      minzoom: 2
     advanced: {}
   - id: "placenames-medium"
     name: "placenames-medium"
@@ -1874,31 +1780,31 @@ Layer:
                                                   'hostel', 'hotel', 'motel', 'information', 'museum', 'picnic_site') THEN tourism ELSE NULL END,
               'amenity_' || CASE WHEN amenity IN ('shelter', 'atm', 'bank', 'bar', 'bicycle_rental', 'bus_station', 'cafe',
                                                   'car_rental', 'car_wash', 'cinema', 'clinic', 'community_centre', 'fire_station', 'fountain',
-                                                  'fuel', 'hospital', 'ice_cream', 'embassy', 'library', 'courthouse', 'townhall', 'parking',
-                                                  'bicycle_parking', 'motorcycle_parking', 'pharmacy', 'doctors', 'dentist', 'place_of_worship',
-                                                  'police', 'post_box', 'post_office', 'pub', 'biergarten', 'recycling', 'restaurant', 'food_court',
-                                                  'fast_food', 'telephone', 'emergency_phone', 'taxi', 'theatre', 'toilets', 'drinking_water',
-                                                  'prison', 'hunting_stand', 'nightclub', 'veterinary') THEN amenity ELSE NULL END,
-              'shop_' || CASE WHEN shop IN ('supermarket', 'bag', 'bakery', 'beauty', 'books', 'butcher', 'clothes', 'computer',
-                                            'confectionery', 'fashion', 'convenience', 'department_store', 'doityourself', 'hardware', 'florist',
-                                            'garden_centre', 'hairdresser', 'hifi', 'ice_cream', 'car', 'car_repair', 'bicycle', 'mall', 'pet',
-                                            'photo', 'photo_studio', 'photography', 'seafood', 'shoes', 'alcohol', 'gift', 'furniture', 'kiosk',
-                                            'mobile_phone', 'motorcycle', 'musical_instrument', 'newsagent', 'optician', 'jewelry', 'jewellery',
-                                            'electronics', 'chemist', 'toys', 'travel_agency', 'car_parts', 'greengrocer', 'farm', 'stationery',
-                                            'laundry', 'dry_cleaning', 'beverages', 'perfumery', 'cosmetics', 'variety_store', 'wine', 'outdoor',
-                                            'copyshop') THEN shop
-                              WHEN shop IN ('accessories', 'antiques', 'appliance', 'art', 'baby_goods', 'bathroom_furnishing',
-                                            'bed', 'boat', 'bookmaker', 'boutique', 'builder', 'building_materials', 'camera', 'car_service',
-                                            'carpet', 'charity', 'cheese', 'chocolate', 'coffee', 'communication', 'craft', 'curtain', 'dairy',
-                                            'deli', 'discount', 'e-cigarette', 'electrical', 'energy', 'erotic', 'estate_agent',
-                                            'fabric', 'fishing', 'flooring', 'food', 'frame', 'frozen_food', 'funeral_directors', 'furnace',
-                                            'gallery', 'games', 'gas', 'general', 'glaziery', 'grocery', 'health', 'health_food', 'hearing_aids',
-                                            'herbalist', 'hobby', 'household', 'houseware', 'hunting', 'interior_decoration', 'kitchen',
-                                            'leather', 'lighting', 'locksmith', 'lottery', 'market', 'massage', 'medical', 'medical_supply', 'money_lender',
-                                            'motorcycle_repair', 'music', 'office_supplies', 'organic', 'paint', 'pastry', 'pawnbroker',
-                                            'phone', 'pottery', 'printing', 'radiotechnics', 'real_estate', 'religion', 'rental', 'salon',
-                                            'scuba_diving', 'second_hand', 'sewing', 'shoe_repair', 'shopping_centre', 'solarium', 'souvenir', 'sports',
-                                            'tailor', 'tanning', 'tattoo', 'tea', 'ticket', 'tiles', 'tobacco', 'trade', 'tyres', 'vacuum_cleaner', 'video',
+                                                  'fuel', 'hospital', 'ice_cream', 'embassy', 'library', 'courthouse', 'townhall', 'parking', 
+                                                  'bicycle_parking', 'motorcycle_parking', 'pharmacy', 'doctors', 'dentist', 'place_of_worship', 
+                                                  'police', 'post_box', 'post_office', 'pub', 'biergarten', 'recycling', 'restaurant', 'food_court', 
+                                                  'fast_food', 'telephone', 'emergency_phone', 'taxi', 'theatre', 'toilets', 'drinking_water', 
+                                                  'prison', 'hunting_stand', 'nightclub', 'veterinary', 'social_facility') THEN amenity ELSE NULL END, 
+              'shop_' || CASE WHEN shop IN ('supermarket', 'bag', 'bakery', 'beauty', 'books', 'butcher', 'clothes', 'computer', 
+                                            'confectionery', 'fashion', 'convenience', 'department_store', 'doityourself', 'hardware', 'florist', 
+                                            'garden_centre', 'hairdresser', 'hifi', 'ice_cream', 'car', 'car_repair', 'bicycle', 'mall', 'pet', 
+                                            'photo', 'photo_studio', 'photography', 'seafood', 'shoes', 'alcohol', 'gift', 'furniture', 'kiosk', 
+                                            'mobile_phone', 'motorcycle', 'musical_instrument', 'newsagent', 'optician', 'jewelry', 'jewellery', 
+                                            'electronics', 'chemist', 'toys', 'travel_agency', 'car_parts', 'greengrocer', 'farm', 'stationery', 
+                                            'laundry', 'dry_cleaning', 'beverages', 'perfumery', 'cosmetics', 'variety_store', 'wine', 'outdoor', 
+                                            'copyshop', 'sports') THEN shop 
+                              WHEN shop IN ('accessories', 'antiques', 'appliance', 'art', 'baby_goods', 'bathroom_furnishing', 
+                                            'bed', 'boat', 'bookmaker', 'boutique', 'builder', 'building_materials', 'camera', 'car_service', 
+                                            'carpet', 'charity', 'cheese', 'chocolate', 'coffee', 'communication', 'craft', 'curtain', 'dairy', 
+                                            'deli', 'discount', 'e-cigarette', 'electrical', 'energy', 'erotic', 'estate_agent', 
+                                            'fabric', 'fishing', 'flooring', 'food', 'frame', 'frozen_food', 'funeral_directors', 'furnace', 
+                                            'gallery', 'games', 'gas', 'general', 'glaziery', 'grocery', 'health', 'health_food', 'hearing_aids', 
+                                            'herbalist', 'hobby', 'household', 'houseware', 'hunting', 'interior_decoration', 'kitchen', 
+                                            'leather', 'lighting', 'locksmith', 'lottery', 'market', 'massage', 'medical', 'medical_supply', 'money_lender', 
+                                            'motorcycle_repair', 'music', 'office_supplies', 'organic', 'paint', 'pastry', 'pawnbroker', 
+                                            'phone', 'pottery', 'printing', 'radiotechnics', 'real_estate', 'religion', 'rental', 'salon', 
+                                            'scuba_diving', 'second_hand', 'sewing', 'shoe_repair', 'shopping_centre', 'solarium', 'souvenir',  
+                                            'tailor', 'tanning', 'tattoo', 'tea', 'ticket', 'tiles', 'tobacco', 'trade', 'tyres', 'vacuum_cleaner', 'video', 
                                             'video_games', 'watches', 'wholesale', 'yes') THEN 'other' ELSE NULL END,
               'leisure_' || CASE WHEN leisure IN ('water_park', 'playground', 'miniature_golf', 'golf_course', 'picnic_table') THEN leisure ELSE NULL END,
               'man_made_' || CASE WHEN man_made IN ('mast', 'water_tower', 'lighthouse', 'windmill') THEN man_made ELSE NULL END,
@@ -1921,11 +1827,12 @@ Layer:
                            'hotel', 'motel', 'information', 'museum', 'viewpoint', 'picnic_site')
             OR amenity IN ('shelter', 'atm', 'bank', 'bar', 'bicycle_rental', 'bus_station', 'cafe',
                            'car_rental', 'car_wash', 'cinema', 'clinic', 'community_centre',
-                           'fire_station', 'fountain', 'fuel', 'hospital', 'ice_cream', 'embassy', 'library', 'courthouse',
-                           'townhall', 'parking', 'bicycle_parking', 'motorcycle_parking', 'pharmacy', 'doctors',
-                           'dentist', 'place_of_worship', 'police', 'post_box', 'post_office', 'pub', 'biergarten',
-                           'recycling', 'restaurant', 'food_court', 'fast_food', 'telephone', 'emergency_phone', 'taxi',
-                           'theatre', 'toilets', 'drinking_water', 'prison', 'hunting_stand', 'nightclub', 'veterinary')
+                           'fire_station', 'fountain', 'fuel', 'hospital', 'ice_cream', 'embassy', 'library', 'courthouse', 
+                           'townhall', 'parking', 'bicycle_parking', 'motorcycle_parking', 'pharmacy', 'doctors', 
+                           'dentist', 'place_of_worship', 'police', 'post_box', 'post_office', 'pub', 'biergarten', 
+                           'recycling', 'restaurant', 'food_court', 'fast_food', 'telephone', 'emergency_phone', 'taxi', 
+                           'theatre', 'toilets', 'drinking_water', 'prison', 'hunting_stand', 'nightclub', 'veterinary',
+                           'social_facility')
             OR shop IS NOT NULL -- skip checking a huge list and use a null check
             OR leisure IN ('water_park', 'playground', 'miniature_golf', 'golf_course', 'picnic_table')
             OR man_made IN ('mast', 'water_tower', 'lighthouse', 'windmill')
@@ -1954,29 +1861,29 @@ Layer:
                                                   'hotel', 'motel', 'information', 'museum', 'picnic_site') THEN tourism ELSE NULL END,
               'amenity_' || CASE WHEN amenity IN ('shelter', 'atm', 'bank', 'bar', 'bicycle_rental', 'bus_station', 'cafe',
                                                   'car_rental', 'car_wash', 'cinema', 'clinic', 'community_centre', 'fire_station', 'fountain',
-                                                  'fuel', 'hospital', 'ice_cream', 'embassy', 'library', 'courthouse', 'townhall', 'parking',
-                                                  'bicycle_parking', 'motorcycle_parking', 'pharmacy', 'doctors', 'dentist', 'place_of_worship',
-                                                  'police', 'post_box', 'post_office', 'pub', 'biergarten', 'recycling', 'restaurant', 'food_court',
-                                                  'fast_food', 'telephone', 'emergency_phone', 'taxi', 'theatre', 'toilets', 'drinking_water',
-                                                  'prison', 'hunting_stand', 'nightclub', 'veterinary') THEN amenity ELSE NULL END,
-              'shop_' || CASE WHEN shop IN ('supermarket', 'bag', 'bakery', 'beauty', 'books', 'butcher', 'clothes', 'computer', 'confectionery',
-                                            'fashion', 'convenience', 'department_store', 'doityourself', 'hardware', 'florist', 'garden_centre',
-                                            'hairdresser', 'hifi', 'ice_cream', 'car', 'car_repair', 'bicycle', 'mall', 'pet', 'photo', 'photo_studio',
-                                            'photography', 'seafood', 'shoes', 'alcohol', 'gift', 'furniture', 'kiosk', 'mobile_phone', 'motorcycle',
-                                            'musical_instrument', 'newsagent', 'optician', 'jewelry', 'jewellery', 'electronics', 'chemist', 'toys',
-                                            'travel_agency', 'car_parts', 'greengrocer', 'farm', 'stationery', 'laundry', 'dry_cleaning', 'beverages',
-                                            'perfumery', 'cosmetics', 'variety_store', 'wine', 'outdoor', 'copyshop') THEN shop
-                              WHEN shop IN ('accessories', 'antiques', 'appliance', 'art', 'baby_goods', 'bathroom_furnishing', 'bed',
-                                            'boat', 'bookmaker', 'boutique', 'builder', 'building_materials', 'camera', 'car_service', 'carpet', 'charity',
-                                            'cheese', 'chocolate', 'coffee', 'communication', 'craft', 'curtain', 'dairy', 'deli',
-                                            'discount', 'e-cigarette', 'electrical', 'energy', 'erotic', 'estate_agent', 'fabric', 'fishing',
-                                            'flooring', 'food', 'frame', 'frozen_food', 'funeral_directors', 'furnace', 'gallery', 'games', 'gas',
-                                            'general', 'glaziery', 'grocery', 'health', 'health_food', 'hearing_aids', 'herbalist', 'hobby', 'household',
-                                            'houseware', 'hunting', 'interior_decoration', 'kitchen', 'leather', 'lighting', 'locksmith', 'lottery',
-                                            'market', 'massage', 'medical', 'medical_supply', 'money_lender', 'motorcycle_repair', 'music', 'office_supplies',
-                                            'organic', 'paint', 'pastry', 'pawnbroker', 'phone', 'pottery', 'printing', 'radiotechnics',
-                                            'real_estate', 'religion', 'rental', 'salon', 'scuba_diving', 'second_hand', 'sewing', 'shoe_repair', 'shopping_centre',
-                                            'solarium', 'souvenir', 'sports', 'tailor', 'tanning', 'tattoo', 'tea', 'ticket', 'tiles', 'tobacco', 'trade', 'tyres',
+                                                  'fuel', 'hospital', 'ice_cream', 'embassy', 'library', 'courthouse', 'townhall', 'parking', 
+                                                  'bicycle_parking', 'motorcycle_parking', 'pharmacy', 'doctors', 'dentist', 'place_of_worship', 
+                                                  'police', 'post_box', 'post_office', 'pub', 'biergarten', 'recycling', 'restaurant', 'food_court', 
+                                                  'fast_food', 'telephone', 'emergency_phone', 'taxi', 'theatre', 'toilets', 'drinking_water', 
+                                                  'prison', 'hunting_stand', 'nightclub', 'veterinary', 'social_facility') THEN amenity ELSE NULL END,
+              'shop_' || CASE WHEN shop IN ('supermarket', 'bag', 'bakery', 'beauty', 'books', 'butcher', 'clothes', 'computer', 'confectionery', 
+                                            'fashion', 'convenience', 'department_store', 'doityourself', 'hardware', 'florist', 'garden_centre', 
+                                            'hairdresser', 'hifi', 'ice_cream', 'car', 'car_repair', 'bicycle', 'mall', 'pet', 'photo', 'photo_studio', 
+                                            'photography', 'seafood', 'shoes', 'alcohol', 'gift', 'furniture', 'kiosk', 'mobile_phone', 'motorcycle', 
+                                            'musical_instrument', 'newsagent', 'optician', 'jewelry', 'jewellery', 'electronics', 'chemist', 'toys', 
+                                            'travel_agency', 'car_parts', 'greengrocer', 'farm', 'stationery', 'laundry', 'dry_cleaning', 'beverages', 
+                                            'perfumery', 'cosmetics', 'variety_store', 'wine', 'outdoor', 'copyshop', 'sports') THEN shop 
+                              WHEN shop IN ('accessories', 'antiques', 'appliance', 'art', 'baby_goods', 'bathroom_furnishing', 'bed',  
+                                            'boat', 'bookmaker', 'boutique', 'builder', 'building_materials', 'camera', 'car_service', 'carpet', 'charity', 
+                                            'cheese', 'chocolate', 'coffee', 'communication', 'craft', 'curtain', 'dairy', 'deli',   
+                                            'discount', 'e-cigarette', 'electrical', 'energy', 'erotic', 'estate_agent', 'fabric', 'fishing', 
+                                            'flooring', 'food', 'frame', 'frozen_food', 'funeral_directors', 'furnace', 'gallery', 'games', 'gas',  
+                                            'general', 'glaziery', 'grocery', 'health', 'health_food', 'hearing_aids', 'herbalist', 'hobby', 'household',  
+                                            'houseware', 'hunting', 'interior_decoration', 'kitchen', 'leather', 'lighting', 'locksmith', 'lottery',  
+                                            'market', 'massage', 'medical', 'medical_supply', 'money_lender', 'motorcycle_repair', 'music', 'office_supplies',  
+                                            'organic', 'paint', 'pastry', 'pawnbroker', 'phone', 'pottery', 'printing', 'radiotechnics', 
+                                            'real_estate', 'religion', 'rental', 'salon', 'scuba_diving', 'second_hand', 'sewing', 'shoe_repair', 'shopping_centre', 
+                                            'solarium', 'souvenir', 'tailor', 'tanning', 'tattoo', 'tea', 'ticket', 'tiles', 'tobacco', 'trade', 'tyres', 
                                             'vacuum_cleaner', 'video', 'video_games', 'watches', 'wholesale', 'yes') THEN 'other' ELSE NULL END,
               'leisure_' || CASE WHEN leisure IN ('water_park', 'playground', 'miniature_golf', 'golf_course', 'picnic_table', 'slipway') THEN leisure ELSE NULL END,
               'man_made_' || CASE WHEN man_made IN ('mast', 'water_tower', 'lighthouse', 'windmill') THEN man_made ELSE NULL END,
@@ -2009,12 +1916,12 @@ Layer:
                            'hotel', 'motel', 'information', 'museum', 'viewpoint', 'picnic_site')
             OR amenity IN ('shelter', 'atm', 'bank', 'bar', 'bicycle_rental', 'bus_station', 'cafe',
                            'car_rental',  'car_wash', 'cinema', 'clinic', 'community_centre',
-                           'fire_station', 'fountain', 'fuel', 'hospital', 'ice_cream', 'embassy', 'library', 'courthouse',
-                           'townhall', 'parking', 'bicycle_parking', 'motorcycle_parking', 'pharmacy', 'doctors',
-                           'dentist', 'place_of_worship', 'police', 'post_box', 'post_office', 'pub', 'biergarten',
-                           'recycling', 'restaurant', 'food_court', 'fast_food', 'telephone', 'emergency_phone',
-                           'taxi', 'theatre', 'toilets', 'drinking_water', 'prison', 'hunting_stand', 'nightclub',
-                           'veterinary')
+                           'fire_station', 'fountain', 'fuel', 'hospital', 'ice_cream', 'embassy', 'library', 'courthouse', 
+                           'townhall', 'parking', 'bicycle_parking', 'motorcycle_parking', 'pharmacy', 'doctors', 
+                           'dentist', 'place_of_worship', 'police', 'post_box', 'post_office', 'pub', 'biergarten', 
+                           'recycling', 'restaurant', 'food_court', 'fast_food', 'telephone', 'emergency_phone', 
+                           'taxi', 'theatre', 'toilets', 'drinking_water', 'prison', 'hunting_stand', 'nightclub', 
+                           'veterinary', 'social_facility')
             OR shop IS NOT NULL -- skip checking a huge list and use a null check
             OR leisure IN ('water_park', 'playground', 'miniature_golf', 'golf_course', 'picnic_table', 'slipway')
             OR man_made IN ('mast', 'water_tower', 'lighthouse', 'windmill', 'cross')
@@ -2274,27 +2181,27 @@ Layer:
                                                   'grave_yard', 'shelter', 'bank', 'embassy', 'fuel', 'bus_station', 'prison', 'university',
                                                   'school', 'college', 'kindergarten', 'hospital', 'ice_cream', 'pharmacy', 'doctors', 'dentist',
                                                   'atm', 'bicycle_rental', 'car_rental', 'car_wash', 'post_box', 'post_office',
-                                                  'recycling', 'telephone', 'emergency_phone', 'toilets', 'taxi', 'drinking_water', 'hunting_stand',
-                                                  'nightclub', 'veterinary') THEN amenity ELSE NULL END,
-              'shop_' || CASE WHEN shop IN ('supermarket', 'bag', 'bakery', 'beauty', 'books', 'butcher', 'clothes', 'computer', 'confectionery',
-                                            'fashion', 'convenience', 'department_store', 'doityourself', 'hardware', 'florist', 'garden_centre',
-                                            'hairdresser', 'hifi', 'ice_cream', 'car', 'car_repair', 'bicycle', 'mall', 'pet', 'photo', 'photo_studio',
-                                            'photography', 'seafood', 'shoes', 'alcohol', 'gift', 'furniture', 'kiosk', 'mobile_phone', 'motorcycle',
-                                            'musical_instrument', 'newsagent', 'optician', 'jewelry', 'jewellery', 'electronics', 'chemist', 'toys',
-                                            'travel_agency', 'car_parts', 'greengrocer', 'farm', 'stationery', 'laundry', 'dry_cleaning', 'beverages',
-                                            'perfumery', 'cosmetics', 'variety_store', 'wine', 'outdoor', 'copyshop') THEN shop
-                              WHEN shop IN ('accessories', 'antiques', 'appliance', 'art', 'baby_goods', 'bathroom_furnishing', 'bed',
-                                            'boat', 'bookmaker', 'boutique', 'builder', 'building_materials', 'camera', 'car_service', 'carpet', 'charity',
-                                            'cheese', 'chocolate', 'coffee', 'communication', 'craft', 'curtain', 'dairy', 'deli',
-                                            'discount', 'e-cigarette', 'electrical', 'energy', 'erotic', 'estate_agent', 'fabric', 'fishing',
-                                            'flooring', 'food', 'frame', 'frozen_food', 'funeral_directors', 'furnace', 'gallery', 'games', 'gas',
-                                            'general', 'glaziery', 'grocery', 'health', 'health_food', 'hearing_aids', 'herbalist', 'hobby', 'household',
-                                            'houseware', 'hunting', 'interior_decoration', 'kitchen', 'leather', 'lighting', 'locksmith',
-                                            'lottery', 'market', 'massage', 'medical', 'medical_supply', 'money_lender', 'motorcycle_repair', 'music',
-                                            'office_supplies', 'organic', 'paint', 'pastry', 'pawnbroker', 'phone', 'pottery',
-                                            'printing', 'radiotechnics', 'real_estate', 'religion', 'rental', 'salon', 'scuba_diving', 'second_hand',
-                                            'sewing', 'shoe_repair', 'shopping_centre', 'solarium', 'souvenir', 'sports', 'tailor', 'tanning', 'tattoo', 'tea',
-                                            'ticket', 'tiles', 'tobacco', 'trade', 'tyres', 'vacuum_cleaner', 'video', 'video_games', 'watches', 'wholesale',
+                                                  'recycling', 'telephone', 'emergency_phone', 'toilets', 'taxi', 'drinking_water', 'hunting_stand', 
+                                                  'nightclub', 'veterinary', 'social_facility') THEN amenity ELSE NULL END,
+              'shop_' || CASE WHEN shop IN ('supermarket', 'bag', 'bakery', 'beauty', 'books', 'butcher', 'clothes', 'computer', 'confectionery', 
+                                            'fashion', 'convenience', 'department_store', 'doityourself', 'hardware', 'florist', 'garden_centre', 
+                                            'hairdresser', 'hifi', 'ice_cream', 'car', 'car_repair', 'bicycle', 'mall', 'pet', 'photo', 'photo_studio', 
+                                            'photography', 'seafood', 'shoes', 'alcohol', 'gift', 'furniture', 'kiosk', 'mobile_phone', 'motorcycle', 
+                                            'musical_instrument', 'newsagent', 'optician', 'jewelry', 'jewellery', 'electronics', 'chemist', 'toys', 
+                                            'travel_agency', 'car_parts', 'greengrocer', 'farm', 'stationery', 'laundry', 'dry_cleaning', 'beverages', 
+                                            'perfumery', 'cosmetics', 'variety_store', 'wine', 'outdoor', 'copyshop', 'sports') THEN shop 
+                              WHEN shop IN ('accessories', 'antiques', 'appliance', 'art', 'baby_goods', 'bathroom_furnishing', 'bed', 
+                                            'boat', 'bookmaker', 'boutique', 'builder', 'building_materials', 'camera', 'car_service', 'carpet', 'charity', 
+                                            'cheese', 'chocolate', 'coffee', 'communication', 'craft', 'curtain', 'dairy', 'deli', 
+                                            'discount', 'e-cigarette', 'electrical', 'energy', 'erotic', 'estate_agent', 'fabric', 'fishing', 
+                                            'flooring', 'food', 'frame', 'frozen_food', 'funeral_directors', 'furnace', 'gallery', 'games', 'gas', 
+                                            'general', 'glaziery', 'grocery', 'health', 'health_food', 'hearing_aids', 'herbalist', 'hobby', 'household', 
+                                            'houseware', 'hunting', 'interior_decoration', 'kitchen', 'leather', 'lighting', 'locksmith', 
+                                            'lottery', 'market', 'massage', 'medical', 'medical_supply', 'money_lender', 'motorcycle_repair', 'music', 
+                                            'office_supplies', 'organic', 'paint', 'pastry', 'pawnbroker', 'phone', 'pottery', 
+                                            'printing', 'radiotechnics', 'real_estate', 'religion', 'rental', 'salon', 'scuba_diving', 'second_hand', 
+                                            'sewing', 'shoe_repair', 'shopping_centre', 'solarium', 'souvenir', 'tailor', 'tanning', 'tattoo', 'tea', 
+                                            'ticket', 'tiles', 'tobacco', 'trade', 'tyres', 'vacuum_cleaner', 'video', 'video_games', 'watches', 'wholesale', 
                                             'yes') THEN 'other' ELSE NULL END,
               'leisure_' || CASE WHEN leisure IN ('swimming_pool', 'water_park', 'miniature_golf', 'golf_course', 'sports_centre', 'stadium', 'track',
                                                   'pitch', 'playground', 'park', 'recreation_ground', 'common', 'garden', 'nature_reserve', 'marina',
@@ -2305,8 +2212,8 @@ Layer:
                                                   'greenhouse_horticulture', 'retail', 'industrial', 'railway', 'commercial', 'brownfield', 'landfill',
                                                   'construction', 'military') THEN landuse ELSE NULL END,
               'man_made_' || CASE WHEN man_made IN ('lighthouse', 'windmill', 'mast', 'water_tower', 'pier', 'breakwater', 'groyne') THEN man_made ELSE NULL END,
-              'natural_' || CASE WHEN "natural" IN ('wood', 'water', 'mud', 'wetland', 'marsh', 'bay', 'spring', 'scree', 'shingle', 'bare_rock', 'sand', 'heath',
-                                                    'grassland', 'scrub', 'beach', 'glacier') THEN "natural" ELSE NULL END,
+              'natural_' || CASE WHEN "natural" IN ('wood', 'water', 'mud', 'wetland', 'marsh', 'bay', 'spring', 'scree', 'shingle', 'bare_rock', 'sand', 'heath', 
+                                                    'grassland', 'scrub', 'beach', 'shoal', 'reef', 'glacier') THEN "natural" ELSE NULL END,
               'place_' || CASE WHEN place IN ('island', 'islet') THEN place ELSE NULL END,
               'military_' || CASE WHEN military IN ('danger_area') THEN military ELSE NULL END,
               'historic_' || CASE WHEN historic IN ('memorial', 'monument', 'archaeological_site') THEN historic ELSE NULL END,
@@ -2413,28 +2320,28 @@ Layer:
                                                       'motorcycle_parking', 'police', 'fire_station', 'fountain', 'place_of_worship', 'grave_yard', 'shelter', 'bank',
                                                       'embassy', 'fuel', 'bus_station', 'prison', 'university', 'school', 'college', 'kindergarten', 'hospital',
                                                       'ice_cream', 'pharmacy', 'doctors', 'dentist', 'atm', 'bicycle_rental', 'car_rental',
-                                                      'car_wash', 'post_box', 'post_office', 'recycling', 'telephone', 'emergency_phone', 'toilets', 'taxi',
-                                                      'drinking_water', 'hunting_stand', 'nightclub', 'veterinary') THEN amenity ELSE NULL END,
-                  'shop_' || CASE WHEN shop IN ('supermarket', 'bag','bakery', 'beauty', 'books', 'butcher', 'clothes', 'computer', 'confectionery', 'fashion',
-                                                'convenience', 'department_store', 'doityourself', 'hardware', 'florist', 'garden_centre', 'hairdresser',
-                                                'hifi', 'ice_cream', 'car', 'car_repair', 'bicycle', 'mall', 'pet', 'photo', 'photo_studio', 'photography',
-                                                'seafood', 'shoes', 'alcohol', 'gift', 'furniture', 'kiosk', 'mobile_phone', 'motorcycle', 'musical_instrument',
-                                                'newsagent', 'optician', 'jewelry', 'jewellery', 'electronics', 'chemist', 'toys', 'travel_agency', 'car_parts',
-                                                'greengrocer', 'farm', 'stationery', 'laundry', 'dry_cleaning', 'beverages', 'perfumery', 'cosmetics',
-                                                'variety_store', 'wine', 'outdoor', 'copyshop') THEN shop
-                                  WHEN shop IN ('accessories', 'antiques', 'appliance', 'art',
-                                                'baby_goods', 'bathroom_furnishing', 'bed', 'boat', 'bookmaker', 'boutique', 'builder',
-                                                'building_materials', 'camera', 'car_service', 'carpet', 'charity', 'cheese', 'chocolate', 'coffee',
-                                                'communication', 'craft', 'curtain', 'dairy', 'deli', 'discount',
-                                                'e-cigarette', 'electrical', 'energy', 'erotic', 'estate_agent', 'fabric', 'fishing', 'flooring',
-                                                'food', 'frame', 'frozen_food', 'funeral_directors', 'furnace', 'gallery', 'games', 'gas',
-                                                'general', 'glaziery', 'grocery', 'health', 'health_food', 'hearing_aids', 'herbalist', 'hobby', 'household',
-                                                'houseware', 'hunting', 'interior_decoration', 'kitchen', 'leather', 'lighting', 'locksmith',
-                                                'lottery', 'market', 'massage', 'medical', 'medical_supply', 'money_lender', 'motorcycle_repair', 'music',
-                                                'office_supplies', 'organic', 'paint', 'pastry', 'pawnbroker', 'phone', 'pottery',
-                                                'printing', 'radiotechnics', 'real_estate', 'religion', 'rental', 'salon', 'scuba_diving', 'second_hand',
-                                                'sewing', 'shoe_repair', 'shopping_centre', 'solarium', 'souvenir', 'sports', 'tailor', 'tanning', 'tattoo',
-                                                'tea', 'ticket', 'tiles', 'tobacco', 'trade', 'tyres', 'vacuum_cleaner', 'video', 'video_games', 'watches',
+                                                      'car_wash', 'post_box', 'post_office', 'recycling', 'telephone', 'emergency_phone', 'toilets', 'taxi', 
+                                                      'drinking_water', 'hunting_stand', 'nightclub', 'veterinary', 'social_facility') THEN amenity ELSE NULL END,
+                  'shop_' || CASE WHEN shop IN ('supermarket', 'bag','bakery', 'beauty', 'books', 'butcher', 'clothes', 'computer', 'confectionery', 'fashion', 
+                                                'convenience', 'department_store', 'doityourself', 'hardware', 'florist', 'garden_centre', 'hairdresser', 
+                                                'hifi', 'ice_cream', 'car', 'car_repair', 'bicycle', 'mall', 'pet', 'photo', 'photo_studio', 'photography', 
+                                                'seafood', 'shoes', 'alcohol', 'gift', 'furniture', 'kiosk', 'mobile_phone', 'motorcycle', 'musical_instrument', 
+                                                'newsagent', 'optician', 'jewelry', 'jewellery', 'electronics', 'chemist', 'toys', 'travel_agency', 'car_parts', 
+                                                'greengrocer', 'farm', 'stationery', 'laundry', 'dry_cleaning', 'beverages', 'perfumery', 'cosmetics', 
+                                                'variety_store', 'wine', 'outdoor', 'copyshop', 'sports') THEN shop 
+                                  WHEN shop IN ('accessories', 'antiques', 'appliance', 'art', 
+                                                'baby_goods', 'bathroom_furnishing', 'bed', 'boat', 'bookmaker', 'boutique', 'builder', 
+                                                'building_materials', 'camera', 'car_service', 'carpet', 'charity', 'cheese', 'chocolate', 'coffee', 
+                                                'communication', 'craft', 'curtain', 'dairy', 'deli', 'discount',  
+                                                'e-cigarette', 'electrical', 'energy', 'erotic', 'estate_agent', 'fabric', 'fishing', 'flooring', 
+                                                'food', 'frame', 'frozen_food', 'funeral_directors', 'furnace', 'gallery', 'games', 'gas', 
+                                                'general', 'glaziery', 'grocery', 'health', 'health_food', 'hearing_aids', 'herbalist', 'hobby', 'household', 
+                                                'houseware', 'hunting', 'interior_decoration', 'kitchen', 'leather', 'lighting', 'locksmith', 
+                                                'lottery', 'market', 'massage', 'medical', 'medical_supply', 'money_lender', 'motorcycle_repair', 'music', 
+                                                'office_supplies', 'organic', 'paint', 'pastry', 'pawnbroker', 'phone', 'pottery', 
+                                                'printing', 'radiotechnics', 'real_estate', 'religion', 'rental', 'salon', 'scuba_diving', 'second_hand', 
+                                                'sewing', 'shoe_repair', 'shopping_centre', 'solarium', 'souvenir', 'tailor', 'tanning', 'tattoo', 
+                                                'tea', 'ticket', 'tiles', 'tobacco', 'trade', 'tyres', 'vacuum_cleaner', 'video', 'video_games', 'watches', 
                                                 'wholesale', 'yes') THEN 'other' ELSE NULL END,
                   'leisure_' || CASE WHEN leisure IN ('swimming_pool', 'water_park', 'miniature_golf', 'golf_course', 'sports_centre', 'stadium', 'track',
                                                       'pitch','playground', 'park', 'recreation_ground', 'common', 'garden', 'nature_reserve', 'marina',

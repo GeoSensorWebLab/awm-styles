@@ -275,6 +275,13 @@
     marker-clip: false;
   }
 
+  [feature = 'amenity_social_facility'][zoom >= 17] {
+    marker-file: url('symbols/social_facility-14.svg');
+    marker-fill: @amenity-brown;
+    marker-placement: interior;
+    marker-clip: false;
+  }
+
   [feature = 'amenity_townhall'][zoom >= 16] {
     marker-file: url('symbols/town_hall.16.svg');
     marker-fill: @amenity-brown;
@@ -870,6 +877,13 @@
     marker-fill: @shop-icon;
   }
 
+  [feature = 'shop_sports'][zoom >= 17] {
+    marker-file: url('symbols/sports-14.svg');
+    marker-fill: @shop-icon;
+    marker-placement: interior;
+    marker-clip: false;
+  }
+
   [feature = 'shop_stationery'][zoom >= 17] {
     marker-file: url('symbols/stationery-14.svg');
     marker-placement: interior;
@@ -1206,6 +1220,7 @@
   [feature = 'amenity_police'][zoom >= 17],
   [feature = 'amenity_car_wash'][zoom >= 17],
   [feature = 'amenity_community_centre'][zoom >= 17],
+  [feature = 'amenity_social_facility'][zoom >= 17],
   [feature = 'amenity_fire_station'][zoom >= 17],
   [feature = 'amenity_drinking_water'][zoom >= 17],
   [feature = 'tourism_picnic_site'][zoom >= 17],
@@ -1486,6 +1501,8 @@
   [feature = 'natural_heath'],
   [feature = 'natural_scrub'],
   [feature = 'natural_beach'],
+  [feature = 'natural_shoal'],
+  [feature = 'natural_reef'],
   [feature = 'leisure_sports_centre'],
   [feature = 'leisure_stadium'],
   [feature = 'leisure_track'],
@@ -1509,6 +1526,7 @@
       text-halo-radius: 1;
       text-halo-fill: rgba(255,255,255,0.6);
       text-placement: interior;
+      [feature = 'natural_reef'],
       [feature = 'natural_wetland'],
       [feature = 'natural_marsh'],
       [feature = 'natural_mud'] {
@@ -1594,7 +1612,8 @@
       [feature = 'natural_scrub'] {
         text-fill: darken(@scrub, 60%);
       }
-      [feature = 'natural_beach'] {
+      [feature = 'natural_beach'],
+      [feature = 'natural_shoal'] {
         text-fill: darken(@beach, 60%);
       }
       [feature = 'leisure_sports_centre'],
@@ -1870,6 +1889,7 @@
   [feature = 'shop_toys'],
   [feature = 'shop_travel_agency'],
   [feature = 'shop_seafood'],
+  [feature = 'shop_sports'],
   [feature = 'shop_stationery'],
   [feature = 'shop_variety_store'],
   [feature = 'shop_wine'],
