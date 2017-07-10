@@ -4,11 +4,104 @@
 
 These are CartoCSS map stylesheets based on the openstreetmap-carto repository. They are used for Arctic Web Map styling.
 
-# Local Installation
+# Mac Installation
 
-You need a PostGIS database populated with OpenStreetMap data in the standard osm2pgsql database layout, along with auxillary shapefiles. See [INSTALL.md](INSTALL.md).
+This will set up Postgresql, Postgis, osm2pgsql, GDAL, Mapnik, and kosmtik for rendering previews. Some of this information is adapted from James Badger's OSM import notes.
 
-# Production Installation
+To start, install the prerequisites:
+
+* Ruby 2.3+
+* Python
+* NodeJS
+* Homebrew
+
+Next download the latest style from GitHub:
+
+    $ git clone https://github.com/GeoSensorWebLab/awm-styles
+    $ cd awm-styles
+
+Install Postgres using Homebrew. You should be safe to install versions newer than 9.6.
+
+    $ brew install postgresql
+
+You do not need to set up auto-start for Postgresql, as we will set up a separate data directory for Arctic Web Map. Next install GDAL:
+
+    $ brew install osgeo/osgeo4mac/gdal2 --with-complete --with-java --with-opencl --with-postgresql
+
+Then install PostGIS:
+
+    $ brew install postgis
+
+Now set up Postgresql with a data directory somewhere that you have a few GB available for the OpenStreetMap database.
+
+    $ cd ~/Downloads
+    $ pg_ctl init -D awm-pg-data
+
+You can edit the Postgresql configuration file to allow for faster imports. See [Paul Norman's "New Server PostgreSQL Tuning"](http://www.paulnorman.ca/blog/2014/11/new-server-postgresql-tuning/) post for some suggestions. For city-level extracts tuning might not be necessary, but for province or country levels you may notice a difference.
+
+If you are running other postgres instances on your machine, edit the port in the configuration. Next start the postgres server.
+
+    $ pg_ctl start -D awm-pg-data
+
+You can stop the server later with:
+
+    $ pg_ctl stop -D awm-pg-data
+
+Next set up the database for OSM.
+
+    $ createuser osm
+    $ createdb -E UTF8 -O osm gis
+    $ psql -f /usr/local/Cellar/postgis/2.3.2/share/postgis/postgis.sql -d gis
+    $ psql -f /usr/local/Cellar/postgis/2.3.2/share/postgis/spatial_ref_sys.sql -d gis
+    $ psql -d gis -c "ALTER TABLE geometry_columns OWNER TO osm; ALTER TABLE spatial_ref_sys OWNER TO osm;"
+    $ psql -d gis -c "CREATE EXTENSION hstore;"
+
+Now install Mapnik using Homebrew. This can take > 10 minutes to build.
+
+    $ brew install mapnik --with-gdal --with-postgresql
+
+And then install osm2pgsql.
+
+    $ brew install osm2pgsql
+
+Next download an OSM extract for testing. Please don't download the entire planet file, you will be waiting literally days to finish the import. I highly recommend downloading from [GeoFabrik](http://download.geofabrik.de/index.html), specifically Nunavut/North West Territories/Yukon regions. Download the `.osm.pbf` versions as they are the most compressed.
+
+If you want to merge multiple `.osm.pbf` files, you will need osmosis. (Skip this step if you are only using one extract file.) As an example, here is how to merge Nunavut and NWT into one file for import.
+
+    $ brew install osmosis
+    $ osmosis --read-pbf-fast nunavut-latest.osm.pbf --read-pbf-fast northwest-territories-latest.osm.pbf --merge --write-pbf merged.osm.pbf
+
+Once you have your (optionally merged) extract file you can import it.
+
+    $ osm2pgsql --create --host localhost --database gis --username osm -E 4326 -C 2000 --number-processes 4 --hstore -G -v merged.osm.pbf
+
+On a 2012 MacBook Pro with 16 GB of RAM and a PCI express SSD this takes just under 2 minutes to complete. Fast SSDs and more RAM seem to have the most impact on import performance.
+
+Now install mapnik and kosmtik for NodeJS. This should use the mapnik library installed by homebrew.
+
+    $ npm install mapnik
+    $ npm install kosmtik
+
+Then edit `.env` and the `DB` variables to point to your local postgres installation. The `CANVEC` variables point to a postgresql server with CanVec contour data loaded into a table.
+
+TODO: Add info on loading CanVec contours data
+
+Now you can generate a project file for kosmtik.
+
+    $ source .env && scripts/project
+    $ kosmtik serve project.mml
+
+Open http://127.0.0.1:6789/ in your browser to preview the map. It should look the same as https://webmap.arcticconnect.org/ but will have your data import instead.
+
+If you want to change the projection in this preview, edit `project.yaml.erb` and edit:
+
+    name — change projection in name
+    description — change projection in name
+    srs — change to PROJ4 string for your projection
+
+Don't change `extents3573` as all the shapefiles are in that projection. (They are in that projection because they needed to be clipped and segmented in EPSG:4326 first otherwise Antarctica causes rendering glitches over the entire Arctic map projection.)
+
+# Linux and Production Installation
 
 For our production system, we have Mapnik using the XML configuration in `/etc/mapnik-osm-carto-data`. In order to install the latest version of our styles you will have to clone this repository to the tile server.
 
