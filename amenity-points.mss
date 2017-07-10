@@ -618,6 +618,15 @@
     marker-clip: false;
   }
 
+  [feature = 'shop_copyshop'] {
+    [zoom >= 17] {
+      marker-file: url('symbols/copyshop-14.svg');
+      marker-placement: interior;
+      marker-clip: false;
+      marker-fill: @shop-icon;
+    }
+  }
+
   [feature = 'shop_cosmetics'],
   [feature = 'shop_perfumery'] {
     [zoom >= 17] {
@@ -1318,15 +1327,19 @@
     [zoom >= 17] {
       text-name: "[name]";
       text-size: @landcover-font-size;
-      [way_pixels > 12000] { text-size: @landcover-font-size-big; }
-      [way_pixels > 48000] { text-size: @landcover-font-size-bigger; }
+      text-wrap-width: @landcover-wrap-width-size;
+      [way_pixels > 12000] {
+        text-size: @landcover-font-size-big;
+        text-wrap-width: @landcover-wrap-width-size-big;
+      }
+      [way_pixels > 48000] {
+        text-size: @landcover-font-size-bigger;
+        text-wrap-width: @landcover-wrap-width-size-bigger;
+      }
       text-fill: @marina-text;
       text-face-name: @landcover-face-name;
       text-halo-radius: 1;
       text-halo-fill: rgba(255,255,255,0.6);
-      text-wrap-width: @landcover-wrap-width-size;
-      [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
-      [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
       text-placement: interior;
     }
   }
@@ -1360,14 +1373,18 @@
     [zoom >= 17] {  
       text-name: "[name]";
       text-size: @landcover-font-size;
-      [way_pixels > 12000] { text-size: @landcover-font-size-big; }
-      [way_pixels > 48000] { text-size: @landcover-font-size-bigger; }
+      text-wrap-width: @landcover-wrap-width-size;
+      [way_pixels > 12000] {
+        text-size: @landcover-font-size-big;
+        text-wrap-width: @landcover-wrap-width-size-big;
+      }
+      [way_pixels > 48000] {
+        text-size: @landcover-font-size-bigger;
+        text-wrap-width: @landcover-wrap-width-size-bigger;
+      }
       text-face-name: @landcover-face-name;
       text-halo-radius: 1;
       text-halo-fill: rgba(255,255,255,0.6);
-      text-wrap-width: @landcover-wrap-width-size;
-      [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
-      [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
       text-placement: interior;
       [feature = 'landuse_military'] {
         text-fill: darken(@military, 40%);
@@ -1388,15 +1405,19 @@
     [zoom >= 17] {
       text-name: "[name]";
       text-size: @landcover-font-size;
-      [way_pixels > 12000] { text-size: @landcover-font-size-big; }
-      [way_pixels > 48000] { text-size: @landcover-font-size-bigger; }
+      text-wrap-width: @landcover-wrap-width-size;
+      [way_pixels > 12000] {
+        text-size: @landcover-font-size-big;
+        text-wrap-width: @landcover-wrap-width-size-big;
+      }
+      [way_pixels > 48000] {
+        text-size: @landcover-font-size-bigger;
+        text-wrap-width: @landcover-wrap-width-size-bigger;
+      }
       text-fill: darken(@danger_area, 40%);
       text-face-name: @bold-fonts;
       text-halo-radius: 1;
       text-halo-fill: rgba(255,255,255,0.6);
-      text-wrap-width: @landcover-wrap-width-size;
-      [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
-      [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
       text-placement: interior;
     }
   }
@@ -1406,15 +1427,19 @@
     [zoom >= 17] {
       text-name: "[name]";
       text-size: @landcover-font-size;
-      [way_pixels > 12000] { text-size: @landcover-font-size-big; }
-      [way_pixels > 48000] { text-size: @landcover-font-size-bigger; }
+      text-wrap-width: @landcover-wrap-width-size;
+      [way_pixels > 12000] {
+        text-size: @landcover-font-size-big;
+        text-wrap-width: @landcover-wrap-width-size-big;
+      }
+      [way_pixels > 48000] {
+        text-size: @landcover-font-size-bigger;
+        text-wrap-width: @landcover-wrap-width-size-bigger;
+      }
       text-fill: darken(@garages, 50%);
       text-face-name: @landcover-face-name;
       text-halo-radius: 1;
       text-halo-fill: rgba(255,255,255,0.6);
-      text-wrap-width: @landcover-wrap-width-size;
-      [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
-      [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
       text-placement: interior;
     }
   }
@@ -1471,14 +1496,18 @@
     [zoom >= 17][feature = 'shop_mall'] {
       text-name: "[name]";
       text-size: @landcover-font-size;
-      [way_pixels > 12000] { text-size: @landcover-font-size-big; }
-      [way_pixels > 48000] { text-size: @landcover-font-size-bigger; }
+      text-wrap-width: @landcover-wrap-width-size;
+      [way_pixels > 12000] {
+        text-size: @landcover-font-size-big;
+        text-wrap-width: @landcover-wrap-width-size-big;
+      }
+      [way_pixels > 48000] {
+        text-size: @landcover-font-size-bigger;
+        text-wrap-width: @landcover-wrap-width-size-bigger;
+      }
       text-face-name: @landcover-face-name;
       text-halo-radius: 1;
       text-halo-fill: rgba(255,255,255,0.6);
-      text-wrap-width: @landcover-wrap-width-size;
-      [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
-      [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
       text-placement: interior;
       [feature = 'natural_wetland'],
       [feature = 'natural_marsh'],
@@ -1686,15 +1715,19 @@
     [zoom >= 17] {
       text-name: "[name]";
       text-size: @landcover-font-size;
-      [way_pixels > 12000] { text-size: @landcover-font-size-big; }
-      [way_pixels > 48000] { text-size: @landcover-font-size-bigger; }
+      text-wrap-width: @landcover-wrap-width-size;
+      [way_pixels > 12000] {
+        text-size: @landcover-font-size-big;
+        text-wrap-width: @landcover-wrap-width-size-big;
+      }
+      [way_pixels > 48000] {
+        text-size: @landcover-font-size-bigger;
+        text-wrap-width: @landcover-wrap-width-size-bigger;
+      }
       text-fill: @marina-text;
       text-face-name: @landcover-face-name;
       text-halo-radius: 1;
       text-halo-fill: rgba(255,255,255,0.6);
-      text-wrap-width: @landcover-wrap-width-size;
-      [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
-      [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
       text-placement: interior;
     }
   }
@@ -1795,6 +1828,7 @@
   [feature = 'shop_fashion'],
   [feature = 'shop_convenience'],
   [feature = 'shop_confectionery'],
+  [feature = 'shop_copyshop'],
   [feature = 'shop_doityourself'],
   [feature = 'shop_dry_cleaning'],
   [feature = 'shop_hardware'],
@@ -1891,15 +1925,19 @@
     [zoom >= 17] {
       text-name: "[name]";
       text-size: @landcover-font-size;
-      [way_pixels > 12000] { text-size: @landcover-font-size-big; }
-      [way_pixels > 48000] { text-size: @landcover-font-size-bigger; }
+      text-wrap-width: @landcover-wrap-width-size;
+      [way_pixels > 12000] {
+        text-size: @landcover-font-size-big;
+        text-wrap-width: @landcover-wrap-width-size-big;
+      }
+      [way_pixels > 48000] {
+        text-size: @landcover-font-size-bigger;
+        text-wrap-width: @landcover-wrap-width-size-bigger;
+      }
       text-fill: darken(@power, 40%);
       text-face-name: @landcover-face-name;
       text-halo-radius: 1;
       text-halo-fill: rgba(255,255,255,0.6);
-      text-wrap-width: @landcover-wrap-width-size;
-      [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
-      [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
       text-placement: interior;
     }
   }
@@ -1912,14 +1950,18 @@
     [zoom >= 17][is_building = 'no'] {
       text-name: "[name]";
       text-size: @landcover-font-size;
-      [way_pixels > 12000] { text-size: @landcover-font-size-big; }
-      [way_pixels > 48000] { text-size: @landcover-font-size-bigger; }
+      text-wrap-width: @landcover-wrap-width-size;
+      [way_pixels > 12000] {
+        text-size: @landcover-font-size-big;
+        text-wrap-width: @landcover-wrap-width-size-big;
+      }
+      [way_pixels > 48000] {
+        text-size: @landcover-font-size-bigger;
+        text-wrap-width: @landcover-wrap-width-size-bigger;
+      }
       text-face-name: @landcover-face-name;
       text-halo-radius: 1;
       text-halo-fill: rgba(255,255,255,0.6);
-      text-wrap-width: @landcover-wrap-width-size;
-      [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
-      [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
       text-placement: interior;
       [feature = 'natural_scree'],
       [feature = 'natural_shingle'],
@@ -1937,15 +1979,19 @@
     [zoom >= 17] {
       text-name: "[name]";
       text-size: @landcover-font-size;
-      [way_pixels > 12000] { text-size: @landcover-font-size-big; }
-      [way_pixels > 48000] { text-size: @landcover-font-size-bigger; }
+      text-wrap-width: @landcover-wrap-width-size;
+      [way_pixels > 12000] {
+        text-size: @landcover-font-size-big;
+        text-wrap-width: @landcover-wrap-width-size-big;
+      }
+      [way_pixels > 48000] {
+        text-size: @landcover-font-size-bigger;
+        text-wrap-width: @landcover-wrap-width-size-bigger;
+      }
       text-fill: darken(@apron, 60%);
       text-face-name: @landcover-face-name;
       text-halo-radius: 1;
       text-halo-fill: rgba(255,255,255,0.6);
-      text-wrap-width: @landcover-wrap-width-size;
-      [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
-      [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
       text-placement: interior;
     }
   }
@@ -1956,15 +2002,19 @@
     [zoom >= 17] {
       text-name: "[name]";
       text-size: @landcover-font-size;
-      [way_pixels > 12000] { text-size: @landcover-font-size-big; }
-      [way_pixels > 48000] { text-size: @landcover-font-size-bigger; }
+      text-wrap-width: @landcover-wrap-width-size;
+      [way_pixels > 12000] {
+        text-size: @landcover-font-size-big;
+        text-wrap-width: @landcover-wrap-width-size-big;
+      }
+      [way_pixels > 48000] {
+        text-size: @landcover-font-size-bigger;
+        text-wrap-width: @landcover-wrap-width-size-bigger;
+      }
       text-fill: darken(@rest_area, 40%);
       text-face-name: @landcover-face-name;
       text-halo-radius: 1;
       text-halo-fill: rgba(255,255,255,0.6);
-      text-wrap-width: @landcover-wrap-width-size;
-      [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
-      [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
       text-placement: interior;
     }
   }
@@ -1975,15 +2025,19 @@
     [zoom >= 17] {
       text-name: "[name]";
       text-size: @landcover-font-size;
-      [way_pixels > 12000] { text-size: @landcover-font-size-big; }
-      [way_pixels > 48000] { text-size: @landcover-font-size-bigger; }
+      text-wrap-width: @landcover-wrap-width-size;
+      [way_pixels > 12000] {
+        text-size: @landcover-font-size-big;
+        text-wrap-width: @landcover-wrap-width-size-big;
+      }
+      [way_pixels > 48000] {
+        text-size: @landcover-font-size-bigger;
+        text-wrap-width: @landcover-wrap-width-size-bigger;
+      }
       text-fill: mix(darken(@glacier, 40%), darken(@glacier-line, 30%), 50%);
       text-face-name: @landcover-face-name;
       text-halo-radius: 1;
       text-halo-fill: rgba(255,255,255,0.6);
-      text-wrap-width: @landcover-wrap-width-size;
-      [way_pixels > 12000] {text-wrap-width: @landcover-wrap-width-size-big; }
-      [way_pixels > 48000] {text-wrap-width: @landcover-wrap-width-size-bigger; }
       text-placement: interior;
     }
   }

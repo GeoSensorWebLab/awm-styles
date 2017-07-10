@@ -2,6 +2,23 @@
 
 A list of changes made to the stylesheet.
 
+### 2017-07-10
+
+* Merge changes from v2.37.0
+    * new farmland color - makes farmland less prominent
+    * Adding shop=copyshop icon
+    * Drop incorrect text class from text-line
+    * Change order of definitions to speed up carto processing
+    * Restore rendering of water-feature labels
+    * Make residential and tertiary slightly narrower on z13
+    * Osmic icon for shop=beverages
+    * correct variable name for path/footway tunnel handling
+    * Make roads narrower at zoom 18 and 19
+    * rework admin boundaries and admin labels on lower zooms, render country subdivisions only for the biggest * s on z4
+    * Add SQL conditions for low level admin lines and labels
+    * Don't use centroid for low-zoom admin calcs
+    * remove admin_level 0,1,3 from label rendering and consolidate table aliases
+
 ### 2017-07-07
 
 * Switch DB to use 4326 projection
