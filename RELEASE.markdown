@@ -111,6 +111,20 @@ A list of changes made to the stylesheet.
     * Move colour name generation later
     * Let generate_shields use road-colors.yaml
     * Use binary mode for mml in yaml2mml
+* Merge changes from v2.42.0
+    * Add information on how to make a release
+    * Update releasing with information on schema change and reload
+    * add amenity=charging_station icon
+    * SVG version of department store icon
+    * Adding tourism=artwork icon
+    * Font size 10 for junction names
+    * More readable icon of charging station
+    * Light green for playground
+    * Ferry route names font size 10 at z13
+    * Move junction=yes to z15
+    * Minimal font size 10 for stations
+    * simplify placenames (font size)
+    * Fix spacing and zoom in syntax
 
 ### 2017-07-07
 
