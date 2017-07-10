@@ -197,7 +197,37 @@ A list of changes made to the stylesheet.
     * Add back captial-name WHERE conditions
     * Document the requirements for good non-latin rendering
     * Remove suggestion of converting CJK fonts
-
+* Merge changes from v2.45.0/v2.45.1
+    * Making pitch and track color less dominant
+    * Add Map Icon Guidelines to Contribution Guidelines
+    * Fix github diff links
+    * Rendering rare shop values
+    * Add text on unpackaged Noto fonts
+    * correct misspelled tag value in line barrier query
+    * Remove wikilinks and separate sections.
+    * add External Icon Design Resources subheading
+    * address "no color" issue and SVG fills
+    * Update changelog with shop changes
+    * Remove extra whitespace in docs
+    * Correct Inkscape typo
+    * Explain why the icons are monochromatic, and don't quote a full SVG
+    * Clean up text for external icon link
+    * Making railway stations appear as major buildings
+    * Add new maintainers.
+    * Rendering the name of man_made=bridge inside the polygon
+    * Random scrub pattern
+    * first draft for design goals document
+    * remove standard size from icon name
+    * set explicit width and height on icons
+    * ensure common canvas size for icons, remove groups, plain SVG, add background canvas for easier scaling in CartoCSS
+    * move shop icons in shop subfolder
+    * changes based on discussion
+    * Make clear Noto Emoji must be installed manually.
+    * small fixes in formulations as per discussion
+    * Adding localconfig.js to gitignore
+    * Cleaning variables in landcover.mss
+    * link fix
+    * fix svg regressions
 
 ### 2017-07-07
 
