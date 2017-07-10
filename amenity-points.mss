@@ -28,8 +28,10 @@
   }
 
   [feature = 'amenity_shelter'][zoom >= 16] {
-    point-file: url('symbols/shelter2.p.16.png');
-    point-placement: interior;
+    marker-file: url('symbols/shelter-14.svg');
+    marker-fill: @transportation-icon;
+    marker-placement: interior;
+    marker-clip: false;
   }
 
   [feature = 'amenity_atm'][zoom >= 17] {
@@ -245,8 +247,10 @@
   }
 
   [feature = 'tourism_information'][zoom >= 17] {
-    point-file: url('symbols/information.p.16.png');
-    point-placement: interior;
+    marker-file: url('symbols/information.12.svg');
+    marker-placement: interior;
+    marker-fill: @amenity-brown;
+    marker-clip: false;
   }
 
   [feature = 'amenity_embassy'][zoom >= 17] {
@@ -987,8 +991,9 @@
   }
 
   [feature = 'natural_cave_entrance'][zoom >= 15] {
-    point-file: url('symbols/poi_cave.p.16.png');
-    point-placement: interior;
+    marker-file: url('symbols/cave.14.svg');
+    marker-placement: interior;
+    marker-clip: false;
   }
 
   [feature = 'natural_spring'][zoom >= 14] {
@@ -1073,7 +1078,8 @@
     }
   }
 
-  [barrier = 'lift_gate'][zoom >= 16]::barrier {
+  [barrier = 'lift_gate'][zoom >= 16]::barrier,
+  [barrier = 'swing_gate'][zoom >= 16]::barrier {
     marker-file: url('symbols/liftgate.svg');
     marker-fill: #3f3f3f;
     marker-placement: interior;

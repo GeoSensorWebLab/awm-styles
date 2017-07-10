@@ -28,6 +28,13 @@ A list of changes made to the stylesheet.
     * updating surface values based on actual use
     * remove line barrier catch-all rendering
     * Adding code and icon for shop=sports
+* Merge changes from v2.39.0
+    * Replacing shelter PNG icon with SVG version
+    * Replacing cave entry PNGicon  with SVG version
+    * fix oneway arrow colour for highway=path/footway and bicycle=designated/horse=designated
+    * render swing_gate like lift_gate
+    * Drop 'disused' from stations SQL
+    * Replacing tourism information PNG icon with SVG version
 
 ### 2017-07-07
 
