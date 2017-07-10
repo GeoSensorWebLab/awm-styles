@@ -1,4 +1,4 @@
-# OpenStreetMap Carto contribution guidelines
+# Arctic Web Map Style contribution guidelines
 
 ## Workflow
 
@@ -12,7 +12,7 @@ Your pull requests will then be reviewed and discussed.
 
 ## Editing Layers
 
-OpenStreetMap Carto uses a YAML file for defining layers. Some of the rationale is outlined in [a GitHub issue](https://github.com/gravitystorm/openstreetmap-carto/issues/711). Editing multi-line SQL statements in a YAML file is much friendlier than editing escaped SQL in a JSON file.
+Arctic Web Map Style uses a YAML file for defining layers. Some of the rationale is outlined in [a GitHub issue](https://github.com/gravitystorm/openstreetmap-carto/issues/711). Editing multi-line SQL statements in a YAML file is much friendlier than editing escaped SQL in a JSON file.
 
 This requires a preprocessing step to convert the ERB YAML to JSON. A script is provided at `scripts/project`, which depends on Ruby standard library.
 

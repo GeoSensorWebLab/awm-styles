@@ -1,26 +1,26 @@
-# OpenStreetMap Carto Community Code of Conduct
+# Arctic Connect Developer Community Code of Conduct
 
 ## Why have a Code of Conduct?
 
-Online communities include people from many different backgrounds. The OpenStreetMap Carto contributors are committed to providing a friendly, safe and welcoming environment for all, regardless of age, disability, gender, nationality, race, religion, sexuality, or similar personal characteristic.
+Online communities include people from many different backgrounds. The Arctic Connect developer contributors are committed to providing a friendly, safe and welcoming environment for all, regardless of age, disability, gender, nationality, race, religion, sexuality, or similar personal characteristic.
 
-The first goal of the Code of Conduct is to specify a baseline standard of behavior so that people with different social values and communication styles can talk about OpenStreetMap Carto effectively, productively, and respectfully.
+The first goal of the Code of Conduct is to specify a baseline standard of behavior so that people with different social values and communication styles can talk about Arctic Connect development effectively, productively, and respectfully.
 
 The second goal is to provide a mechanism for resolving conflicts in the community when they arise.
 
-The third goal of the Code of Conduct is to make our community welcoming to people from different backgrounds. Diversity is critical to the project; for OpenStreetMap Carto to be successful, it needs contributors and users from all backgrounds.
+The third goal of the Code of Conduct is to make our community welcoming to people from different backgrounds. Diversity is critical to the project; for Arctic Connect development to be successful, it needs contributors and users from all backgrounds.
 
 With that said, a healthy community must allow for disagreement and debate. The Code of Conduct is not a mechanism for people to silence others with whom they disagree.
 
 ## Where does the Code of Conduct apply?
 
-If you participate in or contribute to the OpenStreetMap Carto ecosystem in any way, you are encouraged to follow the Code of Conduct while doing so.
+If you participate in or contribute to the Arctic Connect developer ecosystem in any way, you are encouraged to follow the Code of Conduct while doing so.
 
-Explicit enforcement of the Code of Conduct applies to the OpenStreetMap Carto GitHub project and code reviews.
+Explicit enforcement of the Code of Conduct applies to the Arctic Connect GitHub project and code reviews.
 
 ## Values
 
-These are the values to which people in the OpenStreetMap Carto should aspire.
+These are the values to which people in the Arctic Connect developer projects should aspire.
 
 - Be friendly and welcoming
 - Be patient
@@ -44,7 +44,7 @@ People are complicated. You should expect to be misunderstood and to misundersta
 
 ## Unwelcome behavior
 
-These actions are explicitly forbidden in OpenStreetMap Carto spaces:
+These actions are explicitly forbidden in Arctic Connect developer spaces:
 
 - Insulting, demeaning, hateful, or threatening remarks.
 - Discrimination based on age, disability, gender, nationality, race, religion, sexuality, or similar personal characteristic.
@@ -54,15 +54,15 @@ These actions are explicitly forbidden in OpenStreetMap Carto spaces:
 
 ## Moderation
 
-The OpenStreetMap Carto spaces are not free speech venues; they are for discussion about OpenStreetMap Carto.
+The Arctic Connect developer spaces are not free speech venues; they are for discussion about Arctic Connect development.
 
-When using the OpenStreetMap Carto spaces you should act in the spirit of the values. If you conduct yourself in a way that is explicitly forbidden by the CoC, you will be warned and asked to stop. If you do not stop, you will be removed from our community spaces temporarily. Repeated, willful breaches of the CoC will result in a permanent ban.
+When using the Arctic Connect developer spaces you should act in the spirit of the values. If you conduct yourself in a way that is explicitly forbidden by the CoC, you will be warned and asked to stop. If you do not stop, you will be removed from our community spaces temporarily. Repeated, willful breaches of the CoC will result in a permanent ban.
 
 ## Reporting issues
 
-The OpenStreetMap Carto maintainers are responsible for handling conduct-related issues. Their goal is to de-escalate conflicts and try to resolve issues to the satisfaction of all parties.
+The Arctic Connect development maintainers are responsible for handling conduct-related issues. Their goal is to de-escalate conflicts and try to resolve issues to the satisfaction of all parties.
 
-If you encounter a conduct-related issue, you should report it to the maintainers by sending them [all an email](mailto:openstreetmap-carto@gravitystorm.co.uk,penorman@mac.com,info@matthijsmelissen.nl,matkoniecz@gmail.com).
+If you encounter a conduct-related issue, you should report it to the maintainers by sending them [all an email](mailto:info@arcticconnect.org).
 
 **Note that the goal of the Code of Conduct and the maintainers is to resolve conflicts in the most harmonious way possible.** We hope that in most cases issues may be resolved through polite discussion and mutual agreement. Bans and other forceful measures are to be employed only as a last resort.
 
