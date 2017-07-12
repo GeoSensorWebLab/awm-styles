@@ -1,13 +1,12 @@
-.thumb.png
-layers/
-data/
-/*.xml
-node_modules/
-localconfig.json
-project.mml
-.env
-/tmp
-localconfig.js
-# Generated at runtime by Python.
-*.pyc
 **/*.pyc
+*.pyc
+.thumb.png
+/*.xml
+/database.yaml
+/tmp
+data/
+layers/
+localconfig.js
+localconfig.json
+node_modules/
+project.mml

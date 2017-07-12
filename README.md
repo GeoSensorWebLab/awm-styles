@@ -82,13 +82,13 @@ Now install mapnik and kosmtik for NodeJS. This should use the mapnik library in
     $ npm install mapnik
     $ npm install kosmtik
 
-Then edit `.env` and the `DB` variables to point to your local postgres installation. The `CANVEC` variables point to a postgresql server with CanVec contour data loaded into a table.
+Using `database.yaml.sample` as a template, create `database.yaml` and fill out the details for the database for your OpenStreetMap data (imported above), and the details for the CanVec contour data (import instructions coming soon).
 
 TODO: Add info on loading CanVec contours data
 
 Now you can generate a project file for kosmtik.
 
-    $ source .env && scripts/project
+    $ scripts/project.rb
     $ kosmtik serve project.mml
 
 Open http://127.0.0.1:6789/ in your browser to preview the map. It should look the same as https://webmap.arcticconnect.org/ but will have your data import instead.
@@ -117,9 +117,9 @@ Next download the shapefiles using the Ruby script:
 
     $ scripts/get_shapefiles
 
-To compile any changes to your project file, edit the `.env` file (use `.env.sample` as a template) with database details and then:
+To compile any changes to your project file, edit the `database.yaml` file (use `database.yaml.sample` as a template) with database details and then:
 
-    $ source .env && scripts/project
+    $ scripts/project.rb
 
 Then use the Ruby generation script to prepare the XML files:
 

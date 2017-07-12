@@ -16,9 +16,9 @@ Arctic Web Map Style uses a YAML file for defining layers. Some of the rationale
 
 This requires a preprocessing step to convert the ERB YAML to JSON. A script is provided at `scripts/project`, which depends on Ruby standard library.
 
-Edit the `.env` file to fill out your local Postgres database details. Then edit `project.yaml.erb`. After editing the YAML ERB file, run `source .env && ./scripts/project && touch project.mml` to update the file and force TileMill to reload it.
+Edit the `database.yaml` file to fill out your local Postgres database details. Then edit `project.yaml` to adjust layer loading and ordering. After editing the YAML file, run `./scripts/project.rb` to update the file and force kosmtik to reload it.
 
-When committing changes, add both the `project.yaml.erb` and `project.mml` files to the commit. One of the big advantages of this system is that to resolve any layer merge conflicts, they only need to be resolved in the YAML file where they are easier to handle, then the JSON file can be regenerated, while at the same time the styles work with Tilemill out-of-the-box without needing to run the `project` script.
+When committing changes, add only the `project.yaml` file to the commit. One of the big advantages of this system is that to resolve any layer merge conflicts, they only need to be resolved in the YAML file where they are easier to handle, then the JSON file can be regenerated.
 
 ## CartoCSS Style Guidelines
 
@@ -131,4 +131,4 @@ but to provide an overview.
 
 Some changes benefit from a review from a wider audience. In most cases some static images are sufficient, but sometimes a demo layer is necessary. pnorman has a private server which can host layers and has some data from parts of the world loaded. Before requesting this in a pull request, make sure that you don't anticipate any more changes to it.
 
-This does not replace reviewing your changes in Tilemill
+This does not replace reviewing your changes in kosmtik
