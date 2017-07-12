@@ -21,7 +21,7 @@ def index_statement(table, name, conditions=None, concurrent=False,notexist=Fals
                 storage=storage, options=options, where=where)
 
 def parse(cb):
-    with open(os.path.join(os.path.dirname(__file__), '../indexes.yml')) as yaml_file:
+    with open(os.path.join(os.path.dirname(__file__), '../indexes.yaml')) as yaml_file:
         indexes = yaml.safe_load(yaml_file)
 
     for table, data in indexes.iteritems():
