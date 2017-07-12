@@ -117,7 +117,7 @@ Then install Node and carto to build the XML files.
 
 Next download the shapefiles using the Ruby script:
 
-    $ scripts/get_shapefiles
+    $ scripts/get_shapefiles.rb
 
 To compile any changes to your project file, edit the `database.yaml` file (use `database.yaml.sample` as a template) with database details and then:
 
@@ -125,7 +125,7 @@ To compile any changes to your project file, edit the `database.yaml` file (use 
 
 Then use the Ruby generation script to prepare the XML files:
 
-    $ scripts/generate
+    $ scripts/generate.rb
 
 This will generate a set of XML files in the current directory, one for each AWM style. Use the Bash install script to copy these to the Mapnik style directory:
 
