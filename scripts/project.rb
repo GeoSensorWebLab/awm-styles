@@ -9,4 +9,4 @@ project = YAML.load(IO.read('project.yaml'))
 db_settings = YAML.load(IO.read('database.yaml'))
 
 updated_project = project.merge(db_settings)
-IO.write('project.mml', JSON.pretty_generate(updated_project))
+IO.write('arcticwebmap.mml', JSON.pretty_generate(updated_project))

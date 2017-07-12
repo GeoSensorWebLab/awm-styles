@@ -91,11 +91,11 @@ TODO: Add info on loading CanVec contours data
 Now you can generate a project file for kosmtik.
 
     $ scripts/project.rb
-    $ kosmtik serve project.mml
+    $ kosmtik serve arcticwebmap.mml
 
 Open http://127.0.0.1:6789/ in your browser to preview the map. It should look the same as https://webmap.arcticconnect.org/ but will have your data import instead.
 
-If you want to change the projection in this preview, edit `project.yaml.erb` and edit:
+If you want to change the projection in this preview, edit `project.yaml` and edit:
 
     name — change projection in name
     description — change projection in name

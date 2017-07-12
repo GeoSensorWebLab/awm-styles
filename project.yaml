@@ -46,7 +46,7 @@ _parts:
     srs-name: "EPSG:3573"
     srs: "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
   # Change database details in database.yaml, which are merged by
-  # scripts/project.rb on top of this file to produce project.mml.
+  # scripts/project.rb on top of this file to produce arcticwebmap.mml.
   osm2pgsql: &osm2pgsql
     type: "postgis"
     host: ""

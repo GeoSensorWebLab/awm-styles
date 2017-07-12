@@ -4,9 +4,9 @@
 /*.xml
 /database.yaml
 /tmp
+arcticwebmap.mml
 data/
 layers/
 localconfig.js
 localconfig.json
 node_modules/
-project.mml

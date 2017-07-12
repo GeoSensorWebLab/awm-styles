@@ -1,10 +1,10 @@
 #/bin/sh
 if json=$(scripts/yaml2mml.py --check); then
-  echo -n "${json}" | diff -q project.mml -
+  echo -n "${json}" | diff -q arcticwebmap.mml -
   ret=$?
   if [ $ret -ne 0 ]; then
-    echo "project.yaml and project.mml are not in sync!" >&2
-    echo "You should only modify project.yaml, not project.mml and run scripts/yaml2mml.py before committing." >&2
+    echo "project.yaml and arcticwebmap.mml are not in sync!" >&2
+    echo "You should only modify project.yaml, not arcticwebmap.mml and run scripts/yaml2mml.py before committing." >&2
     echo "Read https://github.com/gravitystorm/openstreetmap-carto/blob/master/CONTRIBUTING.md#editing-layers for further information." >&2
     exit $ret
   fi

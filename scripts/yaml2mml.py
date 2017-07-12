@@ -7,14 +7,14 @@ import os
 import sys
 import yaml
 
-parser = argparse.ArgumentParser(description='Keeps project files in sync by converting project.yaml to project.mml.')
+parser = argparse.ArgumentParser(description='Keeps project files in sync by converting project.yaml to arcticwebmap.mml.')
 parser.add_argument('--check', dest='check',
-                    help='write generated JSON to stdout instead to project.mml',
+                    help='write generated JSON to stdout instead to arcticwebmap.mml',
                     required=False, action='store_true', default=False)
 args = parser.parse_args()
 
 yaml_path = os.path.join(os.path.dirname(__file__), '../project.yaml')
-mml_path = os.path.join(os.path.dirname(__file__), '../project.mml')
+mml_path = os.path.join(os.path.dirname(__file__), '../arcticwebmap.mml')
 
 try:
     yaml_file = open(yaml_path)
