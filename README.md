@@ -2,11 +2,13 @@
 
 ![screenshot](preview.png)
 
-These are CartoCSS map stylesheets based on the openstreetmap-carto repository. They are used for Arctic Web Map styling.
+These are [CartoCSS](https://github.com/mapbox/carto) map stylesheets based on the [openstreetmap-carto repository](https://github.com/gravitystorm/openstreetmap-carto). They are used for Arctic Web Map styling.
+
+The currently active commit of this stylesheet used in [Arctic Web Map production](https://webmap.arcticconnect.org) can be seen on the `production` branch.
 
 # Mac Installation
 
-This will set up Postgresql, Postgis, osm2pgsql, GDAL, Mapnik, and kosmtik for rendering previews. Some of this information is adapted from James Badger's OSM import notes.
+This will set up [PostgreSQL](https://www.postgresql.org), [PostGIS](http://postgis.net), [osm2pgsql](https://github.com/openstreetmap/osm2pgsql), [GDAL](http://www.gdal.org), [Mapnik](https://github.com/mapnik/mapnik), and [kosmtik](https://github.com/kosmtik/kosmtik) for rendering previews. Some of this information is adapted from James Badger's OSM import notes.
 
 To start, install the prerequisites:
 
