@@ -7,9 +7,9 @@ require 'yaml'
 AWM_STYLES = 'awm-styles.yaml'
 
 styles = YAML.load(IO.read(AWM_STYLES))["styles"]
-base_project = YAML.load(IO.read('project.yaml'))
-db_settings = YAML.load(IO.read('database.yaml'))
-updated_project = base_project.merge(db_settings)
+base_project = IO.read('project.yaml')
+db_settings = IO.read('database.yaml')
+updated_project = YAML.load(db_settings + "\n" + base_project)
 
 yaml_options = { line_width: -1 }
 

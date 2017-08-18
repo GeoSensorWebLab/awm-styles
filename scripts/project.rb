@@ -5,8 +5,9 @@
 require 'json'
 require 'yaml'
 
-project = YAML.load(IO.read('project.yaml'))
-db_settings = YAML.load(IO.read('database.yaml'))
+project = IO.read('project.yaml')
+db_settings = IO.read('database.yaml')
 
-updated_project = project.merge(db_settings)
+updated_project = YAML.load(db_settings + "\n" + project)
+
 IO.write('arcticwebmap.mml', JSON.pretty_generate(updated_project))

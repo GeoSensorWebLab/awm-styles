@@ -1,5 +1,5 @@
 # These custom, private database details are merged on top of project.yaml
-_parts:
+_dbparts:
   osm2pgsql: &osm2pgsql
     type: "postgis"
     host: "localhost"
