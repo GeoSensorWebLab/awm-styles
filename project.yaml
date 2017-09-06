@@ -444,7 +444,7 @@ Layer:
       <<: *canvec
       table: |2-
         (SELECT wkb_geometry, ogc_fid, elevation
-              FROM FO_1030009_1
+              FROM contours
               WHERE elevation::integer % 100 = 0
               ) AS contours100
     properties:
@@ -459,7 +459,7 @@ Layer:
       <<: *canvec
       table: |2-
         (SELECT wkb_geometry, ogc_fid, elevation
-              FROM FO_1030009_1
+              FROM contours
               WHERE elevation::integer % 20 = 0 AND
               elevation::integer % 100 != 0
               ) AS contours20
