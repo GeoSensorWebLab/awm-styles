@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/GeoSensorWebLab/awm-styles/issues"
   },
-  "homepage": "https://github.com/GeoSensorWebLab/awm-styles#readme"
+  "homepage": "https://github.com/GeoSensorWebLab/awm-styles#readme",
+  "devDependencies": {
+    "kosmtik": "git+https://github.com/kosmtik/kosmtik.git#bd6b7e5d06aa03dd5483e530548d60b1efc4051d"
+  }
 }
