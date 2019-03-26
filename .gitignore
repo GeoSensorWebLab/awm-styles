@@ -1,0 +1,12 @@
+.thumb.png
+layers/
+data/
+tmp/
+*.xml
+*.osm.pbf
+node_modules/
+localconfig.json
+localconfig.js
+.kosmtik-config.yml
+.env
+.DS_Store
