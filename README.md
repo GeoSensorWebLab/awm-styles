@@ -32,7 +32,11 @@ Other changes will be listed here as the stylesheet is developed.
 
 # Installation
 
-You need a PostGIS database populated with OpenStreetMap data along with auxillary shapefiles. See [INSTALL.md](INSTALL.md).
+Installation has been separated into two documents, depending on your goal.
+
+If you want to modify the stylesheet and commit changes to git, see [DEVELOPMENT.md](DEVELOPMENT.md).
+
+For setting up the Arctic Web Map stylesheet on a public server, see [DEPLOYMENT.md](DEPLOYMENT.md).
 
 # Contributing
 
