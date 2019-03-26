@@ -34,6 +34,8 @@ This will install [kosmtik][], which we use to preview changes to the stylesheet
 
 ## Compiling the Project File
 
+TODO: Move compiling to deployment, as it will generate XML files for Mapnik.
+
 The project file for Arctic Web Map style is modified from the project file from openstreetmap-carto. This is necessary for these reasons:
 
 * Output projection for the map under the tiles is now EPSG:3573
