@@ -7,7 +7,7 @@ const child = require('child_process');
 let baseProject = "openstreetmap-carto/project.mml";
 let awmConfig   = "awmconfig.js";
 
-let command = `${__dirname}/node_modules/.bin/kosmtik serve --localconfig ${awmConfig} ${baseProject}`;
-child.execSync(command, (error, stdout, stderr) => {
-	console.log(stdout);
-});
+child.spawn(`${__dirname}/node_modules/.bin/kosmtik`, 
+	['serve', '--localconfig', awmConfig, baseProject], {
+		stdio: 'inherit'
+	});
