@@ -1,0 +1,65 @@
+[
+    {
+        "name": "ne_10m_land",
+        "url": "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_land.zip",
+        "ogr2ogr": {
+            "t_srs": "EPSG:4326",
+            "clipdst": "-180 0 180 90",
+            "segmentize": 0.5
+        }
+    },
+    {
+        "name": "ne_110m_admin_0_boundary_lines_land",
+        "url": "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/110m/cultural/ne_110m_admin_0_boundary_lines_land.zip",
+        "ogr2ogr": {
+            "t_srs": "EPSG:4326",
+            "clipdst": "-180 0 180 90",
+            "segmentize": 0.5
+        }
+    },
+    {
+        "name": "land-polygons-split-3857",
+        "url": "http://data.openstreetmapdata.com/land-polygons-split-3857.zip",
+        "ogr2ogr": {
+            "t_srs": "EPSG:4326",
+            "clipdst": "-180 0 180 90",
+            "segmentize": 0.5
+        }
+    },
+    {
+        "name": "ne_10m_geographic_lines",
+        "url": "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_geographic_lines.zip",
+        "ogr2ogr": {
+            "t_srs": "EPSG:4326",
+            "clipdst": "-180 0 180 90",
+            "segmentize": 0.5
+        }
+    },
+    {
+        "name": "ne_10m_graticules_15",
+        "url": "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_graticules_15.zip",
+        "ogr2ogr": {
+            "t_srs": "EPSG:4326",
+            "clipdst": "-180 0 180 90",
+            "segmentize": 0.5
+        }
+    },
+    {
+        "name": "ne_10m_bathymetry_all",
+        "url": "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_bathymetry_all.zip",
+        "ogr2ogr": {
+            "t_srs": "EPSG:4326",
+            "clipdst": "-180 45 180 90",
+            "segmentize": 0.5
+        }
+    },
+    {
+        "name": "ne_10m_lakes",
+        "url": "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_lakes.zip",
+        "ogr2ogr": {
+            "t_srs": "EPSG:4326",
+            "clipdst": "-180 45 180 90",
+            "segmentize": 0.5
+        }
+    }
+]
