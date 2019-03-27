@@ -1,6 +1,6 @@
 /* Merge the Arctic Web Map configuration onto the openstreetmap-carto
  * project file. If a `localconfig.js(on)` file exists, apply that next.
- * Then export to Mapnik XML files.
+ * Then export to Mapnik XML files (or other format).
 */
 const child = require('child_process');
 
@@ -13,6 +13,16 @@ let args = process.argv.slice(2, process.argv.length);
 
 if (args[0] !== undefined) {
 	switch(args[0].toLocaleUpperCase()) {
+		case '--HELP':
+		case '-H':
+			console.log("USAGE: node compile.js [-h|--help] [FORMAT]");
+			console.log(" -h|--help    print usage");
+			console.log(" FORMAT is one of:");
+			console.log("   XML      - Default Mapnik XML");
+			console.log("   MML      - TileMill Project File (JSON)");
+			console.log("   YML/YAML - TileMill Project File");
+			console.log("   PNG/PNG8 - 8-bit Render of World");
+			process.exit(0);
 		case 'MML':
 			format = "mml";
 			outputFile = "arcticwebmap.mml";
