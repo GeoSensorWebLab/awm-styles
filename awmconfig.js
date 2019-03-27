@@ -23,4 +23,7 @@ exports.LocalConfig = function (localizer, project) {
 	project.mml.Layer = project.mml.Layer.filter((layer) => {
 		return !removedIDs.includes(layer.id);
 	});
+
+	// Use EPSG:3573 PROJ4 string
+	project.mml.srs = "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs";
 };
