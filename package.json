@@ -20,5 +20,8 @@
   "devDependencies": {
     "kosmtik": "git+https://github.com/kosmtik/kosmtik.git#bd6b7e5d06aa03dd5483e530548d60b1efc4051d",
     "pryjs": "^1.0.3"
+  },
+  "dependencies": {
+    "got": "^9.6.0"
   }
 }
