@@ -1,8 +1,16 @@
 const pry = require('pryjs');
 
 exports.LocalConfig = function (localizer, project) {
-    localizer.where('name').then("ArcticWebMap");
-    localizer.where('center').then([60, -90, 4]);
+    project.mml.name = "ArcticWebMap";
+    project.mml.center = [70, -90, 4];
+    project.mml.bounds = [-180, 0, 0, 90];
+
+    // Cache features in RAM. Uses a lot of RAM that would better be
+    // used by Postgres.
+    // localizer.where('Layer')
+    // .then({
+    //     "cache-features": "on"
+    // });
 
     // Change database name, details, projection
     localizer.where('Layer')
@@ -12,10 +20,11 @@ exports.LocalConfig = function (localizer, project) {
         "Datasource.password": "",
         "Datasource.user": "",
         "Datasource.host": "",
-        "Datasource.extent": "-180,0,180,90",
+        "Datasource.extent": "-180,0,0,90",
+        "Datasource.persist_connection": true,
         "srs-name": "EPSG:4326",
         "srs": "+proj=longlat +datum=WGS84 +no_defs",
-        "extent": [-180,0,180,90]
+        "extent": [-180,0,0,90]
 	});
 
 	// remove antarctic layers
