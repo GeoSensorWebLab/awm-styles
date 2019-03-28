@@ -7,7 +7,7 @@ const child = require('child_process');
 let baseProject = "openstreetmap-carto/project.mml";
 let awmConfig   = "awmconfig.js";
 let format      = "xml";
-let outputFile  = "arcticwebmap.png";
+let outputFile  = "arcticwebmap.xml";
 
 let args = process.argv.slice(2, process.argv.length);
 
