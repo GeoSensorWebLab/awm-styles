@@ -161,13 +161,13 @@ shapefiles.forEach((shapefile) => {
                 // 3. segmentize
                 // 4. move all files
                 return spawnPromise("ogr2ogr", 
-                    ["-t_srs", "EPSG:4326", "-lco", "ENCODING=UTF-8", tmpFile, shpFile])
+                    ["-t_srs", "EPSG:4326", "-skipfailures", "-lco", "ENCODING=UTF-8", tmpFile, shpFile])
                 .then(() => {
                     return spawnPromise("ogr2ogr", 
-                        ["-clipsrc", shapefile.ogr2ogr.clipdst, clipFile, tmpFile]);
+                        ["-wrapdateline", "-skipfailures", "-t_srs", "EPSG:4326", "-clipdst", shapefile.ogr2ogr.clipdst, clipFile, tmpFile]);
                 }).then(() => {
                     return spawnPromise("ogr2ogr", 
-                        ["-segmentize", shapefile.ogr2ogr.segmentize, segFile, clipFile]);
+                        ["-explodecollections", "-segmentize", shapefile.ogr2ogr.segmentize, segFile, clipFile]);
                 }).then(() => {
                     return new Promise((resolve, reject) => {
                         fs.readdir(segDir, (err, files) => {
@@ -197,6 +197,12 @@ shapefiles.forEach((shapefile) => {
                     });
 
                     return Promise.all(movePromises);
+                })
+                .then(() => {
+                    // Clean up tmp directories
+                    rimraf.sync(path.dirname(tmpFile));
+                    rimraf.sync(path.dirname(clipFile));
+                    rimraf.sync(path.dirname(segFile));
                 })
                 .then(() => {
                     resolve(outFile);
