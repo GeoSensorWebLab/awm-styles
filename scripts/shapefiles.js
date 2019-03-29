@@ -31,7 +31,18 @@ let spawnPromise = function(command, args) {
         .on('close', resolve)
         .on('exit', resolve);
     });
-}
+};
+
+// Run a command on an input file with ogr2ogr.
+// Put output file(s) in a temporary directory, return output file name.
+let ogr2ogr = function(args, inFile) {
+    let tmpFile = tmp.dirSync().name + `/${path.basename(inFile)}`;
+    args.push(tmpFile, inFile);
+    return spawnPromise("ogr2ogr", args)
+    .then(() => {
+        return tmpFile;
+    });
+};
 
 // Print out all shapefiles
 if (shapefiles === undefined) {
@@ -150,27 +161,38 @@ shapefiles.forEach((shapefile) => {
         // run ogr2ogr on all .shp files
         let commands = files.map((shpFile) => {
             return new Promise((resolve, reject) => {
-                let outFile  = `${outputDir}/${path.basename(shpFile)}`
-                let tmpFile  = tmp.dirSync().name + `/${path.basename(shpFile)}`;
-                let clipFile = tmp.dirSync().name + `/${path.basename(shpFile)}`;
-                let segDir   = tmp.dirSync().name;
-                let segFile  = segDir + `/${path.basename(shpFile)}`;
+                let outFile = `${outputDir}/${path.basename(shpFile)}`
+                
+                // Track temp files so we can delete them after
+                let tempFiles = [];
 
                 // 1. reproject to EPSG:4326
-                // 2. clip
-                // 3. segmentize
-                // 4. move all files
-                return spawnPromise("ogr2ogr", 
-                    ["-t_srs", "EPSG:4326", "-skipfailures", "-lco", "ENCODING=UTF-8", tmpFile, shpFile])
-                .then(() => {
-                    return spawnPromise("ogr2ogr", 
-                        ["-wrapdateline", "-skipfailures", "-t_srs", "EPSG:4326", "-clipdst", shapefile.ogr2ogr.clipdst, clipFile, tmpFile]);
-                }).then(() => {
-                    return spawnPromise("ogr2ogr", 
-                        ["-explodecollections", "-segmentize", shapefile.ogr2ogr.segmentize, segFile, clipFile]);
-                }).then(() => {
-                    return new Promise((resolve, reject) => {
-                        fs.readdir(segDir, (err, files) => {
+                return ogr2ogr(["-t_srs", "EPSG:4326", "-lco", "ENCODING=UTF-8"], shpFile)
+                .then((outFile) => {
+                    tempFiles.push(outFile);
+                    // 2. Fix geometries
+                    // Assumption: tablenames are the same as the filename
+                    let tablename = path.basename(shpFile, ".shp");
+                    return ogr2ogr(["-dialect", "sqlite", "-sql", `"SELECT ST_MakeValid(geometry) as geometry FROM ${tablename}"`], outFile);
+                }).then((outFile) => {
+                    tempFiles.push(outFile);
+                    // 3. Clip to bounds
+                    return ogr2ogr(["-clipsrc", shapefile.ogr2ogr.clip], outFile);
+                }).then((outFile) => {
+                    tempFiles.push(outFile);
+                    // 4. Apply segmentization
+                    return ogr2ogr(["-segmentize", shapefile.ogr2ogr.segmentize], outFile);
+                }).then((outFile) => {
+                    tempFiles.push(outFile);
+                    // 5. Reproject to EPSG:3573
+                    return ogr2ogr(["-t_srs", "EPSG:3573"], outFile);
+                }).then((outFile) => {
+                    tempFiles.push(outFile);
+                    let outDir = path.dirname(outFile);
+                    // search for files in output file's directory so
+                    // we can move them to the AWM data directory
+                    let p = new Promise((resolve, reject) => {
+                        fs.readdir(outDir, (err, files) => {
                             if (err) {
                                 reject(err);
                             } else {
@@ -178,7 +200,10 @@ shapefiles.forEach((shapefile) => {
                             }
                         });    
                     });
-                }).then((segmentizedFiles) => {
+                    return Promise.all([outDir, p]);
+                }).then((values) => {
+                    sourceDir = values[0], segmentizedFiles = values[1];
+                    // Move files from outDir to outputDir
                     let movePromises = segmentizedFiles.map((sFile) => {
                         return new Promise((resolve, reject) => {
                             // remove destination file
@@ -186,7 +211,7 @@ shapefiles.forEach((shapefile) => {
                             rimraf.sync(destFilename);
 
                             // move file
-                            fs.rename(`${segDir}/${sFile}`, destFilename, (err) => {
+                            fs.rename(`${sourceDir}/${sFile}`, destFilename, (err) => {
                                 if (err) {
                                     reject(err);
                                 } else {
@@ -200,9 +225,9 @@ shapefiles.forEach((shapefile) => {
                 })
                 .then(() => {
                     // Clean up tmp directories
-                    rimraf.sync(path.dirname(tmpFile));
-                    rimraf.sync(path.dirname(clipFile));
-                    rimraf.sync(path.dirname(segFile));
+                    tempFiles.forEach((tmpFile) => {
+                        rimraf.sync(path.dirname(tmpFile));
+                    });
                 })
                 .then(() => {
                     resolve(outFile);
