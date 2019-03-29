@@ -1,3 +1,4 @@
+const fs  = require('fs');
 const pry = require('pryjs');
 
 exports.LocalConfig = function (localizer, project) {
@@ -32,13 +33,13 @@ exports.LocalConfig = function (localizer, project) {
         "srs-name": "EPSG:4326",
         "srs": "+proj=longlat +datum=WGS84 +no_defs",
         "extent": [-180,0,0,90]
-	});
+    });
 
-	// remove antarctic layers, high-zoom coast
-	removedIDs = ['icesheet-outlines', 'icesheet-poly', 'coast-poly'];
-	project.mml.Layer = project.mml.Layer.filter((layer) => {
-		return !removedIDs.includes(layer.id);
-	});
+    // remove antarctic layers, high-zoom coast
+    removedIDs = ['icesheet-outlines', 'icesheet-poly', 'coast-poly'];
+    project.mml.Layer = project.mml.Layer.filter((layer) => {
+        return !removedIDs.includes(layer.id);
+    });
 
     // Use natural earth 10m for land instead of OSM
     localizer.where('Layer')
@@ -57,5 +58,64 @@ exports.LocalConfig = function (localizer, project) {
         obj.Datasource.extent = [-20037508, -20037508, 20037508, 20037508];
         obj.Datasource.file = obj.Datasource.file.replace(/^data/, 'data/awm');
         return obj;
-    });	
+    });
+
+    // Add shapefile layers after `necountries`
+    let necountriesIndex = project.mml.Layer.findIndex((item) => {
+        return item.id === "necountries";
+    });
+
+    // Sample layer format:
+    // {
+    //     "id": "world",
+    //     "geometry": "polygon",
+    //     "extent": [
+    //         -20037508,
+    //         -20037508,
+    //         20037508,
+    //         20037508
+    //     ],
+    //     "srs-name": "EPSG:3573",
+    //     "srs": "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs",
+    //     "Datasource": {
+    //         "file": "data/awm/ne_10m_land/ne_10m_land.shp",
+    //         "type": "shape",
+    //         "extent": [
+    //             -20037508,
+    //             -20037508,
+    //             20037508,
+    //             20037508
+    //         ]
+    //     },
+    //     "properties": {
+    //         "maxzoom": 9
+    //     }
+    // }
+
+    if (necountriesIndex) {
+        let newLayers = [];
+
+        newLayers.push({
+            id: "lakes-low",
+            geometry: "polygon",
+            "srs-name": "EPSG:3573",
+            srs: "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs",
+            Datasource: {
+                file: "data/awm/ne_10m_lakes/ne_10m_lakes.shp",
+                type: "shape"
+            },
+            properties: {
+                maxzoom: 7
+            }
+        });
+
+
+        project.mml.Layer.splice(necountriesIndex + 1, 0, ...newLayers);
+    }
+
+    // Add to stylesheets
+    project.mml.Stylesheet.push({
+        id: "../arcticwebmap.mss",
+        data: fs.readFileSync("./arcticwebmap.mss").toString()
+    });
 };
