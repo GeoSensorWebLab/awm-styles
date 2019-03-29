@@ -1,0 +1,68 @@
+doctype html
+html(lang="en")
+  head
+    title= pageTitle
+  style.
+    body { max-width: 900px; margin: 0 auto; }
+    h1, h2, h3 { font-family: sans-serif; }
+    div.layer { padding: 0.5em 0; margin: 0.5em 0; }
+    div.layer:nth-child(even) { background-color: #DDD; }
+    div.layer:nth-child(odd) { background-color: #EEE; }
+    div.layer { opacity: 1.0; }
+    div.inactive { opacity: 0.4; }
+
+    input { font-size: 1.4em; }
+
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+
+  script.
+    $(() => {
+      let applyRestriction = () => {
+        let zoom = $("#zoom-level").val();
+
+        $(".layer").each((index, layer) => {
+          $layer = $(layer);
+          if (parseInt($layer.data("min")) <= zoom && parseInt($layer.data("max")) >= zoom) {
+            $layer.removeClass("inactive");
+          } else {
+            $layer.addClass("inactive");
+          }
+        });
+      };
+
+      let restrict = false;
+      $("#restrict-to-zoom").on("change", (e) => {
+        restrict = $(e.target).is(":checked");
+        if (restrict) {
+          applyRestriction();
+        } else {
+          $(".inactive").removeClass("inactive");
+        }
+      });
+
+      $("#zoom-level").on("change", (e) => {
+        if (restrict) { applyRestriction(); }
+      });
+    });
+
+  body
+    h1 Layer Summary
+    
+    h3 Zoom Level Visibility
+
+    form
+      p 
+        input(type="checkbox",id="restrict-to-zoom")
+        label(for="restrict-to-zoom") Restrict to Zoom Level
+
+      p
+        input(type="number",id="zoom-level",min="0",max="22",value="0")
+        label(for="zoom-level") Zoom Level
+
+
+    each layer in layers
+      div.layer(id=layer.id,data-min=(layer.properties.minzoom || "0"),data-max=(layer.properties.maxzoom || "22"))
+        h2= layer.id
+          h3 Min Zoom: #{layer.properties.minzoom || "0"}
+          h3 Max Zoom: #{layer.properties.maxzoom || "22"}
+          h3 Type: #{layer.Datasource.type}
