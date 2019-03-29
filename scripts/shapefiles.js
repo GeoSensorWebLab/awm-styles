@@ -161,23 +161,23 @@ shapefiles.forEach((shapefile) => {
         // run ogr2ogr on all .shp files
         let commands = files.map((shpFile) => {
             return new Promise((resolve, reject) => {
-                let outFile = `${outputDir}/${path.basename(shpFile)}`
+                let outputFile = `${outputDir}/${path.basename(shpFile)}`
                 
                 // Track temp files so we can delete them after
                 let tempFiles = [];
 
                 // 1. reproject to EPSG:4326
-                return ogr2ogr(["-t_srs", "EPSG:4326", "-lco", "ENCODING=UTF-8"], shpFile)
+                return ogr2ogr(["--config", "OGR_ENABLE_PARTIAL_REPROJECTION", "YES", "-t_srs", "EPSG:4326"], shpFile)
                 .then((outFile) => {
                     tempFiles.push(outFile);
                     // 2. Fix geometries
                     // Assumption: tablenames are the same as the filename
                     let tablename = path.basename(shpFile, ".shp");
-                    return ogr2ogr(["-dialect", "sqlite", "-sql", `"SELECT ST_MakeValid(geometry) as geometry FROM ${tablename}"`], outFile);
+                    return ogr2ogr(["-dialect", "sqlite", "-sql", `"SELECT ST_MakeValid(geometry) as geometry FROM ${tablename}"`, "-explodecollections", "-wrapdateline"], outFile);
                 }).then((outFile) => {
                     tempFiles.push(outFile);
                     // 3. Clip to bounds
-                    return ogr2ogr(["-clipsrc", shapefile.ogr2ogr.clip], outFile);
+                    return ogr2ogr(["-clipdst", shapefile.ogr2ogr.clip], outFile);
                 }).then((outFile) => {
                     tempFiles.push(outFile);
                     // 4. Apply segmentization
@@ -185,7 +185,7 @@ shapefiles.forEach((shapefile) => {
                 }).then((outFile) => {
                     tempFiles.push(outFile);
                     // 5. Reproject to EPSG:3573
-                    return ogr2ogr(["-t_srs", "EPSG:3573"], outFile);
+                    return ogr2ogr(["--config", "OGR_ENABLE_PARTIAL_REPROJECTION", "YES", "-t_srs", "EPSG:3573"], outFile);
                 }).then((outFile) => {
                     tempFiles.push(outFile);
                     let outDir = path.dirname(outFile);
@@ -230,17 +230,9 @@ shapefiles.forEach((shapefile) => {
                     });
                 })
                 .then(() => {
-                    resolve(outFile);
+                    resolve(outputFile);
                 }).catch(reject);
             });
-        });
-
-        return Promise.all(commands);
-    }).then((shpFiles) => {
-        // Run shapeindex on all .shp files
-        let commands = shpFiles.map((shpFile) => {
-            log(shpFile);
-            return spawnPromise("shapeindex", [shpFile]);
         });
 
         return Promise.all(commands);
