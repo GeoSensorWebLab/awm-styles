@@ -109,6 +109,34 @@ exports.LocalConfig = function (localizer, project) {
             }
         });
 
+        let bathymetry = {
+            "bathymetry-0m":   "ne_10m_bathymetry_L_0",
+            "bathymetry-200m": "ne_10m_bathymetry_K_200",
+            "bathymetry-1km":  "ne_10m_bathymetry_J_1000",
+            "bathymetry-2km":  "ne_10m_bathymetry_I_2000",
+            "bathymetry-3km":  "ne_10m_bathymetry_H_3000",
+            "bathymetry-4km":  "ne_10m_bathymetry_G_4000",
+            "bathymetry-5km":  "ne_10m_bathymetry_F_5000",
+            "bathymetry-6km":  "ne_10m_bathymetry_E_6000",
+            "bathymetry-7km":  "ne_10m_bathymetry_D_7000",
+            "bathymetry-8km":  "ne_10m_bathymetry_C_8000",
+            "bathymetry-9km":  "ne_10m_bathymetry_B_9000",
+            "bathymetry-10km": "ne_10m_bathymetry_A_10000",
+        }
+
+        Object.keys(bathymetry).forEach((id) => {
+            let filename = bathymetry[id];
+            newLayers.push({
+                id: id,
+                geometry: "polygon",
+                "srs-name": "EPSG:3573",
+                srs: "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs",
+                Datasource: {
+                    file: `data/awm/ne_10m_bathymetry_all/${filename}.shp`,
+                    type: "shape"
+                }
+            });
+        });
 
         project.mml.Layer.splice(necountriesIndex + 1, 0, ...newLayers);
     }
