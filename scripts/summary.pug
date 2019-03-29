@@ -61,8 +61,8 @@ html(lang="en")
 
 
     each layer in layers
-      div.layer(id=layer.id,data-min=(layer.properties.minzoom || "0"),data-max=(layer.properties.maxzoom || "22"))
+      div.layer(id=layer.id,data-min=(layer.properties ? layer.properties.minzoom || "0" : "0"),data-max=(layer.properties ? layer.properties.maxzoom || "22" : "22"))
         h2= layer.id
-          h3 Min Zoom: #{layer.properties.minzoom || "0"}
-          h3 Max Zoom: #{layer.properties.maxzoom || "22"}
+          h3 Min Zoom: #{layer.properties ? layer.properties.minzoom || "0" : "0"}
+          h3 Max Zoom: #{layer.properties ? layer.properties.maxzoom || "22" : "22"}
           h3 Type: #{layer.Datasource.type}
