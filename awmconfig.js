@@ -1,6 +1,8 @@
 const fs  = require('fs');
 const pry = require('pryjs');
 
+// TODO: Create a DSL/API to clean this up.
+// AddAfter, Remove, CreateLayer, etc.
 exports.LocalConfig = function (localizer, project) {
     project.mml.name = "ArcticWebMap";
     project.mml.center = [0, 0, 3];
@@ -36,7 +38,11 @@ exports.LocalConfig = function (localizer, project) {
     });
 
     // remove antarctic layers, high-zoom coast
-    removedIDs = ['icesheet-outlines', 'icesheet-poly', 'coast-poly'];
+    removedIDs = [
+        'coast-poly',
+        'icesheet-outlines',
+        'icesheet-poly'
+    ];
     project.mml.Layer = project.mml.Layer.filter((layer) => {
         return !removedIDs.includes(layer.id);
     });
