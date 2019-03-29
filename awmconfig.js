@@ -1,5 +1,5 @@
-const fs  = require('fs');
-const pry = require('pryjs');
+const fs  = require("fs");
+const pry = require("pryjs");
 
 // TODO: Create a DSL/API to clean this up.
 // AddAfter, Remove, CreateLayer, etc.
@@ -17,14 +17,14 @@ exports.LocalConfig = function (localizer, project) {
 
     // Cache features in RAM. Uses a lot of RAM that would better be
     // used by Postgres.
-    // localizer.where('Layer')
+    // localizer.where("Layer")
     // .then({
     //     "cache-features": "on"
     // });
 
     // Change database name, details, projection
-    localizer.where('Layer')
-    .if({'Datasource.type': 'postgis'})
+    localizer.where("Layer")
+    .if({"Datasource.type": "postgis"})
     .then({
         "Datasource.dbname": "osm",
         "Datasource.password": "",
@@ -39,30 +39,37 @@ exports.LocalConfig = function (localizer, project) {
 
     // remove antarctic layers, high-zoom coast
     removedIDs = [
-        'coast-poly',
-        'icesheet-outlines',
-        'icesheet-poly'
+        "coast-poly",
+        "icesheet-outlines",
+        "icesheet-poly"
     ];
     project.mml.Layer = project.mml.Layer.filter((layer) => {
         return !removedIDs.includes(layer.id);
     });
 
     // Use natural earth 10m for land instead of OSM
-    localizer.where('Layer')
-    .if({'Datasource.file': 'data/simplified-land-polygons-complete-3857/simplified_land_polygons.shp'})
+    localizer.where("Layer")
+    .if({"Datasource.file": "data/simplified-land-polygons-complete-3857/simplified_land_polygons.shp"})
     .then({
-        'Datasource.file': 'data/ne_10m_land/ne_10m_land.shp'
-    })
+        "Datasource.file": "data/ne_10m_land/ne_10m_land.shp"
+    });
+
+    // Adjust minzoom on water-areas
+    localizer.where("Layer")
+    .if({"id": "water-areas"})
+    .then({
+        "properties.minzoom": 5
+    });
 
     // Adjust layer file location, source projection
-    localizer.where('Layer')
-    .if({'Datasource.type': 'shape'})
+    localizer.where("Layer")
+    .if({"Datasource.type": "shape"})
     .then((obj) => {
         obj["srs-name"] = "EPSG:3573";
         obj["srs"] = "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs";
         obj.extent = [-20037508, -20037508, 20037508, 20037508];
         obj.Datasource.extent = [-20037508, -20037508, 20037508, 20037508];
-        obj.Datasource.file = obj.Datasource.file.replace(/^data/, 'data/awm');
+        obj.Datasource.file = obj.Datasource.file.replace(/^data/, "data/awm");
         return obj;
     });
 
