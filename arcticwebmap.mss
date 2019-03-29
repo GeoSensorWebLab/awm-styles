@@ -1,3 +1,7 @@
+Map {
+  background-color: @land-color;
+}
+
 #lakes-low[zoom < 8] {
 	polygon-fill: @water-color;
 }
