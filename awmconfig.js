@@ -116,6 +116,54 @@ exports.LocalConfig = function (localizer, project) {
         "properties.minzoom": 5
     });
 
+    // Adjust bias for cities, towns, and villages north of 60˚N.
+    // For places in that region:
+    // 1. classify in "city" category
+    // 2. multiply population by 100
+    // 3. Include villages in this layer
+    localizer.where("Layer")
+    .if({"id": "placenames-medium"})
+    .then({"Datasource.table":
+    `(SELECT
+            way,
+            name,
+            score,
+            CASE
+              WHEN (place = 'city') THEN 1
+              WHEN (ST_Covers(ST_MakeEnvelope(-180,60,0,90,4326), ST_Transform(way, 4326))) THEN 1
+              WHEN (place = 'town') THEN 2
+              ELSE 3
+            END as category,
+            round(ascii(md5(osm_id::text)) / 55) AS dir -- base direction factor on geometry to be consistent across metatiles
+          FROM
+            (SELECT
+                osm_id,
+                way,
+                place,
+                name,
+                (
+                  (CASE
+                    WHEN (tags->'population' ~ '^[0-9]{1,8}$') THEN (tags->'population')::INTEGER
+                    WHEN (place = 'city') THEN 100000
+                    WHEN (place = 'town') THEN 1000
+                    WHEN (place = 'village') THEN 100
+                    ELSE 1
+                  END)
+                  *
+                  (CASE
+                    WHEN (ST_Covers(ST_MakeEnvelope(-180,60,0,90,4326), ST_Transform(way, 4326))) THEN 100
+                    WHEN (tags @> 'capital=>4') THEN 2
+                    ELSE 1
+                  END)
+                ) AS score
+              FROM planet_osm_point
+              WHERE place IN ('city', 'town', 'village')
+                AND name IS NOT NULL
+                AND NOT (tags @> 'capital=>yes')
+            ) as p
+          ORDER BY score DESC, length(name) DESC, name
+        ) AS placenames_medium`});
+
     // Adjust shapefile layer file location, source projection
     localizer.where("Layer")
     .if({"Datasource.type": "shape"})
