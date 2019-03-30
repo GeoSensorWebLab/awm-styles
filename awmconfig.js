@@ -118,6 +118,13 @@ exports.LocalConfig = function (localizer, project) {
         "properties.minzoom": 5
     });
 
+    // Adjust minzoom on capital-names
+    localizer.where("Layer")
+    .if({"id": "capital-names"})
+    .then({
+        "properties.minzoom": 5
+    });
+
     // Adjust bias for cities, towns, and villages north of 60˚N.
     // For places in that region:
     // 1. classify in "city" category
@@ -164,7 +171,8 @@ exports.LocalConfig = function (localizer, project) {
                 AND NOT (tags @> 'capital=>yes')
             ) as p
           ORDER BY score DESC, length(name) DESC, name
-        ) AS placenames_medium`});
+        ) AS placenames_medium`,
+        "properties.minzoom": 5});
 
     // Adjust shapefile layer file location, source projection
     localizer.where("Layer")
