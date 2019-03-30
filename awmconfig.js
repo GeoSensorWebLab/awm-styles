@@ -1,22 +1,33 @@
 const fs  = require("fs");
 const pry = require("pryjs");
 
+const epsg3573 = "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs";
+// maximum extent of EPSG:3573 projection
+const extent3573 = [
+    -20037508,
+    -20037508,
+    20037508,
+    20037508
+];
+// clipped extent of EPSG:3573 projection for this map
+const clipped3573 = [
+    -4167630.8211728190071881,
+    -5397732.1324295047670603,
+    5396780.7497062487527728,
+    937306.5764416041783988
+];
+
 // TODO: Create a DSL/API to clean this up.
 // AddAfter, Remove, CreateLayer, etc.
 exports.LocalConfig = function (localizer, project) {
     project.mml.name = "ArcticWebMap";
     project.mml.center = [0, 0, 3];
-    project.mml.bounds = [
-        -20037508,
-        -20037508,
-        20037508,
-        20037508
-    ];
+    project.mml.bounds = extent3573;
     // Use EPSG:3573 PROJ4 string
-    project.mml.srs = "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs";
+    project.mml.srs = epsg3573;
 
     // extents from ne_10m_land projected into EPSG:3573
-    project.mml["maximum-extent"] = [-4167630.8211728190071881, -5397732.1324295047670603, 5396780.7497062487527728, 937306.5764416041783988];
+    project.mml["maximum-extent"] = clipped3573;
 
     // Cache features in RAM. Uses a lot of RAM that would better be
     // used by Postgres.
@@ -29,16 +40,16 @@ exports.LocalConfig = function (localizer, project) {
     localizer.where("Layer")
     .if({"Datasource.type": "postgis"})
     .then({
-        "Datasource.dbname": "osm",
+        "Datasource.dbname": "osm_3573",
         "Datasource.password": "",
         "Datasource.user": "",
         "Datasource.host": "",
         "Datasource.persist_connection": true,
         "Datasource.estimate_extent": true,
         // extent should be in database SRS
-        "Datasource.extent": "-180 40 0 89.999999",
-        "srs-name": "EPSG:4326",
-        "srs": "+proj=longlat +datum=WGS84 +no_defs"
+        "Datasource.extent": clipped3573.join(", "),
+        "srs-name": "EPSG:3573",
+        "srs": epsg3573
     });
 
     // remove antarctic layers - projection issues
@@ -72,7 +83,7 @@ exports.LocalConfig = function (localizer, project) {
     .then({
         "properties.minzoom": 7
     });
-    
+
     // Adjust minzoom on landcover-area-symbols
     localizer.where("Layer")
     .if({"id": "landcover-area-symbols"})
@@ -85,9 +96,9 @@ exports.LocalConfig = function (localizer, project) {
     .if({"Datasource.type": "shape"})
     .then((obj) => {
         obj["srs-name"] = "EPSG:3573";
-        obj["srs"] = "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs";
-        obj.extent = [-20037508, -20037508, 20037508, 20037508];
-        obj.Datasource.extent = [-20037508, -20037508, 20037508, 20037508];
+        obj["srs"] = epsg3573;
+        obj.extent = clipped3573;
+        obj.Datasource.extent = clipped3573;
         obj.Datasource.file = obj.Datasource.file.replace(/^data/, "data/awm");
         return obj;
     });
@@ -129,7 +140,7 @@ exports.LocalConfig = function (localizer, project) {
         id: "lakes-low",
         geometry: "polygon",
         "srs-name": "EPSG:3573",
-        srs: "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs",
+        srs: epsg3573,
         Datasource: {
             file: "data/awm/ne_10m_lakes/ne_10m_lakes.shp",
             type: "shape"
@@ -161,7 +172,7 @@ exports.LocalConfig = function (localizer, project) {
             id: id,
             geometry: "polygon",
             "srs-name": "EPSG:3573",
-            srs: "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs",
+            srs: epsg3573,
             Datasource: {
                 file: `data/awm/ne_10m_bathymetry_all/${filename}.shp`,
                 type: "shape"
