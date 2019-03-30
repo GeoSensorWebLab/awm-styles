@@ -47,15 +47,17 @@ exports.LocalConfig = function (localizer, project) {
     // remove coasts - high-zoom coastline not needed
     // remove country names - only Kalaallit Nunaat/France/Île Verte are
     // displayed, which may look like favouritism to those regions
+    function remove(searchID) {
+        let index = project.mml.Layer.findIndex((l) => (l.id === searchID));
+        project.mml.Layer.splice(index, 1);
+    };
+
     removedIDs = [
         "coast-poly",
         "country-names",
         "icesheet-outlines",
         "icesheet-poly"
-    ];
-    project.mml.Layer = project.mml.Layer.filter((layer) => {
-        return !removedIDs.includes(layer.id);
-    });
+    ].forEach((id) => { remove(id) });
 
     /*
      * LAYER EDITS
