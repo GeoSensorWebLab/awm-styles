@@ -15,6 +15,9 @@ exports.LocalConfig = function (localizer, project) {
     // Use EPSG:3573 PROJ4 string
     project.mml.srs = "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs";
 
+    // extents from ne_10m_land projected into EPSG:3573
+    project.mml["maximum-extent"] = [-4167630.8211728190071881, -5397732.1324295047670603, 5396780.7497062487527728, 937306.5764416041783988];
+
     // Cache features in RAM. Uses a lot of RAM that would better be
     // used by Postgres.
     // localizer.where("Layer")
@@ -30,14 +33,16 @@ exports.LocalConfig = function (localizer, project) {
         "Datasource.password": "",
         "Datasource.user": "",
         "Datasource.host": "",
-        "Datasource.extent": "-180,0,0,90",
         "Datasource.persist_connection": true,
+        "Datasource.estimate_extent": true,
+        // extent should be in database SRS
+        "Datasource.extent": "-180 40 0 89.999999",
         "srs-name": "EPSG:4326",
-        "srs": "+proj=longlat +datum=WGS84 +no_defs",
-        "extent": [-180,0,0,90]
+        "srs": "+proj=longlat +datum=WGS84 +no_defs"
     });
 
-    // remove antarctic layers, high-zoom coast
+    // remove antarctic layers - projection issues
+    // remove coasts - high-zoom coastline not needed
     removedIDs = [
         "coast-poly",
         "icesheet-outlines",
