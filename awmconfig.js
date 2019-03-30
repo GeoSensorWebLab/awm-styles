@@ -1,6 +1,7 @@
 const fs  = require("fs");
 const pry = require("pryjs");
 
+const epsg4326 = "+proj=longlat +datum=WGS84 +no_defs";
 const epsg3573 = "+proj=laea +lat_0=90 +lon_0=-100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs";
 // maximum extent of EPSG:3573 projection
 const extent3573 = [
@@ -250,7 +251,7 @@ exports.LocalConfig = function (localizer, project) {
         "bathymetry-2km":  "ne_10m_bathymetry_I_2000",
         "bathymetry-1km":  "ne_10m_bathymetry_J_1000",
         "bathymetry-200m": "ne_10m_bathymetry_K_200",
-        "bathymetry-0m":   "ne_10m_bathymetry_L_0",
+        "bathymetry-0m":   "ne_10m_bathymetry_L_0"
     }
 
     Object.keys(bathymetry).forEach((id) => {
@@ -263,8 +264,26 @@ exports.LocalConfig = function (localizer, project) {
             Datasource: {
                 file: `data/awm/ne_10m_bathymetry_all/${filename}.shp`,
                 type: "shape"
+            },
+            properties: {
+                maxzoom: 9
             }
         });
+    });
+
+    // Add high-quality water layer for mid and high zoom levels
+    addAfter("bathymetry-0m", {
+        id: "water-poly",
+        geometry: "polygon",
+        "srs-name": "EPSG:4326",
+        srs: epsg4326,
+        Datasource: {
+            file: "data/water_polygons/water-polygons-split-4326/water_polygons.shp",
+            type: "shape"
+        },
+        properties: {
+            minzoom: 10
+        }
     });
 
     /*

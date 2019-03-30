@@ -53,3 +53,7 @@ Map {
 #bathymetry-0m {
   polygon-fill: darken(@water-color, 2%);
 }
+
+#water-poly {
+  polygon-fill: @water-color;
+}

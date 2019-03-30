@@ -140,6 +140,11 @@ shapefiles.forEach((shapefile) => {
     }).then(() => {
         // Create output directory
         return new Promise((resolve, reject) => {
+            // Exit if no transforms
+            if (shapefile.ogr2ogr === undefined) {
+                reject("No transforms needed.");
+            }
+            
             fs.mkdir(outputDir, { recursive: true }, (err) => {
                 if (err) {
                     reject(err);

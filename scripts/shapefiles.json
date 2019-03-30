@@ -46,5 +46,9 @@
             "clip": "-180 40 0 90",
             "segmentize": 0.5
         }
+    },
+    {
+        "name": "water_polygons",
+        "url": "https://osmdata.openstreetmap.de/download/water-polygons-split-4326.zip"
     }
 ]
