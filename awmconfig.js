@@ -20,6 +20,9 @@ const clipped3573 = [
 // TODO: Create a DSL/API to clean this up.
 // AddAfter, Remove, CreateLayer, etc.
 exports.LocalConfig = function (localizer, project) {
+    /*
+     * PROJECT RECONFIGURATION
+     */
     project.mml.name = "ArcticWebMap";
     project.mml.center = [0, 0, 3];
     project.mml.bounds = extent3573;
@@ -35,6 +38,28 @@ exports.LocalConfig = function (localizer, project) {
     // .then({
     //     "cache-features": "on"
     // });
+
+    /*
+     * LAYER REMOVALS
+     */
+
+    // remove antarctic layers - projection issues
+    // remove coasts - high-zoom coastline not needed
+    // remove country names - only Kalaallit Nunaat/France/Île Verte are
+    // displayed, which may look like favouritism to those regions
+    removedIDs = [
+        "coast-poly",
+        "country-names",
+        "icesheet-outlines",
+        "icesheet-poly"
+    ];
+    project.mml.Layer = project.mml.Layer.filter((layer) => {
+        return !removedIDs.includes(layer.id);
+    });
+
+    /*
+     * LAYER EDITS
+     */
 
     // Change database name, details, projection
     localizer.where("Layer")
@@ -52,23 +77,16 @@ exports.LocalConfig = function (localizer, project) {
         "srs": epsg3573
     });
 
-    // remove antarctic layers - projection issues
-    // remove coasts - high-zoom coastline not needed
-    removedIDs = [
-        "coast-poly",
-        "icesheet-outlines",
-        "icesheet-poly"
-    ];
-    project.mml.Layer = project.mml.Layer.filter((layer) => {
-        return !removedIDs.includes(layer.id);
-    });
-
     // Use natural earth 10m for land instead of OSM
     localizer.where("Layer")
     .if({"Datasource.file": "data/simplified-land-polygons-complete-3857/simplified_land_polygons.shp"})
     .then({
         "Datasource.file": "data/ne_10m_land/ne_10m_land.shp"
     });
+
+    /*
+     * MINZOOM ADJUSTMENTS
+     */
 
     // Adjust minzoom on water-areas
     localizer.where("Layer")
@@ -91,7 +109,14 @@ exports.LocalConfig = function (localizer, project) {
         "properties.minzoom": 7
     });
 
-    // Adjust layer file location, source projection
+    // Adjust minzoom on text-poly-low-zoom
+    localizer.where("Layer")
+    .if({"id": "text-poly-low-zoom"})
+    .then({
+        "properties.minzoom": 5
+    });
+
+    // Adjust shapefile layer file location, source projection
     localizer.where("Layer")
     .if({"Datasource.type": "shape"})
     .then((obj) => {
@@ -102,6 +127,10 @@ exports.LocalConfig = function (localizer, project) {
         obj.Datasource.file = obj.Datasource.file.replace(/^data/, "data/awm");
         return obj;
     });
+
+    /*
+     * LAYER ADDITIONS
+     */
 
     // Add a layer to the Layer list after the layer with id `searchID`
     function addAfter(searchID, layer) {
@@ -179,6 +208,10 @@ exports.LocalConfig = function (localizer, project) {
             }
         });
     });
+
+    /*
+     * STYLESHEET ADDITIONS
+     */
 
     // Add to stylesheets
     project.mml.Stylesheet.push({
