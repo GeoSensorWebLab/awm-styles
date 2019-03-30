@@ -66,6 +66,20 @@ exports.LocalConfig = function (localizer, project) {
         "properties.minzoom": 5
     });
 
+    // Adjust minzoom on landcover-low-zoom
+    localizer.where("Layer")
+    .if({"id": "landcover-low-zoom"})
+    .then({
+        "properties.minzoom": 7
+    });
+    
+    // Adjust minzoom on landcover-area-symbols
+    localizer.where("Layer")
+    .if({"id": "landcover-area-symbols"})
+    .then({
+        "properties.minzoom": 7
+    });
+
     // Adjust layer file location, source projection
     localizer.where("Layer")
     .if({"Datasource.type": "shape"})
