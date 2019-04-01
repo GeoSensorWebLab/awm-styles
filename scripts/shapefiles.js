@@ -1,7 +1,7 @@
 /*
  * Retrieve and set up shapefiles for AWM stylesheet
  */
-const shapefiles  = require('./shapefiles.json');
+const shapefiles  = require('../shapefiles.json');
 const child       = require('child_process');
 const compressing = require('compressing');
 const fs          = require('fs');
