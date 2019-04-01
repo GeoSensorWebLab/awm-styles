@@ -1,6 +1,7 @@
 /*
- * Retrieve and set up shapefiles for AWM stylesheet
+ * Retrieve and set up shapefiles and raster images for AWM stylesheet
  */
+const rasters     = require('../rasters.json');
 const shapefiles  = require('../shapefiles.json');
 const child       = require('child_process');
 const compressing = require('compressing');
@@ -11,12 +12,29 @@ const path        = require('path');
 const rimraf      = require('rimraf');
 const tmp         = require('tmp');
 
-let destination = "openstreetmap-carto/data";
-let subdirectory = destination + "/awm";
+// Stylesheets and project are in the openstreetmap-carto directory, so
+// data files should be in a sub-directory. "awm" is created to hold
+// transformed versions.
+let osmDataDir = "openstreetmap-carto/data";
+let awmDataDir = osmDataDir + "/awm";
 
 // convenience function
-function log() {
+let log = function() {
     console.log.apply(this, arguments);
+}
+
+// Return a promise for fs.stat.
+// Resolve if file exists, reject if it does not exist.
+let stat = function(file) {
+    return new Promise((resolve, reject) => {
+        fs.stat(file, (err, stats) => {
+            if (err) {
+                reject(file);
+            } else {
+                resolve(file);
+            }
+        });
+    });
 }
 
 // run a command in a spawned shell, returning a Promise
@@ -36,7 +54,7 @@ let spawnPromise = function(command, args) {
 // Run a command on an input file with ogr2ogr.
 // Put output file(s) in a temporary directory, return output file name.
 let ogr2ogr = function(args, inFile) {
-    let tmpFile = tmp.dirSync().name + `/${path.basename(inFile)}`;
+    let tmpFile = `${tmp.dirSync().name}/${path.basename(inFile)}`;
     args.push(tmpFile, inFile);
     return spawnPromise("ogr2ogr", args)
     .then(() => {
@@ -44,42 +62,31 @@ let ogr2ogr = function(args, inFile) {
     });
 };
 
-// Print out all shapefiles
-if (shapefiles === undefined) {
-    console.error("Cannot read shapefiles.");
-    process.exit(1);
-}
-
 log("There are %d shapefiles.", shapefiles.length);
+log("There are %d rasters.", rasters.length);
 
-// Iterate over shapefiles
-shapefiles.forEach((shapefile) => {
-    let outputDir = `${subdirectory}/${shapefile.name}`;
-    let filename = path.basename(shapefile.url);
+// Iterate over files
+shapefiles.forEach((datafile) => {
+    let finalDir = `${awmDataDir}/${datafile.name}`;
+    let filename = path.basename(datafile.url);
 
-    new Promise((resolve, reject) => {
-        // Check if shapefile has already been converted
-        fs.stat(outputDir, (err, stats) => {
-            if (err) {
-                resolve(outputDir);
-            } else {
-                // reject("Shapefile has already been converted.");
-                resolve();
-            }
-        });
+    // Check if final output directory exists. If it does, then this
+    // file does not need to be downloaded nor converted.
+    return stat(finalDir)
+    .then((file) => {
+        return Promise.reject(`Data file "${file}" has already been converted.`);
+    }, (file) => {
+        return Promise.resolve(file);
     }).then(() => {
-        return new Promise((resolve, reject) => {
-            // Check if downloaded file already exists
-            fs.stat(`${destination}/${filename}`, (err, stats) => {
-                if (err) {
-                    // file doesn't exist - download it
-                    resolve(filename);
-                } else {
-                    // file exists, don't download
-                    log("%s already exists.", filename);
-                    resolve();
-                }
-            });
+        // Check if downloaded file already exists
+        return stat(`${osmDataDir}/${filename}`)
+        .then((file) => {
+            // file exists, don't download
+            log("%s already exists.", file);
+            return Promise.resolve();
+        }, (file) => {
+            // file doesn't exist - download it
+            return Promise.resolve(file);
         });
     }).then((file) => {
         return new Promise((resolve, reject) => {
@@ -87,30 +94,28 @@ shapefiles.forEach((shapefile) => {
             if (file === undefined) {
                 resolve();
             } else {
-                log("Downloading to %s/%s", outputDir, filename);
-                got.stream(shapefile.url)
+                log("Downloading to %s/%s", finalDir, filename);
+                got.stream(datafile.url)
                 .on('error', reject)
                 .on('downloadProgress', (progress) => {
+                    // should debounce this
                     log("%s: %d%%", filename, Math.trunc(100 * progress.percent));
                 })
-                .pipe(fs.createWriteStream(`${destination}/${filename}`))
+                .pipe(fs.createWriteStream(file))
                 .on('finish', resolve);
             }
         });
     }).then(() => {
-        return new Promise((resolve, reject) => {
-            // Check if archive has already been extracted
-            let extractionDir = `${destination}/${shapefile.name}`;
-            fs.stat(extractionDir, (err, stats) => {
-                if (err) {
-                    // dir doesn't exist - extract it
-                    resolve(extractionDir);
-                } else {
-                    // dir exists, don't extract
-                    log("%s already extracted.", filename);
-                    resolve();
-                }
-            });
+        // Check if archive has already been extracted
+        let extractionDir = `${osmDataDir}/${datafile.name}`;
+        return stat(extractionDir)
+        .then((file) => {
+            // dir exists, don't extract
+            log("%s already extracted.", file);
+            return Promise.resolve();
+        }, (file) => {
+            // dir doesn't exist - extract it
+            return Promise.resolve(file);
         });
     }).then((extractionDir) => {
         return new Promise((resolve, reject) => {
@@ -131,7 +136,7 @@ shapefiles.forEach((shapefile) => {
                     reject("Could not extract %s", filename);
                 } else {
                     log("Extracting %s", filename);
-                    extractor(`${destination}/${filename}`, `${destination}/${shapefile.name}`)
+                    extractor(`${osmDataDir}/${filename}`, `${osmDataDir}/${datafile.name}`)
                     .then(resolve)
                     .catch(reject);
                 }
@@ -141,11 +146,11 @@ shapefiles.forEach((shapefile) => {
         // Create output directory
         return new Promise((resolve, reject) => {
             // Exit if no transforms
-            if (shapefile.ogr2ogr === undefined) {
+            if (datafile.ogr2ogr === undefined) {
                 reject("No transforms needed.");
             }
             
-            fs.mkdir(outputDir, { recursive: true }, (err) => {
+            fs.mkdir(finalDir, { recursive: true }, (err) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -156,7 +161,7 @@ shapefiles.forEach((shapefile) => {
     }).then(() => {
         // collect all .shp files
         return new Promise((resolve, reject) => {
-            glob(`${destination}/${shapefile.name}/**/*.shp`, (err, files) => {
+            glob(`${osmDataDir}/${datafile.name}/**/*.shp`, (err, files) => {
                 if (err) { reject(err); }
                 log("Found %d shp files", files.length);
                 resolve(files);
@@ -166,7 +171,7 @@ shapefiles.forEach((shapefile) => {
         // run ogr2ogr on all .shp files
         let commands = files.map((shpFile) => {
             return new Promise((resolve, reject) => {
-                let outputFile = `${outputDir}/${path.basename(shpFile)}`
+                let outputFile = `${finalDir}/${path.basename(shpFile)}`
                 
                 // Track temp files so we can delete them after
                 let tempFiles = [];
@@ -182,11 +187,11 @@ shapefiles.forEach((shapefile) => {
                 }).then((outFile) => {
                     tempFiles.push(outFile);
                     // 3. Clip to bounds
-                    return ogr2ogr(["-clipdst", shapefile.ogr2ogr.clip], outFile);
+                    return ogr2ogr(["-clipdst", datafile.ogr2ogr.clip], outFile);
                 }).then((outFile) => {
                     tempFiles.push(outFile);
                     // 4. Apply segmentization
-                    return ogr2ogr(["-segmentize", shapefile.ogr2ogr.segmentize], outFile);
+                    return ogr2ogr(["-segmentize", datafile.ogr2ogr.segmentize], outFile);
                 }).then((outFile) => {
                     tempFiles.push(outFile);
                     // 5. Reproject to EPSG:3573
@@ -208,11 +213,11 @@ shapefiles.forEach((shapefile) => {
                     return Promise.all([outDir, p]);
                 }).then((values) => {
                     sourceDir = values[0], segmentizedFiles = values[1];
-                    // Move files from outDir to outputDir
+                    // Move files from outDir to finalDir
                     let movePromises = segmentizedFiles.map((sFile) => {
                         return new Promise((resolve, reject) => {
                             // remove destination file
-                            let destFilename = `${outputDir}/${sFile}`;
+                            let destFilename = `${finalDir}/${sFile}`;
                             rimraf.sync(destFilename);
 
                             // move file
