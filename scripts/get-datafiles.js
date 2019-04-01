@@ -159,89 +159,29 @@ shapefiles.forEach((datafile) => {
             });
         });
     }).then(() => {
-        // collect all .shp files
+        // collect all .shp, .tif files
         return new Promise((resolve, reject) => {
-            glob(`${osmDataDir}/${datafile.name}/**/*.shp`, (err, files) => {
-                if (err) { reject(err); }
-                log("Found %d shp files", files.length);
-                resolve(files);
+            glob(`${osmDataDir}/${datafile.name}/**/*.@(shp|tif|tiff)`, (err, files) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(files);
+                }
             });
         });
     }).then((files) => {
-        // run ogr2ogr on all .shp files
-        let commands = files.map((shpFile) => {
+        // run ogr2ogr on all geo files
+        let commands = files.map((geoFile) => {
             return new Promise((resolve, reject) => {
-                let outputFile = `${finalDir}/${path.basename(shpFile)}`
-                
-                // Track temp files so we can delete them after
-                let tempFiles = [];
+                let outputFile = `${finalDir}/${path.basename(geoFile)}`
 
-                // 1. reproject to EPSG:4326
-                return ogr2ogr(["--config", "OGR_ENABLE_PARTIAL_REPROJECTION", "YES", "-t_srs", "EPSG:4326"], shpFile)
-                .then((outFile) => {
-                    tempFiles.push(outFile);
-                    // 2. Fix geometries
-                    // Assumption: tablenames are the same as the filename
-                    let tablename = path.basename(shpFile, ".shp");
-                    return ogr2ogr(["-dialect", "sqlite", "-sql", `"SELECT ST_MakeValid(geometry) as geometry FROM ${tablename}"`, "-explodecollections", "-wrapdateline"], outFile);
-                }).then((outFile) => {
-                    tempFiles.push(outFile);
-                    // 3. Clip to bounds
-                    return ogr2ogr(["-clipdst", datafile.ogr2ogr.clip], outFile);
-                }).then((outFile) => {
-                    tempFiles.push(outFile);
-                    // 4. Apply segmentization
-                    return ogr2ogr(["-segmentize", datafile.ogr2ogr.segmentize], outFile);
-                }).then((outFile) => {
-                    tempFiles.push(outFile);
-                    // 5. Reproject to EPSG:3573
-                    return ogr2ogr(["--config", "OGR_ENABLE_PARTIAL_REPROJECTION", "YES", "-t_srs", "EPSG:3573"], outFile);
-                }).then((outFile) => {
-                    tempFiles.push(outFile);
-                    let outDir = path.dirname(outFile);
-                    // search for files in output file's directory so
-                    // we can move them to the AWM data directory
-                    let p = new Promise((resolve, reject) => {
-                        fs.readdir(outDir, (err, files) => {
-                            if (err) {
-                                reject(err);
-                            } else {
-                                resolve(files);    
-                            }
-                        });    
-                    });
-                    return Promise.all([outDir, p]);
-                }).then((values) => {
-                    sourceDir = values[0], segmentizedFiles = values[1];
-                    // Move files from outDir to finalDir
-                    let movePromises = segmentizedFiles.map((sFile) => {
-                        return new Promise((resolve, reject) => {
-                            // remove destination file
-                            let destFilename = `${finalDir}/${sFile}`;
-                            rimraf.sync(destFilename);
-
-                            // move file
-                            fs.rename(`${sourceDir}/${sFile}`, destFilename, (err) => {
-                                if (err) {
-                                    reject(err);
-                                } else {
-                                    resolve();
-                                }
-                            });
-                        });
-                    });
-
-                    return Promise.all(movePromises);
-                })
-                .then(() => {
-                    // Clean up tmp directories
-                    tempFiles.forEach((tmpFile) => {
-                        rimraf.sync(path.dirname(tmpFile));
-                    });
-                })
-                .then(() => {
-                    resolve(outputFile);
-                }).catch(reject);
+                switch(path.extname(geoFile)) {
+                    case ".shp":
+                    return processShapefile(geoFile, outputFile, datafile.ogr2ogr);
+                    break;
+                    default:
+                    return Promise.reject("Unhandled geo file type: %s", geoFile);
+                }
             });
         });
 
@@ -250,3 +190,74 @@ shapefiles.forEach((datafile) => {
         console.error(err);
     });
 });
+
+// Process for ERSI Shapefiles
+let processShapefile = function(shpFile, outputFile, options) {
+    // Track temp files so we can delete them after
+    let tempFiles = [];
+
+    // 1. reproject to EPSG:4326
+    return ogr2ogr(["--config", "OGR_ENABLE_PARTIAL_REPROJECTION", "YES", "-t_srs", "EPSG:4326"], shpFile)
+    .then((outFile) => {
+        tempFiles.push(outFile);
+        // 2. Fix geometries
+        // Assumption: tablenames are the same as the filename
+        let tablename = path.basename(shpFile, ".shp");
+        return ogr2ogr(["-dialect", "sqlite", "-sql", `"SELECT ST_MakeValid(geometry) as geometry FROM ${tablename}"`, "-explodecollections", "-wrapdateline"], outFile);
+    }).then((outFile) => {
+        tempFiles.push(outFile);
+        // 3. Clip to bounds
+        return ogr2ogr(["-clipdst", options.clip], outFile);
+    }).then((outFile) => {
+        tempFiles.push(outFile);
+        // 4. Apply segmentization
+        return ogr2ogr(["-segmentize", options.segmentize], outFile);
+    }).then((outFile) => {
+        tempFiles.push(outFile);
+        // 5. Reproject to EPSG:3573
+        return ogr2ogr(["--config", "OGR_ENABLE_PARTIAL_REPROJECTION", "YES", "-t_srs", "EPSG:3573"], outFile);
+    }).then((outFile) => {
+        tempFiles.push(outFile);
+        let finalDir = path.dirname(outFile);
+        // search for files in final output file's directory so
+        // we can move them to the AWM data directory
+        let finalFiles = new Promise((resolve, reject) => {
+            fs.readdir(finalDir, (err, files) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(files);    
+                }
+            });    
+        });
+        return Promise.all([finalDir, finalFiles]);
+    }).then((values) => {
+        finalDir = values[0], finalFiles = values[1];
+        // Move files from finalDir to outputDir
+        let movePromises = finalFiles.map((sFile) => {
+            return new Promise((resolve, reject) => {
+                // remove destination file
+                let outputDir = path.dirname(outputFile);
+                let destFilename = `${outputDir}/${sFile}`;
+                rimraf.sync(destFilename);
+
+                // move file
+                fs.rename(`${finalDir}/${sFile}`, destFilename, (err) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                });
+            });
+        });
+
+        return Promise.all(movePromises);
+    })
+    .then(() => {
+        // Clean up tmp directories
+        tempFiles.forEach((tmpFile) => {
+            rimraf.sync(path.dirname(tmpFile));
+        });
+    });
+};
