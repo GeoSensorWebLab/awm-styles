@@ -6,7 +6,23 @@ These are [CartoCSS](https://github.com/mapbox/carto) map stylesheets based on t
 
 The currently active commit of this stylesheet used in [Arctic Web Map production](https://webmap.arcticconnect.org) can be seen on the `production` branch.
 
-# Mac Installation
+## Branches
+
+Development from 2015–2017 is on the `stable/1.0` branch. It is kept for reference and is not under active development.
+
+Development from 2019 onwards is on the `master` branch.
+
+| Feature                       | `stable/1.0`           | `master`                    |
+|-------------------------------|------------------------|-----------------------------|
+| Active Development (2019)     | No                     | Yes                         |
+| Coverage                      | Pan-Arctic             | Canada + Alaska + Greenland |
+| Projections                   | EPSG:3571 to EPSG:3576 | EPSG:3573 only              |
+| Bathymetry Styles             | Yes                    | Yes                         |
+| Contour Lines                 | Canada only            | No                          |
+| `openstreetmap-carto` Version | v2.45.1                | v4.20.0                     |
+| Minutely OSM Updates          | Inactive               | No                          |
+
+## Mac Installation
 
 This will set up [PostgreSQL](https://www.postgresql.org), [PostGIS](http://postgis.net), [osm2pgsql](https://github.com/openstreetmap/osm2pgsql), [GDAL](http://www.gdal.org), [Mapnik](https://github.com/mapnik/mapnik), and [kosmtik](https://github.com/kosmtik/kosmtik) for rendering previews. Some of this information is adapted from James Badger's OSM import notes.
 
@@ -103,7 +119,7 @@ If you want to change the projection in this preview, edit `project.yaml` and ed
 
 Don't change `extents3573` as all the shapefiles are in that projection. (They are in that projection because they needed to be clipped and segmented in EPSG:4326 first otherwise Antarctica causes rendering glitches over the entire Arctic map projection.)
 
-# Linux and Production Installation
+## Linux and Production Installation
 
 For our production system, we have Mapnik using the XML configuration in `/etc/mapnik-osm-carto-data`. In order to install the latest version of our styles you will have to clone this repository to the tile server.
 
@@ -137,15 +153,15 @@ And reload renderd to pick up the changes:
 
 The new style should then start generating on new tiles. If you want to replace old tiles that still have old styles applied, look into the `render_old` command from `mod_tile`.
 
-# Contributing
+## Contributing
 
 Contributions to this project are welcome, see [CONTRIBUTING.md](CONTRIBUTING.md) for full details.
 
-# Maintainers
+## Maintainers
 
 * James Badger <jpbadger@ucalgary.ca> (@openfirmware)
 
-# License
+## License
 
 See LICENSE.
 
