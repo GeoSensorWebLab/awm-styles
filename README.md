@@ -1,4 +1,4 @@
-# Arctic Web Map (Canadian Arctic Branch)
+# Arctic Web Map
 
 TODO: Add screenshot
 
@@ -6,11 +6,11 @@ These are the CartoCSS map stylesheets for the Canadian Arctic map layer on [air
 
 These stylesheets can be used in your own cartography projects, and are designed to be easily customised. They work with [Kosmtik](https://github.com/kosmtik/kosmtik) and also with the command-line [CartoCSS](https://github.com/mapbox/carto) processor.
 
-## Differences from Arctic Web Map (Main Branch)
+## Differences from Arctic Web Map "stable/1.0"
 
-The "Canadian Arctic" branch is a separate map style from the primary Arctic Web Map from ArcticConnect. Here is a comparison.
+The "stable/2.0" branch is a separate map style from the primary Arctic Web Map from ArcticConnect. Here is a comparison.
 
-| Feature                       | Main Branch            | Canadian Arctic Branch      |
+| Feature                       | `stable/1.0`           | `stable/2.0`                |
 |-------------------------------|------------------------|-----------------------------|
 | Active Development (2019)     | No                     | Yes                         |
 | Coverage                      | Pan-Arctic             | Canada + Alaska + Greenland |
@@ -21,6 +21,8 @@ The "Canadian Arctic" branch is a separate map style from the primary Arctic Web
 | Minutely OSM Updates          | Inactive               | No                          |
 
 (Table generated with [Table Convert Online](https://tableconvert.com).)
+
+Currently, active development on the `master` branch will be merged into the `stable/2.0` branch.
 
 ## Differences from openstreetmap-carto
 
