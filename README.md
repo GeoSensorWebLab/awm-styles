@@ -26,9 +26,18 @@ Currently, active development on the `master` branch will be merged into the `st
 
 ## Differences from openstreetmap-carto
 
-* Web Mercator projection is replaced with a more appropriate projection for the far north
+* Web Mercator projection is replaced with a more appropriate projection for the far north (EPSG:3573)
 * Bathymetry ocean data improves visualization of arctic region where oceans and seas significantly impact local communities and research
-* Northern communities have increased label prominence
+* Northern communities have increased label prominence (Cut-off is 60˚N)
+* Region is clipped to -180˚E/40˚N to 0˚E/90˚N
+* Hypsometric cross-tint is used as land base layer up to zoom 12
+* Lakes from Natural Earth data are used up to zoom 7
+* Map background is "land" colour with land/water polygons overlaid
+* OSM `water-areas`, `text-poly-low-zoom`, `capital-names` not shown until zoom 5
+* OSM `landcover-low-zoom`, `landcover-area-symbols` not shown until zoom 7
+* OSM data in PostGIS is stored in EPSG:3573 (fixes label issues)
+* OSM `country-names` removed to not over-emphasize *Kalaallit Nunaat*
+* High-quality OSM split water polygons are used from zoom 10 instead of bathymetry
 
 Other changes will be listed here as the stylesheet is developed.
 
