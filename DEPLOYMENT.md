@@ -99,12 +99,12 @@ This point is a good time to move the PostgreSQL data directory from its default
 
 For the PostgreSQL configuration, please check the defaults used in the [maps_server cookbook][maps_server defaults] for the "import" section.
 
-Create a user and database for OSM:
+Create a user and database for OSM. I named the database `osm_3573` to keep it separate from OSM data that might be in the default projection (3857).
 
 ```
 $ sudo -u postgres createuser osm
-$ sudo -u postgres createdb -O osm osm
-$ sudo -u postgres psql osm -c "CREATE EXTENSION hstore;" -c "CREATE EXTENSION postgis;"
+$ sudo -u postgres createdb -O osm osm_3573
+$ sudo -u postgres psql osm_3573 -c "CREATE EXTENSION hstore;" -c "CREATE EXTENSION postgis;"
 ```
 
 Set up your pg_hba to allow access to the `osm` user from the system user you are using for rendering, probably `www-data`. Restart Postgres to pick up the changes.
@@ -125,7 +125,7 @@ $ sudo apt install osm2pgsql
 Then import:
 
 ```
-$ sudo -u www-data osm2pgsql --host /var/run/postgresql --create --slim --drop --username osm --database osm -C 4000 --tag-transform-script path/to/awm-styles/openstreetmap-carto/openstreetmap-carto.lua --style path/to/awm-styles/openstreetmap-carto/openstreetmap-carto.style --number-processes 8 --hstore -E 3573 -G your-merged-extract.osm.pbf 
+$ sudo -u www-data osm2pgsql --host /var/run/postgresql --create --slim --drop --username osm --database osm_3573 -C 4000 --tag-transform-script path/to/awm-styles/openstreetmap-carto/openstreetmap-carto.lua --style path/to/awm-styles/openstreetmap-carto/openstreetmap-carto.style --number-processes 8 --hstore -E 3573 -G your-merged-extract.osm.pbf 
 ```
 
 This can take 20 minutes to over an hour depending on your hardware. If it fails, you can delete the `osm` database, re-create it, then fix the problem and try `osm2pgsql` again.
