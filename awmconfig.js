@@ -223,6 +223,21 @@ exports.LocalConfig = function (localizer, project) {
     //         "maxzoom": 9
     //     }
     // }
+    
+    addAfter("world", {
+        id: "world-tint",
+        geometry: "raster",
+        "srs-name": "EPSG:3573",
+        srs: epsg3573,
+        Datasource: {
+            file: "data/awm/HYP_HR_SR/HYP_HR_SR.tif",
+            type: "gdal",
+            band: -1
+        },
+        properties: {
+            maxzoom: 12
+        }
+    });
 
     addAfter("necountries", {
         id: "lakes-low",

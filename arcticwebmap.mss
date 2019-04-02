@@ -2,6 +2,10 @@ Map {
   background-color: @land-color;
 }
 
+#world-tint {
+  raster-opacity: 1;
+}
+
 #lakes-low[zoom < 8] {
 	polygon-fill: @water-color;
 }
