@@ -32,22 +32,37 @@ $ npm install
 
 This will install [kosmtik][], which we use to preview changes to the stylesheet in a local web browser.
 
-## Compiling the Project File
+## Downloading and Converting Shapefiles and Rasters
 
-TODO: Move compiling to deployment, as it will generate XML files for Mapnik.
+This map uses vector and raster datasets that are kept on the disk instead of in the PostGIS database. A script has been included in this repo (`scripts/get-datafiles.js`) to download these files, extract them, and convert them for the map projection.
 
-The project file for Arctic Web Map style is modified from the project file from openstreetmap-carto. This is necessary for these reasons:
+GDAL must be installed and `ogr2ogr`, `gdalwarp`, and `gdal_translate` must be available on your `$PATH`.
 
-* Output projection for the map under the tiles is now EPSG:3573
-* Input projection from PostGIS is EPSG:4326 **instead** of EPSG:3857
-* The name of the layer has changed
-* Additional layers/stylesheets have to be added
+Use node to launch the script. It will try to download and process the files in parallel, and the script output will look a bit messy.
 
-Making these changes by editing the file manually is a problem because it is easy to make mistakes. To solve this, a script is used to copy the openstreetmap-carto project file, apply a set of changes, and dump the new file to disk.
+```
+$ node scripts/get-datafiles.js
+```
 
-The script is called `compile.js` and is ran via Node.js. It uses the "local config" feature of Kosmtik to apply a set of changes.
+This will take a few minutes to process.
 
-TODO: cover local server script
+## Running the Preview Server
+
+Once the shapefiles and rasters have been processed, the local kosmtik server can be started to preview the stylesheet.
+
+```
+$ node server.js
+```
+
+This will run kosmtik with the `openstreetmap-carto` stylesheet, with modifications specified in `awmconfig.js`.
+
+## Modifying Layers and Stylesheets
+
+Modifications can be done in `awmconfig.js`, there are some existing examples of adding/modifying/removing layers and stylesheets.
+
+## Custom CartoCSS Styling
+
+Styles for Arctic Web Map are currently kept in `arcticwebmap.mss`. These will be applied *after* the styles in `openstreetmap-carto`.
 
 ## Merging Upstream Changes (Optional)
 
@@ -70,14 +85,13 @@ $ git commit -m "Update openstreetmap-carto to v4.20.0"
 
 Now that the change has been committed, other users of the stylesheet will now be able to deploy the specific submodule version.
 
-
 [kosmtik]: https://github.com/kosmtik/kosmtik
 [openstreetmap-carto]: https://github.com/gravitystorm/openstreetmap-carto
 
 ## How much change to put in a git commit?
 
-TODO: Explain how much of a change to the stylesheet should go into a single git commit, and when to divide it into different commits
+A commit should be created for any discrete "group" of similar changes to the stylesheet or project. Creating multiple smaller commits is preferred as it will make it easier to debug stylesheet problems in the future.
 
 ## Pushing to GitHub
 
-TODO: Explain how to push to GitHub, how to do a pull request, and who from the lab will be merging
+If you have forked this repo and would like to have your changes merged in the main repository, push your code to GitHub in a branch on your fork and then send a pull request to the main repository. James (@openfirmware) will review and merge the changes.
