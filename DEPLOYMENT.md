@@ -49,7 +49,7 @@ The project file for Arctic Web Map style is modified from the project file from
 
 Making these changes by editing the file manually is a problem because it is easy to make mistakes. To solve this, a script is used to copy the openstreetmap-carto project file, apply a set of changes, and dump the new file to disk.
 
-The script is called `compile.js` and is ran via Node.js. It uses the "local config" feature of Kosmtik to apply a set of changes.
+The script is `scripts/compile.js` and is ran via Node.js. It uses the "local config" feature of Kosmtik to apply a set of changes.
 
 ### Deploy the Project
 

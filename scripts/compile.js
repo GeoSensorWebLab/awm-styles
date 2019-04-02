@@ -41,7 +41,7 @@ if (args[0] !== undefined) {
 	}
 }
 
-child.spawn(`${__dirname}/node_modules/.bin/kosmtik`, 
+child.spawn(`${__dirname}/../node_modules/.bin/kosmtik`, 
 	['export', '--output', outputFile,
 	 '--localconfig', awmConfig,
 	 '--format', format,
