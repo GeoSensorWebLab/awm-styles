@@ -120,10 +120,6 @@ shapefiles.concat(rasters).forEach((datafile) => {
                 log("Downloading to %s/%s", finalDir, filename);
                 got.stream(datafile.url)
                 .on('error', reject)
-                .on('downloadProgress', (progress) => {
-                    // should debounce this
-                    log("%s: %d%%", filename, Math.trunc(100 * progress.percent));
-                })
                 .pipe(fs.createWriteStream(file))
                 .on('finish', resolve);
             }
