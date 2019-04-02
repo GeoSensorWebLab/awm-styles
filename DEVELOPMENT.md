@@ -51,7 +51,7 @@ This will take a few minutes to process.
 Once the shapefiles and rasters have been processed, the local kosmtik server can be started to preview the stylesheet.
 
 ```
-$ node server.js
+$ node scripts/server.js
 ```
 
 This will run kosmtik with the `openstreetmap-carto` stylesheet, with modifications specified in `awmconfig.js`.
