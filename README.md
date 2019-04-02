@@ -59,6 +59,14 @@ If you want to modify the stylesheet and commit changes to git, see [DEVELOPMENT
 
 For setting up the Arctic Web Map stylesheet on a public server, see [DEPLOYMENT.md](DEPLOYMENT.md).
 
+# Map Errors
+
+You may encounter issues with the map where data is not properly represented or is flat out incorrect. Some of these problems are with the stylesheet or data import process used by Arctic Web Map. Other problems are due to the underlying data from OpenStreetMap.
+
+Problems with how things are drawn on the map probably fall under this stylesheet. Please use the issues tracker to notify us of any map problems.
+
+Incorrect names, missing data, and similar are based in OpenStreetMap. You can fix small errors yourself with an OSM account, but for larger issues that affect large regions (city scale and larger) you should contact the OSM mailing list for confirmation.
+
 # Contributing
 
 Contributions to this project are welcome, see [CONTRIBUTING.md](CONTRIBUTING.md) for full details.
