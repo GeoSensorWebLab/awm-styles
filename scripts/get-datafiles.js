@@ -23,20 +23,6 @@ let log = function() {
     console.log.apply(this, arguments);
 }
 
-// Return a promise for fs.stat.
-// Resolve if file exists, reject if it does not exist.
-let stat = function(file) {
-    return new Promise((resolve, reject) => {
-        fs.stat(file, (err, stats) => {
-            if (err) {
-                reject(file);
-            } else {
-                resolve(file);
-            }
-        });
-    });
-}
-
 // run a command in a spawned shell, returning a Promise
 let spawnPromise = function(command, args) {
     return new Promise((resolve, reject) => {
@@ -51,8 +37,45 @@ let spawnPromise = function(command, args) {
     });
 };
 
+// Return a promise for fs.stat.
+// Resolve if file exists, reject if it does not exist.
+let stat = function(file) {
+    return new Promise((resolve, reject) => {
+        fs.stat(file, (err, stats) => {
+            if (err) {
+                reject(file);
+            } else {
+                resolve(file);
+            }
+        });
+    });
+}
+
+// Run a command on an input file with gdal_translate.
+// Put output file(s) in a temporary directory, return output file name.
+let gdaltranslate = function(args, inFile) {
+    let tmpFile = `${tmp.dirSync().name}/${path.basename(inFile)}`;
+    args.push(inFile, tmpFile);
+    return spawnPromise("gdal_translate", args)
+    .then(() => {
+        return tmpFile;
+    });
+};
+
+// Run a command on an input file with gdalwarp.
+// Put output file(s) in a temporary directory, return output file name.
+let gdalwarp = function(args, inFile) {
+    let tmpFile = `${tmp.dirSync().name}/${path.basename(inFile)}`;
+    args.push(inFile, tmpFile);
+    return spawnPromise("gdalwarp", args)
+    .then(() => {
+        return tmpFile;
+    });
+};
+
 // Run a command on an input file with ogr2ogr.
 // Put output file(s) in a temporary directory, return output file name.
+// Note the input/outfile order…
 let ogr2ogr = function(args, inFile) {
     let tmpFile = `${tmp.dirSync().name}/${path.basename(inFile)}`;
     args.push(tmpFile, inFile);
@@ -66,7 +89,7 @@ log("There are %d shapefiles.", shapefiles.length);
 log("There are %d rasters.", rasters.length);
 
 // Iterate over files
-shapefiles.forEach((datafile) => {
+shapefiles.concat(rasters).forEach((datafile) => {
     let finalDir = `${awmDataDir}/${datafile.name}`;
     let filename = path.basename(datafile.url);
 
@@ -146,7 +169,7 @@ shapefiles.forEach((datafile) => {
         // Create output directory
         return new Promise((resolve, reject) => {
             // Exit if no transforms
-            if (datafile.ogr2ogr === undefined) {
+            if (datafile.gdal === undefined) {
                 reject("No transforms needed.");
             }
             
@@ -170,28 +193,123 @@ shapefiles.forEach((datafile) => {
             });
         });
     }).then((files) => {
-        // run ogr2ogr on all geo files
-        let commands = files.map((geoFile) => {
+        // run GDAL on all geo files
+        let processedGeofiles = files.map((geoFile) => {
             return new Promise((resolve, reject) => {
                 let outputFile = `${finalDir}/${path.basename(geoFile)}`
 
                 switch(path.extname(geoFile)) {
+                    case ".tif":
+                    case ".tiff":
+                        return processGeoTIFF(geoFile, outputFile, datafile.gdal);
+                    break;
                     case ".shp":
-                    return processShapefile(geoFile, outputFile, datafile.ogr2ogr);
+                        return processShapefile(geoFile, outputFile, datafile.gdal);
                     break;
                     default:
-                    return Promise.reject("Unhandled geo file type: %s", geoFile);
+                        return Promise.reject("Unhandled geo file type: %s", geoFile);
                 }
             });
         });
 
-        return Promise.all(commands);
+        return Promise.all(processedGeofiles);
     }).catch((err) => {
         console.error(err);
     });
 });
 
-// Process for ERSI Shapefiles
+// Process for GeoTIFFs.
+// 1. Reproject to EPSG:4326
+// 2. Clip to bounds
+// 3. Reproject to EPSG:3573
+// 4. Compress
+// 5. Move to output directory
+// Packbits is used for intermediary compression as it is fast and should
+// counter some of the bloating from gdalwarp.
+let processGeoTIFF = function(shpFile, outputFile, options) {
+    // Track temp files so we can delete them after
+    let tempFiles = [];
+
+    // 1. Reproject to EPSG:4326 AND clip in EPSG:4316
+    return gdalwarp([
+        "-t_srs", "EPSG:4326", "-te", options.clip, "-multi",
+        "-co", "\"NUM_THREADS=ALL_CPUS\"",
+        "-co", "\"TILED=YES\"",
+        "-co", "\"COMPRESS=PACKBITS\"",
+        "-dstalpha"
+        ], shpFile)
+    .then((outFile) => {
+        tempFiles.push(outFile);
+        // 3. Reproject to EPSG:3573
+        return gdalwarp([
+            "-t_srs", "EPSG:3573",
+            "-r", "bilinear",
+            "-multi",
+            "-co", "\"NUM_THREADS=ALL_CPUS\"",
+            "-co", "\"TILED=YES\"",
+            "-co", "\"COMPRESS=PACKBITS\"",
+            "-dstalpha"
+            ], outFile);
+    }).then((outFile) => {
+        tempFiles.push(outFile);
+        // 4. Compress
+        return gdaltranslate([
+            "-co", "\"TILED=YES\"",
+            "-co", "\"COMPRESS=JPEG\""
+            ], outFile);
+    }).then((outFile) => {
+        tempFiles.push(outFile);
+        let finalDir = path.dirname(outFile);
+        // search for files in final output file's directory so
+        // we can move them to the AWM data directory
+        let finalFiles = new Promise((resolve, reject) => {
+            fs.readdir(finalDir, (err, files) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(files);    
+                }
+            });    
+        });
+        return Promise.all([finalDir, finalFiles]);
+    }).then((values) => {
+        finalDir = values[0], finalFiles = values[1];
+        // 5. Move to output directory
+        let movePromises = finalFiles.map((sFile) => {
+            return new Promise((resolve, reject) => {
+                // remove destination file
+                let outputDir = path.dirname(outputFile);
+                let destFilename = `${outputDir}/${sFile}`;
+                rimraf.sync(destFilename);
+
+                // move file
+                fs.rename(`${finalDir}/${sFile}`, destFilename, (err) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                });
+            });
+        });
+
+        return Promise.all(movePromises);
+    })
+    .then(() => {
+        // Clean up tmp directories
+        tempFiles.forEach((tmpFile) => {
+            rimraf.sync(path.dirname(tmpFile));
+        });
+    });
+};
+
+// Process for ERSI Shapefiles.
+// 1. Reproject to EPSG:4326
+// 2. Fix geometries
+// 3. Clip to bounds
+// 4. Apply segmentization
+// 5. Reproject to EPSG:3573
+// 6. Move to output directory
 let processShapefile = function(shpFile, outputFile, options) {
     // Track temp files so we can delete them after
     let tempFiles = [];
@@ -233,7 +351,7 @@ let processShapefile = function(shpFile, outputFile, options) {
         return Promise.all([finalDir, finalFiles]);
     }).then((values) => {
         finalDir = values[0], finalFiles = values[1];
-        // Move files from finalDir to outputDir
+        // 6. Move to output directory
         let movePromises = finalFiles.map((sFile) => {
             return new Promise((resolve, reject) => {
                 // remove destination file
