@@ -1,14 +1,21 @@
 # Arctic Web Map
 
-TODO: Add screenshot
+![samples/z5.jpg](samples/z5.jpg)
 
-These are the CartoCSS map stylesheets for the Canadian Arctic map layer on [airport.gswlab.ca](http://airport.gswlab.ca). The style is based on [openstreetmap-carto](https://github.com/gravitystorm/openstreetmap-carto) with some changes for the Canadian Arctic.
+([More screenshots](samples))
 
-These stylesheets can be used in your own cartography projects, and are designed to be easily customised. They work with [Kosmtik](https://github.com/kosmtik/kosmtik) and also with the command-line [CartoCSS](https://github.com/mapbox/carto) processor.
+These are the CartoCSS map stylesheets for the Canadian Arctic map layer on [airport.gswlab.ca][airport]. The style is based on [openstreetmap-carto][osm-carto] with some changes for the Canadian Arctic.
 
-## Differences from Arctic Web Map "stable/1.0"
+These stylesheets can be used in your own cartography projects, and are designed to be easily customised. They work with [Kosmtik][] and also with the command-line [CartoCSS][] processor.
 
-The "stable/2.0" branch is a separate map style from the primary Arctic Web Map from ArcticConnect. Here is a comparison.
+[airport]: http://airport.gswlab.ca
+[CartoCSS]: https://github.com/mapbox/carto
+[Kosmtik]: https://github.com/kosmtik/kosmtik
+[osm-carto]: https://github.com/gravitystorm/openstreetmap-carto
+
+## Differences from Arctic Web Map [stable/1.0][stable-10]
+
+The `stable/2.0` branch is a separate map style from the primary Arctic Web Map from ArcticConnect. Here is a comparison.
 
 | Feature                       | `stable/1.0`           | `stable/2.0`                |
 |-------------------------------|------------------------|-----------------------------|
@@ -20,9 +27,12 @@ The "stable/2.0" branch is a separate map style from the primary Arctic Web Map 
 | `openstreetmap-carto` Version | v2.45.1                | v4.20.0                     |
 | Minutely OSM Updates          | Inactive               | No                          |
 
-(Table generated with [Table Convert Online](https://tableconvert.com).)
+(Table generated with [Table Convert Online][table-convert]).
 
 Currently, active development on the `master` branch will be merged into the `stable/2.0` branch.
+
+[stable-10]: https://github.com/GeoSensorWebLab/awm-styles/tree/stable/1.0
+[table-convert]: https://tableconvert.com
 
 ## Differences from openstreetmap-carto
 
@@ -59,7 +69,7 @@ Arctic Web Map does not have an active versioning system. Branches are used to d
 
 # Roadmap
 
-The Canadian Arctic branch is intended to provide a general purpose stylesheet for researchers and northern communities. To that end, legibility of a wide variety of data from OpenStreetMap will be the focus.
+The `stable/2.0` branch is intended to provide a general purpose stylesheet for researchers and northern communities. To that end, legibility of a wide variety of data from OpenStreetMap will be the focus.
 
 # Alternatives
 
