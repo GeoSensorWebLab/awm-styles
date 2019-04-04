@@ -8,6 +8,8 @@ These are the CartoCSS map stylesheets for the Canadian Arctic map layer on [air
 
 These stylesheets can be used in your own cartography projects, and are designed to be easily customised. They work with [Kosmtik][] and also with the command-line [CartoCSS][] processor.
 
+If you want to use the map or tiles in your project, please see the [USAGE.md](USAGE.md) document. The rest of the README is for a general overview of the Arctic Web Map stylesheet and how to extend it.
+
 [airport]: http://airport.gswlab.ca
 [CartoCSS]: https://github.com/mapbox/carto
 [Kosmtik]: https://github.com/kosmtik/kosmtik
