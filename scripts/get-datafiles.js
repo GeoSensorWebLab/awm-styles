@@ -219,7 +219,7 @@ shapefiles.concat(rasters).forEach((datafile) => {
 // 2. Clip to bounds
 // 3. Reproject to EPSG:3573
 // 4. Compress
-// 5. Move to output directory
+// 5. Copy to output directory
 // Packbits is used for intermediary compression as it is fast and should
 // counter some of the bloating from gdalwarp.
 let processGeoTIFF = function(shpFile, outputFile, options) {
@@ -257,7 +257,7 @@ let processGeoTIFF = function(shpFile, outputFile, options) {
         tempFiles.push(outFile);
         let finalDir = path.dirname(outFile);
         // search for files in final output file's directory so
-        // we can move them to the AWM data directory
+        // we can copy them to the AWM data directory
         let finalFiles = new Promise((resolve, reject) => {
             fs.readdir(finalDir, (err, files) => {
                 if (err) {
@@ -270,16 +270,16 @@ let processGeoTIFF = function(shpFile, outputFile, options) {
         return Promise.all([finalDir, finalFiles]);
     }).then((values) => {
         finalDir = values[0], finalFiles = values[1];
-        // 5. Move to output directory
-        let movePromises = finalFiles.map((sFile) => {
+        // 5. Copy to output directory
+        let copyPromises = finalFiles.map((sFile) => {
             return new Promise((resolve, reject) => {
                 // remove destination file
                 let outputDir = path.dirname(outputFile);
                 let destFilename = `${outputDir}/${sFile}`;
                 rimraf.sync(destFilename);
 
-                // move file
-                fs.rename(`${finalDir}/${sFile}`, destFilename, (err) => {
+                // copy file
+                fs.copyFile(`${finalDir}/${sFile}`, destFilename, (err) => {
                     if (err) {
                         reject(err);
                     } else {
@@ -289,7 +289,7 @@ let processGeoTIFF = function(shpFile, outputFile, options) {
             });
         });
 
-        return Promise.all(movePromises);
+        return Promise.all(copyPromises);
     })
     .then(() => {
         // Clean up tmp directories
@@ -305,7 +305,7 @@ let processGeoTIFF = function(shpFile, outputFile, options) {
 // 3. Clip to bounds
 // 4. Apply segmentization
 // 5. Reproject to EPSG:3573
-// 6. Move to output directory
+// 6. Copy to output directory
 let processShapefile = function(shpFile, outputFile, options) {
     // Track temp files so we can delete them after
     let tempFiles = [];
@@ -334,7 +334,7 @@ let processShapefile = function(shpFile, outputFile, options) {
         tempFiles.push(outFile);
         let finalDir = path.dirname(outFile);
         // search for files in final output file's directory so
-        // we can move them to the AWM data directory
+        // we can copy them to the AWM data directory
         let finalFiles = new Promise((resolve, reject) => {
             fs.readdir(finalDir, (err, files) => {
                 if (err) {
@@ -347,16 +347,16 @@ let processShapefile = function(shpFile, outputFile, options) {
         return Promise.all([finalDir, finalFiles]);
     }).then((values) => {
         finalDir = values[0], finalFiles = values[1];
-        // 6. Move to output directory
-        let movePromises = finalFiles.map((sFile) => {
+        // 6. Copy to output directory
+        let copyPromises = finalFiles.map((sFile) => {
             return new Promise((resolve, reject) => {
                 // remove destination file
                 let outputDir = path.dirname(outputFile);
                 let destFilename = `${outputDir}/${sFile}`;
                 rimraf.sync(destFilename);
 
-                // move file
-                fs.rename(`${finalDir}/${sFile}`, destFilename, (err) => {
+                // copy file
+                fs.copyFile(`${finalDir}/${sFile}`, destFilename, (err) => {
                     if (err) {
                         reject(err);
                     } else {
@@ -366,7 +366,7 @@ let processShapefile = function(shpFile, outputFile, options) {
             });
         });
 
-        return Promise.all(movePromises);
+        return Promise.all(copyPromises);
     })
     .then(() => {
         // Clean up tmp directories
