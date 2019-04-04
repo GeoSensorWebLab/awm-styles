@@ -22,7 +22,9 @@ Note that the API for v5 and v6 appear to be identical. Only minor changes with 
 
 ## Leaflet
 
-TODO
+PolarMap.js can be modified to use tiles from this new server instead of the original Arctic Connect tiles server. Please see [the example](https://arcticmap-demos.glitch.me/index.html) for PolarMap.js where the Tile Layer is redefined in the code.
+
+An example for Leaflet 1.0 or newer is not yet available.
 
 ## ArcGIS Online
 
