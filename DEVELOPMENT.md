@@ -23,7 +23,7 @@ If you are unfamiliar with Node.js, I recommend following a getting started guid
 
 TODO: Add links to guides that are *good*
 
-I recommend installing the most recent "LTS" version, `10.15.3`. Older versions *may* have some odd behaviour. Once node is available on your command line, you can install the dependent development packages:
+I recommend installing the most recent "LTS" version, `10.20.1`. Older versions *may* have some odd behaviour. Once node is available on your command line, you can install the dependent development packages:
 
 ```
 $ cd path/to/awm-styles
