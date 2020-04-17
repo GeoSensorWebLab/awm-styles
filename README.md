@@ -1,6 +1,6 @@
 # Arctic Web Map
 
-![samples/z5.jpg](samples/z5.jpg)
+![samples/zoom-5-canada.jpg](samples/zoom-5-canada.jpg)
 
 ([More screenshots](samples))
 
