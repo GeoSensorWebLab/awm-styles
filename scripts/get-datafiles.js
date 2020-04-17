@@ -1,16 +1,16 @@
 /*
  * Retrieve and set up shapefiles and raster images for AWM stylesheet
  */
-const rasters     = require('../rasters.json');
-const shapefiles  = require('../shapefiles.json');
-const child       = require('child_process');
-const compressing = require('compressing');
-const fs          = require('fs');
-const glob        = require('glob');
-const got         = require('got');
-const path        = require('path');
-const rimraf      = require('rimraf');
-const tmp         = require('tmp');
+ const rasters     = require('../rasters.json');
+ const shapefiles  = require('../shapefiles.json');
+ const child       = require('child_process');
+ const compressing = require('compressing');
+ const fs          = require('fs');
+ const glob        = require('glob');
+ const got         = require('got');
+ const path        = require('path');
+ const rimraf      = require('rimraf');
+ const tmp         = require('tmp');
 
 // Stylesheets and project are in the openstreetmap-carto directory, so
 // data files should be in a sub-directory. "awm" is created to hold
@@ -197,13 +197,13 @@ shapefiles.concat(rasters).forEach((datafile) => {
                 switch(path.extname(geoFile)) {
                     case ".tif":
                     case ".tiff":
-                        return processGeoTIFF(geoFile, outputFile, datafile.gdal);
+                    return processGeoTIFF(geoFile, outputFile, datafile.gdal);
                     break;
                     case ".shp":
-                        return processShapefile(geoFile, outputFile, datafile.gdal);
+                    return processShapefile(geoFile, outputFile, datafile.gdal);
                     break;
                     default:
-                        return Promise.reject("Unhandled geo file type: %s", geoFile);
+                    return Promise.reject("Unhandled geo file type: %s", geoFile);
                 }
             });
         });
