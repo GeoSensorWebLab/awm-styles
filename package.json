@@ -23,7 +23,7 @@
   "dependencies": {
     "compressing": "^1.5.0",
     "glob": "^7.1.6",
-    "got": "^9.6.0",
+    "got": "^11.8.5",
     "kosmtik": "git+https://github.com/kosmtik/kosmtik.git#bd6b7e5d06aa03dd5483e530548d60b1efc4051d",
     "pug": "^2.0.4",
     "rimraf": "^2.7.1",
